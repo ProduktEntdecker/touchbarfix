@@ -1,0 +1,13 @@
+{
+    "swift.path": "/usr/bin/swift",
+    "swift.buildPath": ".build",
+    "swift.targetBuildPath": ".build/debug",
+    "swift.debuggerPath": "/usr/bin/lldb",
+    "files.associations": {
+        "*.swift": "swift"
+    },
+    "editor.formatOnSave": true,
+    "editor.rulers": [120],
+    "files.trimTrailingWhitespace": true,
+    "files.insertFinalNewline": true
+}
