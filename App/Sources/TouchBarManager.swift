@@ -66,8 +66,13 @@ class TouchBarManager: ObservableObject {
     }
     
     func restartTouchBar() async -> Result<Void, TouchBarError> {
+        print("🚀 Starting Touch Bar restart process...")
+        print("   Device has Touch Bar: \(hasTouchBar)")
+        print("   Model: \(getModelIdentifier())")
+        
         // Check if device has Touch Bar
         guard hasTouchBar else {
+            print("❌ No Touch Bar detected on this device")
             await MainActor.run {
                 self.lastError = .noTouchBar
                 self.isRestarting = false
@@ -84,9 +89,12 @@ class TouchBarManager: ObservableObject {
         let processes = ["TouchBarServer", "NowPlayingTouchUI", "ControlStrip"]
         var allSuccessful = true
         
+        print("🎯 Targeting processes: \(processes.joined(separator: ", "))")
+        
         for process in processes {
             let result = await killProcess(named: process)
             if case .failure(let error) = result {
+                print("❌ Failed to kill \(process): \(error.localizedDescription)")
                 await MainActor.run {
                     self.lastError = error
                 }
@@ -94,11 +102,21 @@ class TouchBarManager: ObservableObject {
             }
         }
         
+        print("⏱️ Waiting 2 seconds for processes to restart...")
         // Wait for processes to restart
         try? await Task.sleep(nanoseconds: 2_000_000_000) // 2 seconds
         
+        // Verify processes have restarted
+        print("🔍 Verifying Touch Bar processes have restarted...")
+        let verificationProcesses = ["TouchBarServer"]
+        for process in verificationProcesses {
+            let isRunning = checkIfProcessRunning(process)
+            print("   \(process): \(isRunning ? "✅ Running" : "❌ Not running")")
+        }
+        
         // Reset Touch Bar preferences if needed
         if allSuccessful {
+            print("🔧 Resetting Touch Bar preferences...")
             await resetTouchBarPreferences()
             
             await MainActor.run {
@@ -108,6 +126,8 @@ class TouchBarManager: ObservableObject {
                 self.isRestarting = false
             }
             
+            print("✅ Touch Bar restart completed successfully! (Restart #\(restartCount))")
+            print("📊 Final status: \(getTouchBarStatus())")
             return .success(())
         }
         
@@ -115,10 +135,13 @@ class TouchBarManager: ObservableObject {
             self.isRestarting = false
         }
         
+        print("❌ Touch Bar restart failed")
         return .failure(lastError ?? .unknown("Failed to restart Touch Bar"))
     }
     
     private func killProcess(named processName: String) async -> Result<Void, TouchBarError> {
+        print("🔄 Attempting to kill process: \(processName)")
+        
         let task = Process()
         task.launchPath = "/usr/bin/pkill"
         task.arguments = ["-x", processName]
@@ -130,16 +153,25 @@ class TouchBarManager: ObservableObject {
             try task.run()
             task.waitUntilExit()
             
+            let terminationStatus = task.terminationStatus
+            print("   pkill \(processName) returned: \(terminationStatus)")
+            
             // pkill returns 0 if at least one process was killed, 1 if no process found
             // We treat "no process found" as success (it might not be running)
-            if task.terminationStatus == 0 || task.terminationStatus == 1 {
+            if terminationStatus == 0 {
+                print("   ✅ Successfully killed \(processName)")
+                return .success(())
+            } else if terminationStatus == 1 {
+                print("   ⚠️ \(processName) was not running")
                 return .success(())
             } else {
                 let errorData = pipe.fileHandleForReading.readDataToEndOfFile()
                 let errorString = String(data: errorData, encoding: .utf8) ?? "Unknown error"
+                print("   ❌ Failed to kill \(processName): \(errorString)")
                 return .failure(.killFailed("\(processName): \(errorString)"))
             }
         } catch {
+            print("   ❌ Exception killing \(processName): \(error.localizedDescription)")
             return .failure(.killFailed("\(processName): \(error.localizedDescription)"))
         }
     }

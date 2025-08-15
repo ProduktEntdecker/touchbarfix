@@ -8,6 +8,8 @@
     <string>TouchBarRestarter</string>
     <key>CFBundleIconFile</key>
     <string>AppIcon</string>
+    <key>CFBundleIconName</key>
+    <string>AppIcon</string>
     <key>CFBundleIdentifier</key>
     <string>com.produktentdecker.touchbarrestarter</string>
     <key>CFBundleInfoDictionaryVersion</key>
@@ -23,9 +25,14 @@
     <key>LSApplicationCategoryType</key>
     <string>public.app-category.utilities</string>
     <key>LSMinimumSystemVersion</key>
-    <string>13.0</string>
+    <string>11.0</string>
     <key>LSUIElement</key>
     <true/>
+    <key>LSArchitecturePriority</key>
+    <array>
+        <string>arm64</string>
+        <string>x86_64</string>
+    </array>
     <key>NSHumanReadableCopyright</key>
     <string>Copyright © 2024 ProduktEntdecker. All rights reserved.</string>
     <key>NSMainStoryboardFile</key>

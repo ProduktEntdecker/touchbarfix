@@ -25,14 +25,43 @@ echo "🧹 Cleaning previous builds..."
 rm -rf "$RELEASE_DIR"
 swift package clean
 
-# Build the executable
-echo "🏗️ Building executable..."
-swift build -c release
+# Build universal binary for both Intel and Apple Silicon
+echo "🏗️ Building universal binary..."
+
+# Build for Apple Silicon (arm64)
+echo "  📱 Building for Apple Silicon (arm64)..."
+swift build -c release --arch arm64
 
 if [ $? -ne 0 ]; then
-    echo -e "${RED}❌ Build failed!${NC}"
+    echo -e "${RED}❌ ARM64 build failed!${NC}"
     exit 1
 fi
+
+# Build for Intel (x86_64)
+echo "  💻 Building for Intel (x86_64)..."
+swift build -c release --arch x86_64
+
+if [ $? -ne 0 ]; then
+    echo -e "${RED}❌ x86_64 build failed!${NC}"
+    exit 1
+fi
+
+# Create universal binary using lipo
+echo "  🔗 Creating universal binary..."
+ARM64_BINARY="$BUILD_DIR/arm64-apple-macosx/release/TouchBarRestarter"
+X86_64_BINARY="$BUILD_DIR/x86_64-apple-macosx/release/TouchBarRestarter"
+UNIVERSAL_BINARY="$BUILD_DIR/universal-TouchBarRestarter"
+
+lipo -create "$ARM64_BINARY" "$X86_64_BINARY" -output "$UNIVERSAL_BINARY"
+
+if [ $? -ne 0 ]; then
+    echo -e "${RED}❌ Failed to create universal binary!${NC}"
+    exit 1
+fi
+
+# Verify universal binary
+echo "  🔍 Verifying universal binary..."
+lipo -info "$UNIVERSAL_BINARY"
 
 # Create app bundle structure
 echo "📦 Creating app bundle..."
@@ -40,8 +69,8 @@ APP_BUNDLE="$RELEASE_DIR/$APP_NAME.app"
 mkdir -p "$APP_BUNDLE/Contents/MacOS"
 mkdir -p "$APP_BUNDLE/Contents/Resources"
 
-# Copy executable
-cp "$BUILD_DIR/arm64-apple-macosx/release/TouchBarRestarter" "$APP_BUNDLE/Contents/MacOS/"
+# Copy universal executable
+cp "$UNIVERSAL_BINARY" "$APP_BUNDLE/Contents/MacOS/TouchBarRestarter"
 
 # Copy Info.plist
 cp "Resources/Info.plist" "$APP_BUNDLE/Contents/"
