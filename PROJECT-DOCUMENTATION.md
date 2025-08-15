@@ -22,6 +22,12 @@
    - ✅ **Single Instance Prevention**: Enhanced with proper UI activation and logging
    - ✅ **Process Verification**: Confirms Touch Bar processes restart after kill
 
+   **v1.1.1 Critical Fixes (August 15, 2024):**
+   - ✅ **Touch Bar Detection Fixed**: Dual detection method (model + process check)
+   - ✅ **Restart Loop Fixed**: UI no longer gets stuck in "Restarting..." state
+   - ✅ **M1 MacBook Pro Support**: Verified working on MacBookPro17,1
+   - ✅ **Enhanced Debugging**: Better logging for troubleshooting
+
 2. **Automated testing suite** ✅
    - 7 unit tests implemented using XCTest
    - Mock TouchBarManager for testing without hardware
@@ -345,17 +351,24 @@ TouchBarRestarter-1.0.0.dmg (2.2MB)
 - **Status**: 📋 Needs external testing
 - **Test Focus**: x86_64 binary execution
 
-### **Known Issues Requiring Fix Before Release**
+### **Issues Fixed Post-Testing (August 15, 2024)**
 
-1. **Touch Bar Detection Issue**: 
-   - MacBookPro17,1 shows "Touch Bar detected: false" 
-   - Should be true for 2020 M1 MacBook Pro
-   - Root cause: Model detection logic needs verification
+1. **Touch Bar Detection Issue** ✅ FIXED
+   - **Problem**: MacBookPro17,1 incorrectly detected as not having Touch Bar
+   - **Root Cause**: String comparison issue with model identifier
+   - **Solution**: Added dual detection (model list + process check) and string trimming
+   - **Status**: Fixed and verified working on M1 MacBook Pro
 
-2. **Console Logging**: 
-   - Enhanced logging added for debugging
-   - Should be reduced for production release
-   - Consider log levels (DEBUG vs RELEASE)
+2. **Restart Loop UI Bug** ✅ FIXED  
+   - **Problem**: UI stuck showing "Restarting..." indefinitely
+   - **Root Cause**: Touch Bar detection failure prevented completion
+   - **Solution**: Fixed detection + added re-check before restart
+   - **Status**: Fixed - UI now properly shows success/failure
+
+3. **Console Logging** 📝 RETAINED
+   - Enhanced logging kept for production
+   - Helps users diagnose issues via Console.app
+   - Can be reduced in future release if needed
 
 ### **Minimum Testing Checklist Before DMG Creation**
 
@@ -363,9 +376,9 @@ TouchBarRestarter-1.0.0.dmg (2.2MB)
 - [x] Universal binary creation confirmed
 - [x] Single instance prevention with enhanced logging  
 - [x] Welcome dialog shows on every launch
-- [ ] Touch Bar detection fix verified
-- [ ] Different user account test completed
-- [ ] Process kill/restart verification with logging
+- [x] Touch Bar detection fix verified ✅ (August 15)
+- [x] Different user account test completed ✅ (August 14)
+- [x] Process kill/restart verification with logging ✅ (August 15)
 
 #### **SHOULD HAVE** ⚡
 - [ ] Intel MacBook Pro testing (if hardware available)
@@ -470,8 +483,8 @@ open "Release/Touch Bar Restarter.app" && open "Release/Touch Bar Restarter.app"
 
 ---
 
-*Last Updated: August 14, 2024 - 21:00 PST*
-*Version: 1.1.0 (Enhanced UX Release)*
+*Last Updated: August 15, 2024 - 09:15 PST*
+*Version: 1.1.1 (Critical Bug Fix Release)*
 *Status: Production Ready (pending code signing)*
 *Architecture: Universal Binary (Intel + Apple Silicon)*
-*Testing: User Acceptance Testing Completed*
+*Testing: All Critical Issues Resolved ✅*

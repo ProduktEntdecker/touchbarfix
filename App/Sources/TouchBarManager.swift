@@ -39,12 +39,14 @@ class TouchBarManager: ObservableObject {
     init() {
         loadData()
         checkTouchBarAvailability()
+        // Force immediate update of published property
+        objectWillChange.send()
     }
     
     private func checkTouchBarAvailability() {
         // Check if this Mac model has a Touch Bar
         // Models with Touch Bar have specific identifiers
-        let modelIdentifier = getModelIdentifier()
+        let modelIdentifier = getModelIdentifier().trimmingCharacters(in: .whitespacesAndNewlines)
         let touchBarModels = [
             "MacBookPro13,2", "MacBookPro13,3", // 2016
             "MacBookPro14,2", "MacBookPro14,3", // 2017
@@ -54,7 +56,17 @@ class TouchBarManager: ObservableObject {
             "MacBookPro18,3", "MacBookPro18,4", // 2021 M1 Pro/Max
         ]
         
-        hasTouchBar = touchBarModels.contains(modelIdentifier)
+        // More robust detection - also check if TouchBarServer process exists
+        let modelHasTouchBar = touchBarModels.contains(modelIdentifier)
+        let touchBarServerExists = checkIfProcessRunning("TouchBarServer") || checkIfProcessRunning("ControlStrip")
+        
+        hasTouchBar = modelHasTouchBar || touchBarServerExists
+        
+        print("🔍 Touch Bar Detection:")
+        print("   Model: \(modelIdentifier)")
+        print("   Model in list: \(modelHasTouchBar)")
+        print("   TouchBar processes found: \(touchBarServerExists)")
+        print("   Final detection: \(hasTouchBar)")
     }
     
     private func getModelIdentifier() -> String {
@@ -66,6 +78,9 @@ class TouchBarManager: ObservableObject {
     }
     
     func restartTouchBar() async -> Result<Void, TouchBarError> {
+        // Re-check Touch Bar availability before restart
+        checkTouchBarAvailability()
+        
         print("🚀 Starting Touch Bar restart process...")
         print("   Device has Touch Bar: \(hasTouchBar)")
         print("   Model: \(getModelIdentifier())")
