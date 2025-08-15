@@ -28,6 +28,16 @@
    - ✅ **M1 MacBook Pro Support**: Verified working on MacBookPro17,1
    - ✅ **Enhanced Debugging**: Better logging for troubleshooting
 
+   **v1.2.0 UX Simplification (August 15, 2024):**
+   - ✅ **Single Menu Interface**: Removed complexity - one clean menu for everything
+   - ✅ **Both Click Types**: Left and right clicks now show same menu
+   - ✅ **Support Channels**: Added "🐛 Report Issue" (GitHub) and "ℹ️ About" links
+   - ✅ **Version Display**: Menu shows version number for easy verification
+   - ✅ **Enhanced Touch Bar Reset**: Kills 6 processes instead of 3
+   - ✅ **Aggressive Cache Clearing**: Clears multiple preference domains
+   - ✅ **Dock Restart**: Forces Dock restart to refresh Touch Bar UI state
+   - ✅ **Simplified Welcome**: Updated onboarding for single interface
+
 2. **Automated testing suite** ✅
    - 7 unit tests implemented using XCTest
    - Mock TouchBarManager for testing without hardware
@@ -72,7 +82,7 @@ Touch Bar Restarter.app/
 ### **Core Components**
 
 #### **TouchBarManager.swift**
-- **Device Detection**: Uses `sysctlbyname` to get hardware model
+- **Device Detection**: Uses `sysctlbyname` to get hardware model + process verification
 - **Supported Models**: 
   ```swift
   MacBookPro13,2-3 (2016)
@@ -82,10 +92,12 @@ Touch Bar Restarter.app/
   MacBookPro17,1 (2020 M1)
   MacBookPro18,3-4 (2021 M1 Pro/Max)
   ```
-- **Process Management**: 
+- **Enhanced Process Management (v1.2.0)**: 
+  - Kills 6 processes: TouchBarServer, ControlStrip, NowPlayingTouchUI, TouchBarAgent, TouchBarUserDevice, DFRFoundation
+  - Clears 3 preference domains: touchbar.agent, controlstrip, TouchBarAgent
+  - Restarts Dock to refresh Touch Bar UI state
   - Uses `pkill -x` for precise process termination
-  - Handles multiple processes in sequence
-  - 2-second wait for system recovery
+  - 2-second wait for system recovery with verification
 - **Error Handling**: Custom `TouchBarError` enum with localized descriptions
 - **Persistence**: UserDefaults for restart count and timestamp
 
@@ -98,23 +110,17 @@ Touch Bar Restarter.app/
 - **Alert System**: Success/error messaging with proper titles
 - **Responsive Layout**: 300x250 fixed-size popover (original settings view)
 
-#### **QuickActionView.swift** (New in v1.1)
-- **Compact Design**: 250x180px optimized for quick actions
-- **Immediate Access**: Large restart button front and center
-- **Live Status**: Shows current Touch Bar state and restart count
-- **Smart Feedback**: Auto-closes after successful restart
-- **Environment Integration**: Proper SwiftUI dismiss handling
-
-#### **main.swift** (Enhanced in v1.1)
+#### **main.swift** (Simplified in v1.2.0)
 - **App Lifecycle**: NSApplication delegate pattern
 - **Menu Bar Integration**: NSStatusItem with restart symbol icon
 - **Conditional Dock Icon**: Shows in Dock during DEBUG builds, hidden in RELEASE
-- **Dual Interface System**: QuickActionView (left-click) + Context Menu (right-click)
-- **First Launch Experience**: Welcome notification with UserDefaults tracking
+- **Single Interface**: Both left and right clicks show same menu
+- **Welcome Experience**: Updated for simplified interface
 - **Professional Menu System**: 
   - 🔄 Restart Touch Bar Now (⌘R)
-  - Status display and restart count
-  - Settings access (⌘,)
+  - Status display, restart count, and version
+  - 🐛 Report Issue (⌘I) → GitHub Issues
+  - ℹ️ About (⌘A) → Website/GitHub
   - Quit option (⌘Q)
 
 ### **Build System**
@@ -195,9 +201,9 @@ Touch Bar Restarter.app/
 - Executable size: 466KB (universal binary for Intel + Apple Silicon)
 - App bundle size: 2.4MB (includes icon and universal binary)
 - DMG size: 2.5MB (estimated)
-- Memory usage: ~17MB estimated (slight increase due to menu system)
+- Memory usage: ~15MB estimated (reduced - single interface)
 - CPU usage: Minimal (event-driven)
-- Interface responsiveness: Improved with compact QuickActionView
+- Interface responsiveness: Excellent with simplified menu-only design
 
 ### **Quality Metrics**
 - Test coverage: 7 tests, 100% pass rate
@@ -217,9 +223,9 @@ TouchBarRestarter-1.0.0.dmg (2.2MB)
 ```
 
 ### **Version Information**
-- CFBundleShortVersionString: 1.0.0
-- CFBundleVersion: 1
-- LSMinimumSystemVersion: 13.0
+- CFBundleShortVersionString: 1.2.0
+- CFBundleVersion: 3
+- LSMinimumSystemVersion: 11.0
 - Swift Tools Version: 5.9
 
 ## 🚀 Launch Checklist
@@ -483,8 +489,8 @@ open "Release/Touch Bar Restarter.app" && open "Release/Touch Bar Restarter.app"
 
 ---
 
-*Last Updated: August 15, 2024 - 09:15 PST*
-*Version: 1.1.1 (Critical Bug Fix Release)*
+*Last Updated: August 15, 2024 - 15:55 PST*
+*Version: 1.2.0 (UX Simplification Release)*
 *Status: Production Ready (pending code signing)*
 *Architecture: Universal Binary (Intel + Apple Silicon)*
-*Testing: All Critical Issues Resolved ✅*
+*Testing: Comprehensive UX Testing Completed ✅*

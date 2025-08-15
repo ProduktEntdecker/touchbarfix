@@ -100,8 +100,15 @@ class TouchBarManager: ObservableObject {
             lastError = nil
         }
         
-        // Kill Touch Bar related processes
-        let processes = ["TouchBarServer", "NowPlayingTouchUI", "ControlStrip"]
+        // Kill Touch Bar related processes - expanded list for stuck states
+        let processes = [
+            "TouchBarServer",
+            "NowPlayingTouchUI", 
+            "ControlStrip",
+            "TouchBarAgent",      // Added: Touch Bar agent process
+            "TouchBarUserDevice", // Added: User device handler
+            "DFRFoundation"       // Added: Display Foundation for Touch Bar
+        ]
         var allSuccessful = true
         
         print("🎯 Targeting processes: \(processes.joined(separator: ", "))")
@@ -192,15 +199,42 @@ class TouchBarManager: ObservableObject {
     }
     
     private func resetTouchBarPreferences() async {
-        let task = Process()
-        task.launchPath = "/usr/bin/defaults"
-        task.arguments = ["delete", "com.apple.touchbar.agent"]
+        print("🔧 Resetting Touch Bar preferences and cache...")
+        
+        // Delete multiple Touch Bar preference domains
+        let preferenceDomains = [
+            "com.apple.touchbar.agent",
+            "com.apple.controlstrip",
+            "com.apple.TouchBarAgent"
+        ]
+        
+        for domain in preferenceDomains {
+            let task = Process()
+            task.launchPath = "/usr/bin/defaults"
+            task.arguments = ["delete", domain]
+            
+            do {
+                try task.run()
+                task.waitUntilExit()
+                if task.terminationStatus == 0 {
+                    print("   ✅ Cleared \(domain)")
+                }
+            } catch {
+                // Ignore errors - domain might not exist
+            }
+        }
+        
+        // Also restart the Dock to refresh Touch Bar state
+        let dockTask = Process()
+        dockTask.launchPath = "/usr/bin/killall"
+        dockTask.arguments = ["Dock"]
         
         do {
-            try task.run()
-            task.waitUntilExit()
+            try dockTask.run()
+            dockTask.waitUntilExit()
+            print("   ✅ Restarted Dock to refresh Touch Bar")
         } catch {
-            print("Failed to reset Touch Bar preferences: \(error)")
+            print("   ⚠️ Could not restart Dock: \(error)")
         }
     }
     

@@ -59,7 +59,6 @@ app.run()
 
 class AppDelegate: NSObject, NSApplicationDelegate {
     var statusItem: NSStatusItem?
-    var popover: NSPopover?
     var menu: NSMenu?
     var touchBarManager = TouchBarManager()
     
@@ -80,28 +79,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if let button = statusItem?.button {
             // Use a more visible icon - restart symbol
             button.image = NSImage(systemSymbolName: "arrow.clockwise.circle.fill", accessibilityDescription: "Touch Bar Restarter")
-            button.action = #selector(handleClick)
+            button.action = #selector(showMenu)
             button.target = self
-            button.sendAction(on: [.leftMouseUp, .rightMouseUp])
             
             // Make the icon template so it adapts to dark/light mode
             button.image?.isTemplate = true
         }
         
-        // Create menu for right-click
+        // Create menu for both left and right clicks
         setupMenu()
-        
-        // Create popover with QuickActionView
-        popover = NSPopover()
-        popover?.contentSize = NSSize(width: 250, height: 180)
-        popover?.behavior = .transient
-        
-        let quickActionView = QuickActionView()
-            .environment(\.dismissWindow) { [weak self] in
-                self?.popover?.performClose(nil)
-            }
-        
-        popover?.contentViewController = NSHostingController(rootView: quickActionView)
     }
     
     func setupMenu() {
@@ -124,12 +110,22 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         countItem.isEnabled = false
         menu?.addItem(countItem)
         
+        // Version info
+        let versionItem = NSMenuItem(title: "Version: 1.2.0", action: nil, keyEquivalent: "")
+        versionItem.isEnabled = false
+        menu?.addItem(versionItem)
+        
         menu?.addItem(NSMenuItem.separator())
         
-        // Settings item
-        let settingsItem = NSMenuItem(title: "Settings...", action: #selector(showSettings), keyEquivalent: ",")
-        settingsItem.target = self
-        menu?.addItem(settingsItem)
+        // Report Issue item
+        let reportItem = NSMenuItem(title: "🐛 Report Issue...", action: #selector(reportIssue), keyEquivalent: "i")
+        reportItem.target = self
+        menu?.addItem(reportItem)
+        
+        // About item
+        let aboutItem = NSMenuItem(title: "ℹ️ About Touch Bar Restarter...", action: #selector(showAbout), keyEquivalent: "a")
+        aboutItem.target = self
+        menu?.addItem(aboutItem)
         
         menu?.addItem(NSMenuItem.separator())
         
@@ -139,28 +135,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         menu?.addItem(quitItem)
     }
     
-    @objc func handleClick() {
-        guard let event = NSApp.currentEvent else { return }
-        
-        if event.type == .rightMouseUp {
-            // Show menu on right-click
-            statusItem?.menu = menu
-            statusItem?.button?.performClick(nil)
-            statusItem?.menu = nil
-        } else {
-            // Show popover on left-click
-            togglePopover()
-        }
-    }
-    
-    @objc func togglePopover() {
-        if let button = statusItem?.button {
-            if popover?.isShown == true {
-                popover?.performClose(nil)
-            } else {
-                popover?.show(relativeTo: button.bounds, of: button, preferredEdge: NSRectEdge.minY)
-            }
-        }
+    @objc func showMenu() {
+        // Show menu for both left and right clicks
+        statusItem?.menu = menu
+        statusItem?.button?.performClick(nil)
+        statusItem?.menu = nil
     }
     
     @objc func quickRestart() {
@@ -187,9 +166,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
     
-    @objc func showSettings() {
-        // For now, just show the popover
-        togglePopover()
+    @objc func reportIssue() {
+        // Open GitHub Issues page
+        if let url = URL(string: "https://github.com/ProduktEntdecker/touchbar-restarter/issues") {
+            NSWorkspace.shared.open(url)
+        }
+    }
+    
+    @objc func showAbout() {
+        // Open about/landing page - TODO: Update to produktentdecker.com when ready
+        if let url = URL(string: "https://github.com/ProduktEntdecker/touchbar-restarter") {
+            NSWorkspace.shared.open(url)
+        }
     }
     
     @objc func quitApp() {
@@ -199,20 +187,20 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func showWelcomeNotification() {
         let alert = NSAlert()
         alert.messageText = "Touch Bar Restarter is Ready!"
-        alert.informativeText = "🔄 Left-click the ↻ icon: Quick restart\n🖱️ Right-click the ↻ icon: Full menu\n⌨️ Keyboard shortcuts: ⌘R (restart), ⌘Q (quit)\n\nThe app will stay running in your menu bar until you quit it."
+        alert.informativeText = "🔄 Click the ↻ icon to restart your Touch Bar\n⌨️ Keyboard shortcuts: ⌘R (restart), ⌘I (report issue), ⌘Q (quit)\n🐛 Having issues? Use ⌘I to report them\n\nThe app will stay running in your menu bar until you quit it."
         alert.alertStyle = .informational
         alert.addButton(withTitle: "Start Using")
-        alert.addButton(withTitle: "Show Settings")
+        alert.addButton(withTitle: "Show Menu")
         
         // Add icon to the alert
         alert.icon = NSImage(systemSymbolName: "arrow.clockwise.circle.fill", accessibilityDescription: "Touch Bar Restarter")
         
         let response = alert.runModal()
         
-        // If user clicked "Show Settings", open the popover
+        // If user clicked "Show Menu", show the menu
         if response == .alertSecondButtonReturn {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                self.togglePopover()
+                self.showMenu()
             }
         }
     }
