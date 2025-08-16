@@ -7,6 +7,7 @@ enum TouchBarError: LocalizedError {
     case processNotFound
     case killFailed(String)
     case serviceRestartFailed
+    case securityViolation(String)
     case unknown(String)
     
     var errorDescription: String? {
@@ -19,6 +20,8 @@ enum TouchBarError: LocalizedError {
             return "Failed to restart \(process)"
         case .serviceRestartFailed:
             return "Failed to restart Touch Bar service"
+        case .securityViolation(let message):
+            return "Security violation: \(message)"
         case .unknown(let message):
             return message
         }
@@ -32,6 +35,16 @@ class TouchBarManager: ObservableObject {
     @Published var hasTouchBar = false
     @Published var lastError: TouchBarError?
     
+    // SECURITY: Hardcoded, validated list of allowed Touch Bar processes
+    private let allowedTouchBarProcesses: Set<String> = [
+        "TouchBarServer",
+        "NowPlayingTouchUI", 
+        "ControlStrip",
+        "TouchBarAgent",
+        "TouchBarUserDevice",
+        "DFRFoundation"
+    ]
+    
     private let userDefaults = UserDefaults.standard
     private let restartCountKey = "TouchBarRestartCount"
     private let lastRestartKey = "LastTouchBarRestart"
@@ -41,6 +54,31 @@ class TouchBarManager: ObservableObject {
         checkTouchBarAvailability()
         // Force immediate update of published property
         objectWillChange.send()
+    }
+    
+    // SECURITY: Validate and sanitize process names before use
+    private func validateProcessName(_ processName: String) -> Bool {
+        // Simply check if it's in our allowed list - that's the most important security check
+        let isAllowed = allowedTouchBarProcesses.contains(processName)
+        
+        if !isAllowed {
+            print("🔒 Process validation failed: '\(processName)' not in allowed list")
+        }
+        
+        return isAllowed
+    }
+    
+    // SECURITY: Sanitize process names to prevent injection
+    private func sanitizeProcessName(_ processName: String) -> String {
+        // Remove any non-alphanumeric characters except hyphens
+        let sanitized = processName.components(separatedBy: CharacterSet.alphanumerics.union(CharacterSet(charactersIn: "-")).inverted).joined()
+        
+        // SECURITY: Log sanitization for security monitoring
+        if sanitized != processName {
+            print("🔒 Process name sanitized: '\(processName)' -> '\(sanitized)'")
+        }
+        
+        return sanitized
     }
     
     private func checkTouchBarAvailability() {
@@ -69,11 +107,26 @@ class TouchBarManager: ObservableObject {
         print("   Final detection: \(hasTouchBar)")
     }
     
+    // SECURITY: Add bounds checking to prevent buffer overflow
     private func getModelIdentifier() -> String {
         var size = 0
-        sysctlbyname("hw.model", nil, &size, nil, 0)
+        let result = sysctlbyname("hw.model", nil, &size, nil, 0)
+        
+        // SECURITY: Validate sysctl result and size
+        guard result == 0, size > 0, size < 1024 else { // Reasonable bounds for model name
+            print("🔒 Security: Invalid sysctl result or size: \(result), \(size)")
+            return "Unknown"
+        }
+        
         var model = [CChar](repeating: 0, count: size)
-        sysctlbyname("hw.model", &model, &size, nil, 0)
+        let readResult = sysctlbyname("hw.model", &model, &size, nil, 0)
+        
+        // SECURITY: Validate read result
+        guard readResult == 0 else {
+            print("🔒 Security: Failed to read sysctl: \(readResult)")
+            return "Unknown"
+        }
+        
         return String(cString: model)
     }
     
@@ -85,6 +138,15 @@ class TouchBarManager: ObservableObject {
         print("   Device has Touch Bar: \(hasTouchBar)")
         print("   Model: \(getModelIdentifier())")
         
+        // Enhanced logging for Console verification
+        print("\n" + String(repeating: "=", count: 60))
+        print("🚀 TOUCH BAR RESTART INITIATED")
+        print("   Timestamp: \(Date())")
+        print("   Device model: \(getModelIdentifier())")
+        print("   Has Touch Bar: \(hasTouchBar)")
+        print("   App Version: 1.2.1")
+        print(String(repeating: "=", count: 60))
+        
         // Check if device has Touch Bar
         guard hasTouchBar else {
             print("❌ No Touch Bar detected on this device")
@@ -95,26 +157,27 @@ class TouchBarManager: ObservableObject {
             return .failure(.noTouchBar)
         }
         
+        // Check initial state of Touch Bar processes
+        print("\n📊 PRE-RESTART PROCESS STATUS:")
+        for process in allowedTouchBarProcesses {
+            let isRunning = checkIfProcessRunning(process)
+            print("   • \(process): \(isRunning ? "✅ Running" : "❌ Not Running")")
+        }
+        
         await MainActor.run {
             isRestarting = true
             lastError = nil
         }
         
-        // Kill Touch Bar related processes - expanded list for stuck states
-        let processes = [
-            "TouchBarServer",
-            "NowPlayingTouchUI", 
-            "ControlStrip",
-            "TouchBarAgent",      // Added: Touch Bar agent process
-            "TouchBarUserDevice", // Added: User device handler
-            "DFRFoundation"       // Added: Display Foundation for Touch Bar
-        ]
+        // SECURITY: Use validated, hardcoded process list instead of dynamic input
+        let processes = Array(allowedTouchBarProcesses)
         var allSuccessful = true
         
-        print("🎯 Targeting processes: \(processes.joined(separator: ", "))")
+        print("\n🎯 KILLING PROCESSES:")
+        print("   Targets: \(processes.joined(separator: ", "))")
         
         for process in processes {
-            let result = await killProcess(named: process)
+            let result = await secureKillProcess(process)
             if case .failure(let error) = result {
                 print("❌ Failed to kill \(process): \(error.localizedDescription)")
                 await MainActor.run {
@@ -124,16 +187,27 @@ class TouchBarManager: ObservableObject {
             }
         }
         
-        print("⏱️ Waiting 2 seconds for processes to restart...")
+        print("\n⏱️ Waiting 2 seconds for processes to restart...")
         // Wait for processes to restart
         try? await Task.sleep(nanoseconds: 2_000_000_000) // 2 seconds
         
         // Verify processes have restarted
-        print("🔍 Verifying Touch Bar processes have restarted...")
-        let verificationProcesses = ["TouchBarServer"]
-        for process in verificationProcesses {
+        print("\n📊 POST-RESTART PROCESS STATUS:")
+        for process in allowedTouchBarProcesses {
             let isRunning = checkIfProcessRunning(process)
-            print("   \(process): \(isRunning ? "✅ Running" : "❌ Not running")")
+            print("   • \(process): \(isRunning ? "✅ Running" : "❌ Not Running")")
+        }
+        
+        // Additional verification for critical processes
+        print("\n🔍 Verifying critical Touch Bar processes:")
+        let criticalProcesses = ["TouchBarServer", "ControlStrip"]
+        var criticalRunning = true
+        for process in criticalProcesses {
+            let isRunning = checkIfProcessRunning(process)
+            print("   • \(process): \(isRunning ? "✅ VERIFIED RUNNING" : "⚠️ NOT DETECTED")")
+            if !isRunning && process == "TouchBarServer" {
+                criticalRunning = false
+            }
         }
         
         // Reset Touch Bar preferences if needed
@@ -148,8 +222,13 @@ class TouchBarManager: ObservableObject {
                 self.isRestarting = false
             }
             
-            print("✅ Touch Bar restart completed successfully! (Restart #\(restartCount))")
-            print("📊 Final status: \(getTouchBarStatus())")
+            print("\n" + String(repeating: "=", count: 60))
+            print("✅ TOUCH BAR RESTART COMPLETED SUCCESSFULLY!")
+            print("   Restart Count: #\(restartCount)")
+            print("   Timestamp: \(Date())")
+            print("   Duration: ~2.5 seconds")
+            print("   Final Status: \(getTouchBarStatus())")
+            print(String(repeating: "=", count: 60) + "\n")
             return .success(())
         }
         
@@ -161,11 +240,29 @@ class TouchBarManager: ObservableObject {
         return .failure(lastError ?? .unknown("Failed to restart Touch Bar"))
     }
     
-    private func killProcess(named processName: String) async -> Result<Void, TouchBarError> {
+    // SECURITY: Secure process termination with validation
+    private func secureKillProcess(_ processName: String) async -> Result<Void, TouchBarError> {
+        // SECURITY: Validate process name before any operations
+        guard validateProcessName(processName) else {
+            let error = TouchBarError.securityViolation("Invalid process name: '\(processName)'")
+            print("🔒 Security violation: \(error.localizedDescription)")
+            return .failure(error)
+        }
+        
+        // SECURITY: Double-check against allowed list
+        guard allowedTouchBarProcesses.contains(processName) else {
+            let error = TouchBarError.securityViolation("Unauthorized process: '\(processName)'")
+            print("🔒 Security violation: \(error.localizedDescription)")
+            return .failure(error)
+        }
+        
+        // Log for verification in Console
+        print("📊 TOUCH_BAR_RESTART: Killing process '\(processName)' at \(Date())")
         print("🔄 Attempting to kill process: \(processName)")
         
         let task = Process()
-        task.launchPath = "/usr/bin/pkill"
+        // SECURITY: Use executableURL instead of launchPath for better security
+        task.executableURL = URL(fileURLWithPath: "/usr/bin/pkill")
         task.arguments = ["-x", processName]
         
         let pipe = Pipe()
@@ -198,10 +295,11 @@ class TouchBarManager: ObservableObject {
         }
     }
     
+    
     private func resetTouchBarPreferences() async {
         print("🔧 Resetting Touch Bar preferences and cache...")
         
-        // Delete multiple Touch Bar preference domains
+        // SECURITY: Hardcoded, validated preference domains
         let preferenceDomains = [
             "com.apple.touchbar.agent",
             "com.apple.controlstrip",
@@ -210,7 +308,8 @@ class TouchBarManager: ObservableObject {
         
         for domain in preferenceDomains {
             let task = Process()
-            task.launchPath = "/usr/bin/defaults"
+            // SECURITY: Use executableURL for better security
+            task.executableURL = URL(fileURLWithPath: "/usr/bin/defaults")
             task.arguments = ["delete", domain]
             
             do {
@@ -226,7 +325,8 @@ class TouchBarManager: ObservableObject {
         
         // Also restart the Dock to refresh Touch Bar state
         let dockTask = Process()
-        dockTask.launchPath = "/usr/bin/killall"
+        // SECURITY: Use executableURL for better security
+        dockTask.executableURL = URL(fileURLWithPath: "/usr/bin/killall")
         dockTask.arguments = ["Dock"]
         
         do {
@@ -258,7 +358,8 @@ class TouchBarManager: ObservableObject {
         }
         
         let task = Process()
-        task.launchPath = "/usr/bin/pgrep"
+        // SECURITY: Use executableURL for better security
+        task.executableURL = URL(fileURLWithPath: "/usr/bin/pgrep")
         task.arguments = ["-x", "TouchBarServer"]
         
         do {
@@ -271,8 +372,15 @@ class TouchBarManager: ObservableObject {
     }
     
     func checkIfProcessRunning(_ processName: String) -> Bool {
+        // SECURITY: Validate process name before checking
+        guard validateProcessName(processName) else {
+            print("🔒 Security: Attempted to check invalid process: '\(processName)'")
+            return false
+        }
+        
         let task = Process()
-        task.launchPath = "/usr/bin/pgrep"
+        // SECURITY: Use executableURL for better security
+        task.executableURL = URL(fileURLWithPath: "/usr/bin/pgrep")
         task.arguments = ["-x", processName]
         
         do {

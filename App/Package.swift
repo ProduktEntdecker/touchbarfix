@@ -25,7 +25,8 @@ let package = Package(
                 .copy("../Resources/TouchBarRestarter.entitlements")
             ],
             swiftSettings: [
-                .unsafeFlags(["-suppress-warnings"], .when(configuration: .release))
+                // SECURITY: Removed unsafe flags that suppress warnings
+                // All security warnings must be visible for proper auditing
             ]
         ),
         .testTarget(

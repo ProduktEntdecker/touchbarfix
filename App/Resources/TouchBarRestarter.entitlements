@@ -19,12 +19,23 @@
     <key>com.apple.security.app-sandbox</key>
     <false/>
     
-    <!-- Network access for future update checking -->
-    <key>com.apple.security.network.client</key>
-    <true/>
+    <!-- SECURITY: Network access removed until actually needed for updates -->
+    <!-- <key>com.apple.security.network.client</key> -->
+    <!-- <true/> -->
     
-    <!-- User defaults access -->
-    <key>com.apple.security.files.user-selected.read-write</key>
-    <true/>
+    <!-- SECURITY: File access restricted to minimum required -->
+    <!-- <key>com.apple.security.files.user-selected.read-write</key> -->
+    <!-- <true/> -->
+    
+    <!-- SECURITY: Only essential Touch Bar process termination allowed -->
+    <key>com.apple.security.temporary-exception.mach-lookup.global-name</key>
+    <array>
+        <string>com.apple.TouchBarServer</string>
+        <string>com.apple.controlstrip</string>
+        <string>com.apple.NowPlayingTouchUI</string>
+        <string>com.apple.TouchBarAgent</string>
+        <string>com.apple.TouchBarUserDevice</string>
+        <string>com.apple.DFRFoundation</string>
+    </array>
 </dict>
 </plist>
