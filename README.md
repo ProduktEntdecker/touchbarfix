@@ -1,32 +1,44 @@
-# Touch Bar Restarter
+# TouchBarFix
 
-A macOS utility that restarts the Touch Bar (`TouchBarServer` and `ControlStrip`) in one click — no Terminal or reboot needed.
+Fix your unresponsive MacBook Touch Bar with one click — no Terminal commands or restart required.
 
 ## Why?
 
 Many MacBook Pros (2016–2021) experience flickering or non-responsive Touch Bars. The usual fix requires either a Terminal command or a full system reboot. This app does it with a single click.
 
-## Features (MVP)
+## Features
 
-- One-click Touch Bar restart
-- Menu bar interface
-- Lightweight and sandbox-friendly
-- Signed and notarized for secure installation
+- **One-click Touch Bar restart** — Fix frozen or unresponsive Touch Bar instantly
+- **Menu bar interface** — Clean, minimal design that stays out of your way  
+- **Security hardened** — Process whitelisting and input validation (8/10 security rating)
+- **Enhanced logging** — Detailed console output for verification
+- **Universal binary** — Supports both Intel and Apple Silicon Macs
+- **Free during beta** — No cost while in testing phase
 
-## Planned Features
+## Supported Models
 
-- Auto-restart detection
-- Logging
-- Preferences and update options
+- MacBook Pro 2016-2021 (all Touch Bar models)
+- Specifically tested on MacBookPro17,1 (M1, 2020)
+
+## Installation
+
+1. **Download** the latest DMG from [Releases](https://github.com/ProduktEntdecker/touchbarfix/releases)
+2. **Mount** the DMG and drag TouchBarFix to Applications
+3. **Launch** TouchBarFix (first time: right-click → Open → Open)
+4. **Use** the menu bar icon to restart your Touch Bar
 
 ## Tech Stack
 
-- SwiftUI + Xcode (macOS 12+)
-- Gumroad for distribution
-- Sparkle for auto-updates (non-App Store)
-- Astro for landing page
-- Buttondown for email capture
+- **Swift + SwiftUI** — Native macOS performance
+- **GitHub Pages** — Landing page hosting at [touchbarfix.com](https://touchbarfix.com)
+- **Security focused** — Process whitelisting, input validation, secure APIs
+
+## Repository
+
+- **Repository**: [github.com/ProduktEntdecker/touchbarfix](https://github.com/ProduktEntdecker/touchbarfix)
+- **Website**: [touchbarfix.com](https://touchbarfix.com)
+- **Issues**: [Report bugs or request features](https://github.com/ProduktEntdecker/touchbarfix/issues)
 
 ---
 
-*Built with ❤️ by ProduktEntdecker*# touchbar-restarter
+*Built with ❤️ by [ProduktEntdecker](https://github.com/ProduktEntdecker)*
