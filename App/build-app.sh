@@ -1,16 +1,16 @@
 #!/bin/bash
 
-# Touch Bar Restarter App Bundle Build Script
+# TouchBarFix App Bundle Build Script
 # This script builds a proper .app bundle for distribution
 
 set -e
 
-echo "🔨 Building Touch Bar Restarter App Bundle..."
+echo "🔨 Building TouchBarFix App Bundle..."
 
 # Configuration
-APP_NAME="Touch Bar Restarter"
-BUNDLE_ID="com.produktentdecker.touchbarrestarter"
-VERSION="1.0.0"
+APP_NAME="TouchBarFix"
+BUNDLE_ID="com.produktentdecker.touchbarfix"
+VERSION="1.2.1"
 BUILD_DIR=".build"
 RELEASE_DIR="Release"
 

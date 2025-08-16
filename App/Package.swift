@@ -2,14 +2,14 @@
 import PackageDescription
 
 let package = Package(
-    name: "TouchBarRestarter",
+    name: "TouchBarFix",
     platforms: [
         .macOS(.v13)
     ],
     products: [
         .executable(
-            name: "TouchBarRestarter",
-            targets: ["TouchBarRestarter"]
+            name: "TouchBarFix",
+            targets: ["TouchBarFix"]
         )
     ],
     dependencies: [
@@ -17,7 +17,7 @@ let package = Package(
     ],
     targets: [
         .executableTarget(
-            name: "TouchBarRestarter",
+            name: "TouchBarFix",
             dependencies: [],
             path: "Sources",
             resources: [
@@ -30,8 +30,8 @@ let package = Package(
             ]
         ),
         .testTarget(
-            name: "TouchBarRestarterTests",
-            dependencies: ["TouchBarRestarter"],
+            name: "TouchBarFixTests",
+            dependencies: ["TouchBarFix"],
             path: "Tests"
         )
     ]

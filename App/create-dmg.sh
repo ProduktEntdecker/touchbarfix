@@ -1,10 +1,10 @@
 #!/bin/bash
 
-# DMG Creation Script for Touch Bar Restarter
+# DMG Creation Script for TouchBarFix
 set -e
 
-APP_NAME="Touch Bar Restarter"
-DMG_NAME="TouchBarRestarter-1.0.0"
+APP_NAME="TouchBarFix"
+DMG_NAME="TouchBarFix-1.2.1"
 RELEASE_DIR="Release"
 APP_BUNDLE="$RELEASE_DIR/$APP_NAME.app"
 
@@ -35,11 +35,11 @@ ln -s /Applications "$DMG_DIR/Applications"
 
 # Create README file
 cat > "$DMG_DIR/README.txt" << EOF
-Touch Bar Restarter v1.0.0
+TouchBarFix v1.2.1
 ==========================
 
 Installation:
-1. Drag "Touch Bar Restarter" to your Applications folder
+1. Drag "TouchBarFix" to your Applications folder
 2. Launch from Applications or Spotlight
 3. The app will appear in your menu bar
 
@@ -52,7 +52,7 @@ Requirements:
 - MacBook Pro with Touch Bar (2016-2021 models)
 
 Support:
-Visit https://github.com/yourusername/touchbar-restarter
+Visit https://github.com/ProduktEntdecker/touchbarfix
 
 © 2024 ProduktEntdecker
 EOF

@@ -4,7 +4,7 @@ import Foundation
 
 // Check for existing instance
 func checkSingleInstance() -> Bool {
-    let bundleIdentifier = "com.produktentdecker.touchbarrestarter"
+    let bundleIdentifier = "com.produktentdecker.touchbarfix"
     let runningApps = NSWorkspace.shared.runningApplications
     
     // Count apps with our bundle identifier that are already running
@@ -34,8 +34,8 @@ if !checkSingleInstance() {
     NSApplication.shared.activate(ignoringOtherApps: true)
     
     let alert = NSAlert()
-    alert.messageText = "Touch Bar Restarter is Already Running"
-    alert.informativeText = "Another instance of Touch Bar Restarter is already running in your menu bar. Please quit the existing instance before starting a new one."
+    alert.messageText = "TouchBarFix is Already Running"
+    alert.informativeText = "Another instance of TouchBarFix is already running in your menu bar. Please quit the existing instance before starting a new one."
     alert.alertStyle = .warning
     alert.addButton(withTitle: "OK")
     alert.icon = NSImage(systemSymbolName: "exclamationmark.triangle.fill", accessibilityDescription: "Warning")
@@ -78,7 +78,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         if let button = statusItem?.button {
             // Use a more visible icon - restart symbol
-            button.image = NSImage(systemSymbolName: "arrow.clockwise.circle.fill", accessibilityDescription: "Touch Bar Restarter")
+            button.image = NSImage(systemSymbolName: "arrow.clockwise.circle.fill", accessibilityDescription: "TouchBarFix")
             button.action = #selector(showMenu)
             button.target = self
             
@@ -111,7 +111,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         menu?.addItem(countItem)
         
         // Version info
-        let versionItem = NSMenuItem(title: "Version: 1.2.0", action: nil, keyEquivalent: "")
+        let versionItem = NSMenuItem(title: "Version: 1.2.1", action: nil, keyEquivalent: "")
         versionItem.isEnabled = false
         menu?.addItem(versionItem)
         
@@ -123,14 +123,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         menu?.addItem(reportItem)
         
         // About item
-        let aboutItem = NSMenuItem(title: "ℹ️ About Touch Bar Restarter...", action: #selector(showAbout), keyEquivalent: "a")
+        let aboutItem = NSMenuItem(title: "ℹ️ About TouchBarFix...", action: #selector(showAbout), keyEquivalent: "a")
         aboutItem.target = self
         menu?.addItem(aboutItem)
         
         menu?.addItem(NSMenuItem.separator())
         
         // Quit item
-        let quitItem = NSMenuItem(title: "Quit Touch Bar Restarter", action: #selector(quitApp), keyEquivalent: "q")
+        let quitItem = NSMenuItem(title: "Quit TouchBarFix", action: #selector(quitApp), keyEquivalent: "q")
         quitItem.target = self
         menu?.addItem(quitItem)
     }
@@ -168,14 +168,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     @objc func reportIssue() {
         // Open GitHub Issues page
-        if let url = URL(string: "https://github.com/ProduktEntdecker/touchbar-restarter/issues") {
+        if let url = URL(string: "https://github.com/ProduktEntdecker/touchbarfix/issues") {
             NSWorkspace.shared.open(url)
         }
     }
     
     @objc func showAbout() {
         // Open about/landing page - TODO: Update to produktentdecker.com when ready
-        if let url = URL(string: "https://github.com/ProduktEntdecker/touchbar-restarter") {
+        if let url = URL(string: "https://github.com/ProduktEntdecker/touchbarfix") {
             NSWorkspace.shared.open(url)
         }
     }
@@ -186,14 +186,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func showWelcomeNotification() {
         let alert = NSAlert()
-        alert.messageText = "Touch Bar Restarter is Ready!"
+        alert.messageText = "TouchBarFix is Ready!"
         alert.informativeText = "🔄 Click the ↻ icon to restart your Touch Bar\n⌨️ Keyboard shortcuts: ⌘R (restart), ⌘I (report issue), ⌘Q (quit)\n🐛 Having issues? Use ⌘I to report them\n\nThe app will stay running in your menu bar until you quit it."
         alert.alertStyle = .informational
         alert.addButton(withTitle: "Start Using")
         alert.addButton(withTitle: "Show Menu")
         
         // Add icon to the alert
-        alert.icon = NSImage(systemSymbolName: "arrow.clockwise.circle.fill", accessibilityDescription: "Touch Bar Restarter")
+        alert.icon = NSImage(systemSymbolName: "arrow.clockwise.circle.fill", accessibilityDescription: "TouchBarFix")
         
         let response = alert.runModal()
         

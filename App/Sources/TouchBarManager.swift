@@ -144,7 +144,7 @@ class TouchBarManager: ObservableObject {
         print("   Timestamp: \(Date())")
         print("   Device model: \(getModelIdentifier())")
         print("   Has Touch Bar: \(hasTouchBar)")
-        print("   App Version: 1.2.1")
+        print("   App: TouchBarFix 1.2.1")
         print(String(repeating: "=", count: 60))
         
         // Check if device has Touch Bar
