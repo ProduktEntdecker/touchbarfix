@@ -1,28 +1,79 @@
-# TOUCHBARFIX PROJECT - CRITICAL INFORMATION
+# TOUCHBARFIX PROJECT - ESSENTIAL INFORMATION FOR CLAUDE
 
-**PROJECT RENAMED ON AUGUST 16, 2024 AT 18:00 CET**
+**Last Updated: August 16, 2024 - 22:15 CET**
 
-## ❌ OLD NAME (NEVER USE AGAIN):
+## 🚨 CRITICAL PROJECT INFORMATION
+
+### PROJECT REBRAND COMPLETED
+**Renamed on August 16, 2024 at 18:00 CET**
+
+## ❌ OLD NAMES (NEVER USE):
 - Touch Bar Restarter
 - touchbar-restarter 
 - TouchBarRestarter
+- Any variation with "restarter"
 
-## ✅ NEW NAME (ALWAYS USE):
-- TouchBarFix
-- touchbarfix
-- github.com/ProduktEntdecker/touchbarfix
-- touchbarfix.com
+## ✅ CURRENT NAMES (ALWAYS USE):
+- **Product Name**: TouchBarFix
+- **Repository**: touchbarfix  
+- **Domain**: touchbarfix.com
+- **GitHub**: https://github.com/ProduktEntdecker/touchbarfix
+- **Bundle ID**: com.produktentdecker.touchbarfix
 
-## IMPORTANT PATHS:
-- ✅ Correct: /Users/floriansteiner/Documents/GitHub/touchbarfix
-- ❌ DOES NOT EXIST: /Users/floriansteiner/Documents/GitHub/touchbar-restarter
+## 📁 CORRECT PATHS:
+- ✅ **Project Root**: `/Users/floriansteiner/Documents/GitHub/touchbarfix`
+- ✅ **App Source**: `/Users/floriansteiner/Documents/GitHub/touchbarfix/App`
+- ✅ **Documentation**: `/Users/floriansteiner/Documents/GitHub/touchbarfix/docs`
+- ❌ **NEVER USE**: `/Users/floriansteiner/Documents/GitHub/touchbar-restarter` (DOES NOT EXIST)
 
-## CURRENT STATUS:
-- Version: 1.2.1 (Security Hardening + Rebrand)
-- App: TouchBarFix.app
-- DMG: TouchBarFix-1.2.1.dmg  
-- Bundle ID: com.produktentdecker.touchbarfix
-- Domain: touchbarfix.com
-- GitHub: https://github.com/ProduktEntdecker/touchbarfix
+## 🚀 CURRENT STATUS (v1.2.1):
 
-This is the only correct project path and name.
+### ✅ COMPLETED:
+- **App**: TouchBarFix.app (Universal Binary)
+- **Security**: 8/10 rating (process whitelisting, input validation)
+- **Distribution**: TouchBarFix-1.2.1.dmg ready
+- **Website**: touchbarfix.com (GitHub Pages + custom domain)
+- **Infrastructure**: GitHub repository, documentation, landing page
+- **Testing**: Comprehensive security and functionality testing
+
+### 🟡 IN PROGRESS:
+- **SSL Certificate**: GitHub Pages HTTPS provisioning for touchbarfix.com
+- **Beta Testing**: Ready to deploy to test users
+
+### 📋 NEXT STEPS:
+- Complete SSL setup
+- Deploy to beta testers
+- Apple Developer ID for code signing
+- Public launch preparation
+
+## 🛠 DEVELOPMENT COMMANDS:
+
+```bash
+# Navigate to project
+cd /Users/floriansteiner/Documents/GitHub/touchbarfix
+
+# Build app
+cd App && swift build
+
+# Create release app
+./build-app.sh
+
+# Create DMG
+./create-dmg.sh
+
+# Open in Xcode
+cd App && open Package.swift
+
+# Git operations
+git add . && git commit -m "message" && git push origin main
+```
+
+## 🔗 IMPORTANT LINKS:
+- **Website**: https://touchbarfix.com
+- **Repository**: https://github.com/ProduktEntdecker/touchbarfix
+- **Issues**: https://github.com/ProduktEntdecker/touchbarfix/issues
+
+## ⚠️ REMINDER FOR CLAUDE:
+- ALWAYS use "TouchBarFix" or "touchbarfix" - never the old names
+- ALWAYS use the correct path `/Users/floriansteiner/Documents/GitHub/touchbarfix`
+- This project is BETA LAUNCH READY as of August 16, 2024

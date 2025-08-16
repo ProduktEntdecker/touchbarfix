@@ -870,10 +870,13 @@ open "Release/Touch Bar Restarter.app" && open "Release/Touch Bar Restarter.app"
 
 ---
 
-*Last Updated: August 16, 2024 - 21:30 PST*
+*Last Updated: August 16, 2024 - 22:15 CET*
 *Project Name: TouchBarFix (formerly Touch Bar Restarter)*
 *Version: 1.2.1 (Rebrand + Security Hardening Release)*
-*Status: ✅ READY FOR BETA TESTING*
+*Status: ✅ BETA LAUNCH READY*
 *Architecture: Universal Binary (Intel + Apple Silicon)*
+*Website: https://touchbarfix.com (GitHub Pages + Custom Domain)*
+*Repository: https://github.com/ProduktEntdecker/touchbarfix*
 *Testing: Security & Functionality Testing Completed ✅*
 *Security: ✅ SECURE - All Critical Issues Resolved*
+*Distribution: TouchBarFix-1.2.1.dmg ready for beta testing*
