@@ -48,9 +48,9 @@ fi
 
 # Create universal binary using lipo
 echo "  🔗 Creating universal binary..."
-ARM64_BINARY="$BUILD_DIR/arm64-apple-macosx/release/TouchBarRestarter"
-X86_64_BINARY="$BUILD_DIR/x86_64-apple-macosx/release/TouchBarRestarter"
-UNIVERSAL_BINARY="$BUILD_DIR/universal-TouchBarRestarter"
+ARM64_BINARY="$BUILD_DIR/arm64-apple-macosx/release/TouchBarFix"
+X86_64_BINARY="$BUILD_DIR/x86_64-apple-macosx/release/TouchBarFix"
+UNIVERSAL_BINARY="$BUILD_DIR/universal-TouchBarFix"
 
 lipo -create "$ARM64_BINARY" "$X86_64_BINARY" -output "$UNIVERSAL_BINARY"
 
@@ -70,13 +70,13 @@ mkdir -p "$APP_BUNDLE/Contents/MacOS"
 mkdir -p "$APP_BUNDLE/Contents/Resources"
 
 # Copy universal executable
-cp "$UNIVERSAL_BINARY" "$APP_BUNDLE/Contents/MacOS/TouchBarRestarter"
+cp "$UNIVERSAL_BINARY" "$APP_BUNDLE/Contents/MacOS/TouchBarFix"
 
 # Copy Info.plist
 cp "Resources/Info.plist" "$APP_BUNDLE/Contents/"
 
 # Copy entitlements (for reference during signing)
-cp "Resources/TouchBarRestarter.entitlements" "$RELEASE_DIR/"
+cp "Resources/TouchBarFix.entitlements" "$RELEASE_DIR/"
 
 # Copy app icon
 echo "🎨 Adding app icon..."
@@ -97,7 +97,7 @@ if command -v codesign &> /dev/null; then
     
     if [ -n "$IDENTITY" ]; then
         codesign --force --deep --sign "$IDENTITY" \
-            --entitlements "Resources/TouchBarRestarter.entitlements" \
+            --entitlements "Resources/TouchBarFix.entitlements" \
             --options runtime \
             "$APP_BUNDLE"
         
@@ -112,7 +112,7 @@ fi
 
 # Verify the app bundle
 echo "🔍 Verifying app bundle..."
-if [ -f "$APP_BUNDLE/Contents/MacOS/TouchBarRestarter" ]; then
+if [ -f "$APP_BUNDLE/Contents/MacOS/TouchBarFix" ]; then
     echo -e "${GREEN}✅ App bundle created successfully!${NC}"
     echo ""
     echo "📍 Location: $APP_BUNDLE"

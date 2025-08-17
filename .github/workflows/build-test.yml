@@ -31,7 +31,7 @@ jobs:
     - name: Verify Universal Binary
       run: |
         cd App
-        lipo -info .build/release/TouchBarRestarter | grep "x86_64 arm64"
+        lipo -info .build/release/TouchBarFix | grep "x86_64 arm64"
     
     - name: Upload Build Artifacts
       uses: actions/upload-artifact@v3

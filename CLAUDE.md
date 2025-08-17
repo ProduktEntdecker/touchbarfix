@@ -75,7 +75,24 @@ git add . && git commit -m "message" && git push origin main
 - **Repository**: https://github.com/ProduktEntdecker/touchbarfix
 - **Issues**: https://github.com/ProduktEntdecker/touchbarfix/issues
 
-## ⚠️ REMINDER FOR CLAUDE:
-- ALWAYS use "TouchBarFix" or "touchbarfix" - never the old names
-- ALWAYS use the correct path `/Users/floriansteiner/Documents/GitHub/touchbarfix`
-- This project is BETA LAUNCH READY as of August 16, 2024
+## ⚠️ CRITICAL REMINDER FOR CLAUDE:
+
+### 🚨 OLD NAME REFERENCES CAUSE CRITICAL ISSUES:
+- **Git conflicts and SSL certificate problems**
+- **Build failures and deployment errors**
+- **Repository inconsistencies**
+
+### ✅ ALWAYS USE CORRECT NAMES:
+- **Product**: TouchBarFix (NEVER "Touch Bar Restarter")
+- **Executable**: TouchBarFix (NEVER "TouchBarRestarter")
+- **Path**: `/Users/floriansteiner/Documents/GitHub/touchbarfix`
+- **Bundle ID**: com.produktentdecker.touchbarfix
+
+### 🔍 CHECK THESE FILES FOR OLD REFERENCES:
+- Package.swift (executable name)
+- Info.plist (CFBundleExecutable)
+- build-app.sh (binary paths)
+- *.swift files (import statements)
+- GitHub Actions workflows
+
+This project is BETA LAUNCH READY as of August 17, 2024

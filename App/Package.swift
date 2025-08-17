@@ -22,7 +22,7 @@ let package = Package(
             path: "Sources",
             resources: [
                 .copy("../Resources/Info.plist"),
-                .copy("../Resources/TouchBarRestarter.entitlements")
+                .copy("../Resources/TouchBarFix.entitlements")
             ],
             swiftSettings: [
                 // SECURITY: Removed unsafe flags that suppress warnings

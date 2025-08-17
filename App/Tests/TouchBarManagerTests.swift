@@ -1,5 +1,5 @@
 import XCTest
-@testable import TouchBarRestarter
+@testable import TouchBarFix
 
 final class TouchBarManagerTests: XCTestCase {
     var touchBarManager: TouchBarManager!
