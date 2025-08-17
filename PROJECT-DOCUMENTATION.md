@@ -38,13 +38,15 @@
    - ✅ **Dock Restart**: Forces Dock restart to refresh Touch Bar UI state
    - ✅ **Simplified Welcome**: Updated onboarding for single interface
 
-   **v1.2.1 Security Hardening (August 16, 2024):**
+   **v1.2.1 Security Hardening & Fixes (August 16-17, 2024):**
    - ✅ **Process Whitelisting**: Only allows killing specific Touch Bar processes
    - ✅ **Input Validation**: Prevents command injection attacks
    - ✅ **Secure API Usage**: Using executableURL instead of deprecated launchPath
    - ✅ **Enhanced Logging**: Detailed console logging for verification
    - ✅ **Security Simplified**: Removed overly complex signature verification
    - ✅ **Testing Framework**: Improved with security-aware tests
+   - ✅ **Name Consistency**: Fixed all TouchBarRestarter → TouchBarFix references
+   - ✅ **Warning Fixes**: Resolved all compiler warnings (criticalRunning variable)
 
 2. **Automated testing suite** ✅
    - 7 unit tests implemented using XCTest
@@ -878,7 +880,7 @@ open "Release/Touch Bar Restarter.app" && open "Release/Touch Bar Restarter.app"
 
 ---
 
-*Last Updated: August 17, 2024 - 12:00 CET*
+*Last Updated: August 17, 2024 - 12:45 CET*
 *Project Name: TouchBarFix (formerly Touch Bar Restarter)*
 *Version: 1.2.1 (Rebrand + Security Hardening Release)*
 *Status: ✅ BETA LAUNCH READY*

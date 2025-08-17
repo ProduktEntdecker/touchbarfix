@@ -39,6 +39,14 @@ Many MacBook Pros (2016–2021) experience flickering or non-responsive Touch Ba
 - **Website**: [touchbarfix.com](https://touchbarfix.com)
 - **Issues**: [Report bugs or request features](https://github.com/ProduktEntdecker/touchbarfix/issues)
 
+## 📚 Documentation
+
+- [Project Documentation](PROJECT-DOCUMENTATION.md) - Complete technical details
+- [Development Guide](App/DEVELOPMENT.md) - Setup and development instructions
+- [Business Plan](Business%20Plan.md) - Product strategy and market analysis
+- [Project Plan](Project%20Plan.md) - Development roadmap and milestones
+- [DevOps Setup](DEVOPS-SETUP.md) - CI/CD and repository management guide
+
 ---
 
 *Built with ❤️ by [ProduktEntdecker](https://github.com/ProduktEntdecker)*

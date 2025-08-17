@@ -1,4 +1,4 @@
-# Touch Bar Restarter
+# TouchBarFix
 
 A macOS utility app that helps restart your Touch Bar when it becomes unresponsive. Built with SwiftUI and distributed as a status bar app.
 
@@ -39,7 +39,7 @@ A macOS utility app that helps restart your Touch Bar when it becomes unresponsi
 
 1. **Navigate to the project:**
    ```bash
-   cd TouchBarRestarter
+   cd TouchBarFix
    ```
 
 2. **Build the project:**
@@ -60,7 +60,7 @@ A macOS utility app that helps restart your Touch Bar when it becomes unresponsi
 ### Project Structure
 
 ```
-TouchBarRestarter/
+TouchBarFix/
 ├── Package.swift              # Swift Package Manager configuration
 ├── Sources/
 │   ├── main.swift            # App entry point and status bar setup
@@ -95,12 +95,12 @@ The app uses several methods to restart the Touch Bar:
 
 2. **Code Sign the App:**
    ```bash
-   codesign --force --deep --sign "Developer ID Application: Your Name" TouchBarRestarter
+   codesign --force --deep --sign "Developer ID Application: Your Name" TouchBarFix
    ```
 
 3. **Notarize the App:**
    ```bash
-   xcrun notarytool submit TouchBarRestarter.zip --apple-id "your@email.com" --password "app-specific-password"
+   xcrun notarytool submit TouchBarFix.zip --apple-id "your@email.com" --password "app-specific-password"
    ```
 
 ### Creating DMG Package
