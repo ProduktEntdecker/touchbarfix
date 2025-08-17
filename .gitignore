@@ -1,7 +1,15 @@
 # macOS
 .DS_Store
+.AppleDouble
+.LSOverride
 *.swp
 *~.nib
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
 
 # Xcode
 build/
@@ -48,3 +56,20 @@ playground.xcworkspace
 
 # Documentation cache
 docs/.build/
+
+# Security - NEVER commit these
+*.p12
+*.cer
+*.key
+*.mobileprovision
+*.secrets
+.env
+.env.local
+
+# App specific
+*.dmg.bak
+*.app.dSYM.zip
+
+# Testing
+coverage/
+*.lcov

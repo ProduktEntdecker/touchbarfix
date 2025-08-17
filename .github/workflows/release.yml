@@ -1,0 +1,51 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: macos-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Swift
+      uses: swift-actions/setup-swift@v1
+      with:
+        swift-version: "5.9"
+    
+    - name: Build Release App
+      run: |
+        cd App
+        chmod +x build-app.sh
+        ./build-app.sh
+    
+    - name: Create DMG Installer
+      run: |
+        cd App
+        chmod +x create-dmg.sh
+        ./create-dmg.sh
+    
+    - name: Generate Release Notes
+      id: release_notes
+      run: |
+        echo "## What's Changed" > RELEASE_NOTES.md
+        git log --pretty=format:"- %s" $(git describe --tags --abbrev=0 HEAD^)..HEAD >> RELEASE_NOTES.md
+        echo "" >> RELEASE_NOTES.md
+        echo "## Downloads" >> RELEASE_NOTES.md
+        echo "- **TouchBarFix.dmg** - Universal binary for Intel and Apple Silicon Macs" >> RELEASE_NOTES.md
+    
+    - name: Create GitHub Release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: App/Release/*.dmg
+        body_path: RELEASE_NOTES.md
+        generate_release_notes: true
+        draft: false
+        prerelease: false
