@@ -1,22 +1,14 @@
 {
   "version": 2,
   "name": "touchbarfix",
-  "builds": [
-    {
-      "src": "docs/index.html",
-      "use": "@vercel/static"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/docs/$1"
-    }
-  ],
   "rewrites": [
     {
       "source": "/",
       "destination": "/docs/index.html"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/docs/$1"
     }
   ]
 }
