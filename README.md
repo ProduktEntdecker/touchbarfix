@@ -46,6 +46,8 @@ Many MacBook Pros (2016–2021) experience flickering or non-responsive Touch Ba
 - [Business Plan](Business%20Plan.md) - Product strategy and market analysis
 - [Project Plan](Project%20Plan.md) - Development roadmap and milestones
 - [DevOps Setup](DEVOPS-SETUP.md) - CI/CD and repository management guide
+- [Hosting Migration](HOSTING-MIGRATION.md) - GitHub Pages → Vercel migration analysis
+- [Vercel Migration Tasks](VERCEL-MIGRATION-TASKS.md) - Implementation checklist
 
 ---
 
