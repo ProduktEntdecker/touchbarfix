@@ -210,8 +210,8 @@ class TouchBarManager: ObservableObject {
             }
         }
         
-        // Reset Touch Bar preferences if needed
-        if allSuccessful {
+        // Reset Touch Bar preferences if restart was successful and critical processes are running
+        if allSuccessful && criticalRunning {
             print("🔧 Resetting Touch Bar preferences...")
             await resetTouchBarPreferences()
             
@@ -230,14 +230,20 @@ class TouchBarManager: ObservableObject {
             print("   Final Status: \(getTouchBarStatus())")
             print(String(repeating: "=", count: 60) + "\n")
             return .success(())
+        } else {
+            await MainActor.run {
+                self.isRestarting = false
+            }
+            
+            if !allSuccessful {
+                print("❌ Touch Bar restart failed - process termination issues")
+                return .failure(lastError ?? .unknown("Failed to restart Touch Bar processes"))
+            } else {
+                print("⚠️ Touch Bar restart completed but critical processes not detected")
+                print("   This may indicate a deeper system issue")
+                return .failure(.serviceRestartFailed)
+            }
         }
-        
-        await MainActor.run {
-            self.isRestarting = false
-        }
-        
-        print("❌ Touch Bar restart failed")
-        return .failure(lastError ?? .unknown("Failed to restart Touch Bar"))
     }
     
     // SECURITY: Secure process termination with validation
