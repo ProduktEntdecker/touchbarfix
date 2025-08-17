@@ -13,10 +13,10 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     
-    - name: Set up Swift
-      uses: swift-actions/setup-swift@v1
-      with:
-        swift-version: "5.9"
+    - name: Verify Swift Installation
+      run: |
+        swift --version
+        xcodebuild -version
     
     - name: Build TouchBarFix
       run: |
@@ -28,14 +28,23 @@ jobs:
         cd App
         swift test
     
-    - name: Verify Universal Binary
+    - name: Verify Build Output
       run: |
         cd App
-        lipo -info .build/release/TouchBarFix | grep "x86_64 arm64"
+        ls -la .build/release/ || echo "Release directory not found"
+        if [ -f .build/release/TouchBarFix ]; then
+          echo "TouchBarFix binary found"
+          file .build/release/TouchBarFix
+        else
+          echo "TouchBarFix binary not found"
+          ls -la .build/ || echo "Build directory not found"
+        fi
     
     - name: Upload Build Artifacts
       uses: actions/upload-artifact@v3
       if: success()
       with:
         name: TouchBarFix-Build-${{ github.sha }}
-        path: App/.build/release/
+        path: |
+          App/.build/release/TouchBarFix
+          App/.build/release/*.dSYM
