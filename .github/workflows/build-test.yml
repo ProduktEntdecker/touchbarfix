@@ -26,6 +26,7 @@ jobs:
     - name: Run Tests
       run: |
         cd App
+        echo "Running tests in CI environment (no Touch Bar hardware)"
         swift test
     
     - name: Verify Build Output

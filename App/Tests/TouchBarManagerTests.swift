@@ -106,12 +106,19 @@ class MockTouchBarManager: TouchBarManager {
     override func checkIfProcessRunning(_ processName: String) -> Bool {
         return mockProcessRunning
     }
+    
+    override func detectTouchBar() {
+        // Override detection to use only mock values
+        hasTouchBar = mockHasTouchBar
+        print("🔍 Mock Touch Bar Detection: \(mockHasTouchBar)")
+    }
 }
 
 final class MockTouchBarManagerTests: XCTestCase {
     func testMockWithoutTouchBar() async {
         let mockManager = MockTouchBarManager()
         mockManager.mockHasTouchBar = false
+        mockManager.detectTouchBar() // Force detection with mock values
         
         let result = await mockManager.restartTouchBar()
         
