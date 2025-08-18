@@ -1,5 +1,12 @@
 {
-  "buildCommand": "echo 'Static site - no build needed'",
-  "outputDirectory": "docs",
-  "installCommand": "echo 'No dependencies to install'"
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/docs/$1"
+    },
+    {
+      "source": "/",
+      "destination": "/docs/index.html"
+    }
+  ]
 }
