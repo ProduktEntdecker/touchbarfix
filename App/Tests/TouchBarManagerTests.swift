@@ -42,7 +42,7 @@ final class TouchBarManagerTests: XCTestCase {
     
     func testProcessCheck() {
         // Test checking if a known Touch Bar process is running
-        let isRunning = touchBarManager.checkIfProcessRunning("TouchBarServer")
+        let _ = touchBarManager.checkIfProcessRunning("TouchBarServer")
         // TouchBarServer might or might not be running, but should be allowed
         XCTAssertTrue(true, "TouchBarServer process check should be allowed")
         
@@ -107,8 +107,8 @@ class MockTouchBarManager: TouchBarManager {
         return mockProcessRunning
     }
     
-    override func detectTouchBar() {
-        // Override detection to use only mock values
+    func detectTouchBar() {
+        // Detection to use only mock values
         hasTouchBar = mockHasTouchBar
         print("🔍 Mock Touch Bar Detection: \(mockHasTouchBar)")
     }
