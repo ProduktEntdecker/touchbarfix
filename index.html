@@ -490,15 +490,16 @@
             // Store email (we'll use a simple webhook for now)
             // In production, you'd want a proper backend
             try {
-                // Send to a webhook service like Zapier, Make, or your own endpoint
-                await fetch('https://hooks.zapier.com/hooks/catch/YOUR_WEBHOOK_ID/', {
+                // Send to Zapier webhook
+                await fetch('https://hooks.zapier.com/hooks/catch/5408728/utm09w5/', {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
                     body: JSON.stringify({
                         email: email,
                         timestamp: new Date().toISOString(),
                         offer: 'founders_edition_free',
-                        source: window.location.href
+                        source: window.location.href,
+                        user_agent: navigator.userAgent.substring(0, 100)
                     })
                 });
             } catch (error) {
