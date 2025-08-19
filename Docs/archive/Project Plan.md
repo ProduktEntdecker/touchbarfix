@@ -1,6 +1,8 @@
-# 🗂️ Project Plan – TouchBarFix MVP Launch
+# 🗂️ Project Plan – TouchBarFix Launch & Growth
 
-This document outlines the structured work packages and tools used to bring the TouchBarFix app from idea to public beta. The goal is to launch a stable, functional, monetizable 1.0 version targeted at users with unresponsive or black Touch Bars on Intel and Apple Silicon MacBook Pros (2016–2020).
+This document outlines the structured work packages and tools used to bring the TouchBarFix app from idea to production launch. **UPDATED August 19, 2025:** Pivoted from beta-first to direct-sales strategy based on conversion optimization analysis.
+
+**CURRENT OBJECTIVE:** Launch direct sales to achieve 100 downloads milestone (€550 revenue) by August 26, 2025.
 
 ---
 
@@ -136,15 +138,71 @@ This document outlines the structured work packages and tools used to bring the 
 - Vercel account setup and domain configuration
 - DNS migration to Vercel infrastructure
 
-📋 **NEXT IMMEDIATE STEPS:**
-1. **Complete Vercel migration** (Replace GitHub Pages hosting)
-2. **Verify SSL and domain setup** on Vercel
-3. **Beta testing** with 5-10 MacBook Pro users
-4. **Feedback collection** and iteration
-5. **Apple Developer ID** acquisition for signing
-6. **Public launch** preparation
+---
 
-## 🚀 Next ONE Thing
+## ✅ Phase 6: CONVERSION OPTIMIZATION & DIRECT SALES (August 19, 2025)
 
-> 🎯 **Complete Vercel migration** to resolve SSL issues immediately.  
-> Then deploy beta to first test users for real-world usage data.
+**Objective:** Pivot from beta-first to direct-sales strategy. Optimize landing page for immediate revenue generation.
+
+| Task | Description | Tools | Status |
+|------|-------------|-------|---------|
+| **Landing Page Surgery** | Peep Laja conversion treatment - lead with cost avoidance | HTML/CSS, Tailwind | ✅ COMPLETED |
+| **CTA Simplification** | Single purchase flow, remove beta/waitlist confusion | JavaScript, Plausible | ✅ COMPLETED |
+| **Trust Signal Overhaul** | Add Apple Developer + 30-day guarantee badges | HTML, Graphics | ✅ COMPLETED |
+| **SEO & AI Optimization** | LLM.txt, robots.txt, sitemap.xml, structured data | JSON, XML, TXT | ✅ COMPLETED |
+| **Analytics Enhancement** | Custom conversion events for purchase tracking | Plausible, JavaScript | ✅ COMPLETED |
+| **Security Configuration** | Block sensitive directories from public access | vercel.json, redirects | ✅ COMPLETED |
+
+**Key Changes Implemented:**
+- Hero headline: "Skip the €700 Apple Repair - Fix Your Touch Bar in 30 Seconds"
+- Single CTA: Direct to Gumroad purchase (€6.99)
+- Removed weak social proof, added strong trust signals
+- Expected conversion improvement: 1-2% → 8-12%
+
+---
+
+## 🔄 Phase 7: IMMEDIATE LAUNCH EXECUTION (August 19-26, 2025)
+
+**Objective:** Achieve 100 downloads milestone through dual-channel distribution and organic traffic generation.
+
+| Task | Description | Tools | Status |
+|------|-------------|-------|---------|
+| **Gumroad Store Setup** | Professional product page, instant delivery | Gumroad platform | 🔄 IN PROGRESS |
+| **Apple Developer Signing** | Code sign app for App Store submission | Xcode, Developer portal | ⏳ PENDING |
+| **DMG Distribution Package** | Create fresh installer with signed binary | create-dmg script | ⏳ PENDING |
+| **App Store Submission** | Metadata, screenshots, review process | App Store Connect | ⏳ PENDING |
+| **Reddit Traffic Generation** | r/MacBookPro, r/mac community posts | Reddit engagement | ⏳ PENDING |
+| **HackerNews Launch** | "Show HN" technical audience post | HackerNews submission | ⏳ PENDING |
+
+**Success Metrics:**
+- Target: 100 downloads in 7 days
+- Revenue goal: €550 net revenue
+- Traffic needed: 800-1,200 visitors (at 8-12% conversion)
+- Primary channel: Gumroad (€6.29 net per sale)
+- Secondary channel: App Store (€4.89 net per sale)
+
+---
+
+## 📈 Phase 8: OPTIMIZATION & SCALE (August 27 - September 16, 2025)
+
+**Objective:** Optimize conversion funnel and scale to 1,200 units/month target.
+
+| Task | Description | Tools | Target Date |
+|------|-------------|-------|-------------|
+| **A/B Test Headlines** | Cost-avoidance messaging variations | Plausible, HTML | Week 2 |
+| **Customer Testimonials** | Real user success stories collection | Email, surveys | Week 2-3 |
+| **Content Marketing** | SEO blog posts, tutorial videos | Blog platform, YouTube | Week 3-4 |
+| **Referral System** | Customer-driven growth mechanism | Custom development | Week 4 |
+| **International Expansion** | Multi-currency, localization | Gumroad features | Month 2 |
+
+---
+
+## 🚀 Current Priority (August 19, 2025)
+
+> 🎯 **EXECUTE IMMEDIATE LAUNCH PLAN**  
+> 1. Setup Gumroad store (TODAY)  
+> 2. Sign app with Apple Developer ID (TODAY)  
+> 3. Create fresh DMG distribution package (TODAY)  
+> 4. Launch Reddit/HackerNews traffic generation (TOMORROW)  
+> 
+> **Goal:** First 10 sales within 48 hours to validate conversion optimization.

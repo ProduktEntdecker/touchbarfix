@@ -1,3 +1,57 @@
 {
-  "framework": null
+  "framework": null,
+  "functions": {},
+  "headers": [
+    {
+      "source": "/App/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/App/:path*",
+      "destination": "/404.html",
+      "statusCode": 404
+    },
+    {
+      "source": "/.git/:path*", 
+      "destination": "/404.html",
+      "statusCode": 404
+    },
+    {
+      "source": "/.github/:path*",
+      "destination": "/404.html", 
+      "statusCode": 404
+    },
+    {
+      "source": "/docs/:path*",
+      "destination": "/404.html",
+      "statusCode": 404
+    },
+    {
+      "source": "/scripts/:path*",
+      "destination": "/404.html",
+      "statusCode": 404
+    },
+    {
+      "source": "/CLAUDE.md",
+      "destination": "/404.html",
+      "statusCode": 404
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(robots\\.txt|sitemap\\.xml|llm\\.txt|.*\\.json)$",
+      "dest": "/$1"
+    },
+    {
+      "src": "/",
+      "dest": "/index.html"
+    }
+  ]
 }

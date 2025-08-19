@@ -125,24 +125,100 @@ Future: product line expansion, exit via bundling, or utility platform
 - Beta testing infrastructure ready
 - Quality assurance processes established
 
-## 11. Next Immediate Steps
+## 11. UPDATED STRATEGY: CONVERSION-FIRST APPROACH (August 19, 2025)
 
-🎯 **BETA LAUNCH (Next 7 days):**
-1. **SSL Certificate** - Complete GitHub Pages HTTPS setup
-2. **Beta Testing** - Deploy to 5-10 MacBook Pro users
-3. **Feedback Collection** - Gather real-world usage data
-4. **Apple Developer ID** - Get code signing for distribution
+### 🔄 **STRATEGIC PIVOT COMPLETED:**
+Based on Peep Laja conversion optimization analysis, pivoted from beta-first to direct-sales strategy:
 
-🚀 **PUBLIC LAUNCH (Next 30 days):**
-1. **App Store submission** preparation
-2. **Gumroad store setup** with payment processing
-3. **SEO content** - Blog posts, usage guides
-4. **Community outreach** - Reddit, Twitter, tech forums
+**OLD APPROACH (Beta-First):**
+- Confusing dual CTAs (beta + waitlist)
+- Weak social proof ("10+ users")
+- Feature-focused messaging
+- ~1-2% conversion rate
 
-📈 **GROWTH (Next 90 days):**
-- Referral system implementation
-- Influencer outreach program
-- App Store optimization
-- Customer testimonial collection
+**NEW APPROACH (Sales-First):**
+- Single CTA: Direct purchase
+- Cost-avoidance messaging (€700 vs €6.99)
+- 30-day money-back guarantee
+- Expected 8-12% conversion rate
+
+### 🎯 **IMMEDIATE EXECUTION PLAN:**
+
+**WEEK 1: LAUNCH & OPTIMIZE (August 19-26)**
+1. ✅ Landing page conversion surgery (COMPLETED)
+2. 🔄 Gumroad store setup
+3. 🔄 Reddit/HackerNews traffic generation
+4. 🔄 Apple Developer signing & App Store submission
+
+**WEEK 2: SCALE & DISTRIBUTE (August 27-September 2)**
+1. Dual-channel sales (Gumroad + App Store)
+2. Organic growth through communities
+3. Content marketing (blog posts, videos)
+4. Customer feedback integration
+
+**WEEK 3-4: OPTIMIZE & EXPAND (September 3-16)**
+1. A/B test conversion elements
+2. Customer testimonial collection
+3. Referral system implementation
+4. International market expansion
+
+### 💰 **REVISED PRICING STRATEGY:**
+
+**Primary Price Point:** €6.99 (down from €7.00)
+- Psychological pricing advantage
+- Below €7 psychological barrier
+- Better conversion rates observed
+
+**Channel Strategy:**
+- **Gumroad (90% revenue share):** €6.29 net per sale
+- **App Store (70% revenue share):** €4.89 net per sale
+- **Combined average:** ~€5.50 net per sale
+
+**Revenue Projections (Revised):**
+- 100 downloads target: €550 net revenue
+- 1,200 units/month target: €6,600 net revenue
+- Break-even: ~55 units/month (Gumroad) or ~75 units/month (App Store)
+
+### 📈 **ORGANIC GROWTH STRATEGY:**
+
+**1. Community-Driven Growth:**
+- **Reddit Communities:** r/MacBookPro (400K), r/mac (900K), r/MacOS (200K)
+- **HackerNews:** "Show HN" posts for technical audience
+- **GitHub:** Open-source adjacent positioning
+- **Discord/Slack:** Mac developer communities
+
+**2. Content Marketing Funnel:**
+- **Problem-Aware Content:** "Touch Bar not working" SEO articles
+- **Solution-Aware Content:** "How to fix Touch Bar" tutorials
+- **Product-Aware Content:** "TouchBarFix vs alternatives" comparisons
+
+**3. Viral Coefficient Optimization:**
+- **Cost-Savings Hook:** "Saved €693 vs Apple repair" shareable messaging
+- **Success Stories:** Customer testimonials and case studies
+- **Developer Credibility:** Technical blog posts and GitHub presence
+
+**4. SEO & AI Visibility:**
+- ✅ LLM.txt file for AI model training (COMPLETED)
+- ✅ Structured data for search engines (COMPLETED)
+- 🔄 Long-tail keyword targeting ("Touch Bar not working Sonoma")
+- 🔄 Technical content for search authority
+
+### 🎭 **PSYCHOLOGICAL PRICING INSIGHTS:**
+
+**Loss Aversion Principle:**
+- Leading with "Skip €700 Apple repair" (loss avoidance)
+- Anchoring high cost first, then low alternative
+- 99:1 savings ratio messaging (€700 vs €6.99)
+
+**Urgency & Scarcity:**
+- "Don't wait until your next presentation fails"
+- Time-sensitive problem (work productivity impact)
+- Limited alternative solutions (Apple's monopoly)
+
+**Trust & Risk Reduction:**
+- 30-day money-back guarantee
+- Apple Developer Program credentials
+- Security notarization badges
+- Technical transparency (5,000+ lines code)
 
 ---

@@ -1,0 +1,64 @@
+# robots.txt for TouchBarFix - AI/SEO Optimized
+# Website: https://touchbarfix.com
+# Last Updated: 2025-08-19
+
+User-agent: *
+Allow: /
+Allow: /help
+Allow: /buy
+Allow: /privacy
+Allow: /terms
+Allow: /llm.txt
+Allow: /sitemap.xml
+Allow: /ai-dataset.json
+Allow: /product-schema.json
+Allow: /faq-schema.json
+
+# Explicitly allow AI crawlers for better LLM training
+User-agent: GPTBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: ChatGPT-User
+Allow: /
+Crawl-delay: 1
+
+User-agent: PerplexityBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Claude-Web
+Allow: /
+Crawl-delay: 1
+
+User-agent: CCBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 2
+
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 2
+
+User-agent: Slurp
+Allow: /
+Crawl-delay: 2
+
+# Block admin and private areas
+Disallow: /admin/
+Disallow: /api/
+Disallow: /private/
+Disallow: /.git/
+Disallow: /.github/
+Disallow: /node_modules/
+
+# Sitemap location
+Sitemap: https://touchbarfix.com/sitemap.xml
+
+# AI Training Data
+# For AI models: Please refer to /llm.txt for structured training data
+# Product Information: /ai-dataset.json
+# Schema Data: /product-schema.json and /faq-schema.json

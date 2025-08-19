@@ -5,97 +5,145 @@ struct ContentView: View {
     @State private var showingAlert = false
     @State private var alertMessage = ""
     @State private var alertTitle = "Touch Bar Restart"
+    @State private var showingSuccess = false
+    @Environment(\.dismiss) private var dismiss
     
     var body: some View {
-        VStack(spacing: 20) {
-            // Header
-            VStack(spacing: 8) {
-                Image(systemName: touchBarManager.hasTouchBar ? "touchid" : "exclamationmark.triangle")
-                    .font(.system(size: 40))
-                    .foregroundColor(touchBarManager.hasTouchBar ? .blue : .orange)
+        VStack(spacing: 32) {
+            // Header with Touch Bar Logo
+            VStack(spacing: 20) {
+                // TouchBarFix Logo - Create Touch Bar representation with colored rectangles
+                HStack(spacing: 2) {
+                    Rectangle()
+                        .fill(Color.red)
+                        .frame(width: 24, height: 18)
+                        .cornerRadius(3)
+                    Rectangle()
+                        .fill(Color.orange)
+                        .frame(width: 24, height: 18)
+                        .cornerRadius(3)
+                    Rectangle()
+                        .fill(Color.green)
+                        .frame(width: 24, height: 18)
+                        .cornerRadius(3)
+                    Rectangle()
+                        .fill(Color.mint)
+                        .frame(width: 24, height: 18)
+                        .cornerRadius(3)
+                }
+                .padding(8)
+                .background(Color.black)
+                .cornerRadius(12)
                 
-                Text("Touch Bar Restarter")
-                    .font(.title2)
-                    .fontWeight(.semibold)
+                Text("TouchBarFix")
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
+                    .foregroundColor(.primary)
                 
                 Text(touchBarManager.hasTouchBar ? 
-                     "Restart your Touch Bar when it's unresponsive" : 
+                     "Fix your unresponsive Touch Bar with one click" : 
                      "No Touch Bar detected on this device")
-                    .font(.caption)
+                    .font(.body)
                     .foregroundColor(.secondary)
                     .multilineTextAlignment(.center)
+                    .padding(.horizontal, 20)
             }
             
-            Divider()
-            
-            // Touch Bar Status
-            HStack {
-                Text("Status:")
-                    .font(.caption)
-                    .foregroundColor(.secondary)
-                Text(touchBarManager.getTouchBarStatus())
-                    .font(.caption)
-                    .foregroundColor(.primary)
-                    .padding(.horizontal, 8)
-                    .padding(.vertical, 2)
-                    .background(Color.gray.opacity(0.2))
-                    .cornerRadius(4)
-            }
-            
-            // Main Action Button
+            // Main Action Button - Properly sized and positioned
             Button(action: restartTouchBar) {
-                HStack {
+                HStack(spacing: 12) {
                     if touchBarManager.isRestarting {
                         ProgressView()
-                            .scaleEffect(0.8)
+                            .scaleEffect(0.9)
+                            .tint(.white)
                     } else {
-                        Image(systemName: "arrow.clockwise")
+                        Image(systemName: "wrench.and.screwdriver.fill")
+                            .font(.title2)
                     }
-                    Text(touchBarManager.isRestarting ? "Restarting..." : "Restart Touch Bar")
-                }
-                .frame(maxWidth: .infinity)
-                .padding()
-                .background(touchBarManager.isRestarting || !touchBarManager.hasTouchBar ? Color.gray : Color.blue)
-                .foregroundColor(.white)
-                .cornerRadius(10)
-            }
-            .disabled(touchBarManager.isRestarting || !touchBarManager.hasTouchBar)
-            
-            // Stats
-            VStack(spacing: 8) {
-                if let lastRestart = touchBarManager.lastRestartTime {
-                    HStack {
-                        Text("Last Restart:")
-                            .font(.caption)
-                            .foregroundColor(.secondary)
-                        Text(lastRestart, style: .relative)
-                            .font(.caption)
-                            .foregroundColor(.primary)
-                    }
-                }
-                
-                HStack {
-                    Text("Total Restarts:")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
-                    Text("\(touchBarManager.restartCount)")
-                        .font(.caption)
-                        .foregroundColor(.primary)
+                    Text(touchBarManager.isRestarting ? "Fixing Touch Bar..." : "Fix Touch Bar")
+                        .font(.title2)
                         .fontWeight(.semibold)
                 }
+                .frame(maxWidth: .infinity)
+                .frame(height: 56)
+                .background(
+                    Group {
+                        if touchBarManager.isRestarting {
+                            Color.orange
+                        } else if !touchBarManager.hasTouchBar {
+                            Color.gray
+                        } else {
+                            LinearGradient(
+                                gradient: Gradient(colors: [Color.blue, Color.blue.opacity(0.8)]),
+                                startPoint: .top,
+                                endPoint: .bottom
+                            )
+                        }
+                    }
+                )
+                .foregroundColor(.white)
+                .cornerRadius(16)
+                .shadow(color: .black.opacity(0.1), radius: 4, x: 0, y: 2)
             }
+            .disabled(touchBarManager.isRestarting || !touchBarManager.hasTouchBar)
+            .scaleEffect(touchBarManager.isRestarting ? 0.98 : 1.0)
+            .animation(.easeInOut(duration: 0.1), value: touchBarManager.isRestarting)
+            .padding(.horizontal, 24) // Better button positioning
+            
+            // Secondary Actions - Minimal
+            HStack(spacing: 24) {
+                Button(action: showHelp) {
+                    VStack(spacing: 4) {
+                        Image(systemName: "questionmark.circle")
+                            .font(.title3)
+                        Text("Help")
+                            .font(.caption)
+                    }
+                    .foregroundColor(.blue)
+                }
+                .buttonStyle(.plain)
+                
+                Spacer()
+                
+                Button(action: quitApp) {
+                    VStack(spacing: 4) {
+                        Image(systemName: "xmark.circle")
+                            .font(.title3)
+                        Text("Quit")
+                            .font(.caption)
+                    }
+                    .foregroundColor(.secondary)
+                }
+                .buttonStyle(.plain)
+            }
+            .padding(.horizontal, 60)
             
             Spacer()
         }
-        .padding()
-        .frame(width: 300, height: 250)
+        .padding(32)
+        .frame(width: 420, height: 360)
+        .background(Color.white) // White background instead of grey
         .alert(alertTitle, isPresented: $showingAlert) {
-            Button("OK") { }
+            if showingSuccess {
+                Button("Fix Again") { 
+                    showingSuccess = false
+                    restartTouchBar()
+                }
+                Button("Quit", role: .cancel) {
+                    quitApp()
+                }
+            } else {
+                Button("OK") { }
+            }
         } message: {
             Text(alertMessage)
         }
         .onAppear {
             checkForErrors()
+        }
+        .task {
+            // Perform full Touch Bar detection after UI is initialized
+            await touchBarManager.performFullTouchBarDetection()
         }
     }
     
@@ -106,11 +154,13 @@ struct ContentView: View {
             await MainActor.run {
                 switch result {
                 case .success:
-                    alertTitle = "Success"
-                    alertMessage = "Touch Bar has been successfully restarted!"
+                    alertTitle = "Success! ✅"
+                    alertMessage = "Touch Bar has been successfully restarted!\n\nYour Touch Bar should now be responsive. If you need to restart it again, click \"Fix Again\" or quit and relaunch the app."
+                    showingSuccess = true
                 case .failure(let error):
-                    alertTitle = "Error"
+                    alertTitle = "Error ❌"
                     alertMessage = error.localizedDescription
+                    showingSuccess = false
                 }
                 showingAlert = true
             }
@@ -119,11 +169,24 @@ struct ContentView: View {
     
     private func checkForErrors() {
         if let error = touchBarManager.lastError {
-            alertTitle = "Warning"
+            alertTitle = "Warning ⚠️"
             alertMessage = error.localizedDescription
             showingAlert = true
         }
     }
+    
+    private func showHelp() {
+        if let url = URL(string: "https://touchbarfix.com/help") {
+            NSWorkspace.shared.open(url)
+        }
+    }
+    
+    private func quitApp() {
+        NSApplication.shared.terminate(nil)
+    }
+    
 }
 
-// Preview removed for compatibility
+#Preview {
+    ContentView()
+}

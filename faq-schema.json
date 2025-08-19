@@ -1,0 +1,113 @@
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is TouchBarFix and how does it work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "TouchBarFix is a professional macOS utility that fixes frozen, unresponsive, or black Touch Bar issues on MacBook Pro (2016-2021). It works by safely restarting the Touch Bar system processes (TouchBarServer, ControlStrip, etc.) with one click, eliminating the need for Terminal commands or expensive hardware repair."
+      }
+    },
+    {
+      "@type": "Question", 
+      "name": "How much does TouchBarFix cost?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "TouchBarFix costs €6.99 as a one-time purchase. This saves you €693+ compared to Apple's hardware repair service which costs €700+ and takes 3-5 business days."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which MacBook models are compatible with TouchBarFix?",
+      "acceptedAnswer": {
+        "@type": "Answer", 
+        "text": "TouchBarFix works on all MacBook Pro models with Touch Bar from 2016-2021, including: MacBook Pro 13\" and 15\" (2016-2017), MacBook Pro 13\", 15\", and 16\" (2018-2020), and MacBook Pro 13\" M1 (2020). It supports both Intel and Apple Silicon processors as a Universal Binary."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What Touch Bar problems does TouchBarFix solve?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "TouchBarFix fixes: completely black/blank Touch Bar, frozen and unresponsive Touch Bar, Touch Bar not updating content, unresponsive Touch Bar buttons, Touch Bar flickering or artifacts, Touch Bar issues after macOS updates, Control Strip not working, and frozen Now Playing controls."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is TouchBarFix safe to use?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, TouchBarFix is completely safe. It uses process whitelisting for security, only targets official Apple Touch Bar processes, includes input validation and security hardening, and never modifies system files. It simply restarts the same processes that macOS would restart automatically after a system reboot."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the success rate of TouchBarFix?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "TouchBarFix has a 95% success rate for software-related Touch Bar issues. It cannot fix hardware failures, but most Touch Bar problems are software-related and can be resolved by restarting the system processes."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need technical knowledge to use TouchBarFix?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No technical knowledge required. TouchBarFix provides a simple, one-click solution with a user-friendly interface. No Terminal commands, no system restarts, and no complex configurations needed."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long does it take to fix the Touch Bar?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "TouchBarFix typically restores Touch Bar functionality in about 30 seconds. Compare this to Apple's repair service which takes 3-5 business days and costs €700+."
+      }
+    },
+    {
+      "@type": "Question", 
+      "name": "What macOS versions are supported?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "TouchBarFix requires macOS 13.0 (Ventura) or later. It's built as a Universal Binary and works on both Intel and Apple Silicon Macs."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is there a refund policy?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, TouchBarFix comes with a 30-day money-back guarantee. If the software doesn't solve your Touch Bar issue, you can request a full refund within 30 days of purchase."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Where can I buy TouchBarFix?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "You can purchase TouchBarFix directly from https://touchbarfix.com/buy via Gumroad for secure payment processing. Mac App Store availability is coming soon."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can TouchBarFix fix hardware problems?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No, TouchBarFix can only fix software-related Touch Bar issues. If your Touch Bar has physical damage or hardware failure, you'll need to contact Apple for repair. However, 95% of Touch Bar problems are software-related and can be fixed with TouchBarFix."
+      }
+    }
+  ],
+  "about": {
+    "@type": "SoftwareApplication",
+    "name": "TouchBarFix Professional",
+    "url": "https://touchbarfix.com"
+  },
+  "dateModified": "2025-08-19",
+  "publisher": {
+    "@type": "Organization",
+    "name": "ProduktEntdecker", 
+    "url": "https://touchbarfix.com"
+  }
+}
