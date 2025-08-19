@@ -43,14 +43,10 @@
       "statusCode": 404
     }
   ],
-  "routes": [
+  "rewrites": [
     {
-      "src": "/(robots\\.txt|sitemap\\.xml|llm\\.txt|.*\\.json)$",
-      "dest": "/$1"
-    },
-    {
-      "src": "/",
-      "dest": "/index.html"
+      "source": "/",
+      "destination": "/index.html"
     }
   ]
 }
