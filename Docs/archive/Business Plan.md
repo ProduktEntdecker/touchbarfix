@@ -162,22 +162,36 @@ Based on Peep Laja conversion optimization analysis, pivoted from beta-first to 
 3. Referral system implementation
 4. International market expansion
 
-### 💰 **REVISED PRICING STRATEGY:**
+### 💰 **LAUNCH PRICING STRATEGY (Updated August 19, 2025 - Evening):**
 
-**Primary Price Point:** €6.99 (down from €7.00)
-- Psychological pricing advantage
-- Below €7 psychological barrier
-- Better conversion rates observed
+**PHASE 1: PENETRATION PRICING (Week 1)**
+**Launch Price:** €0.99 for first 100 customers
+- Removes ALL purchase friction (impulse buy territory)
+- Builds immediate social proof and testimonials
+- Creates urgency with "limited launch special"
+- Validates market demand before scaling
 
-**Channel Strategy:**
-- **Gumroad (90% revenue share):** €6.29 net per sale
-- **App Store (70% revenue share):** €4.89 net per sale
-- **Combined average:** ~€5.50 net per sale
+**PHASE 2: STANDARD PRICING (Week 2+)**
+**Regular Price:** €6.99
+- Positioned below €7 psychological barrier
+- Justified by social proof from 100+ users
+- Still 99% cheaper than €700 Apple repair
 
-**Revenue Projections (Revised):**
-- 100 downloads target: €550 net revenue
-- 1,200 units/month target: €6,600 net revenue
-- Break-even: ~55 units/month (Gumroad) or ~75 units/month (App Store)
+**Channel Economics:**
+- **Gumroad at €0.99:** €0.89 net per sale (90% share)
+- **Gumroad at €6.99:** €6.29 net per sale
+- **App Store at €6.99:** €4.89 net per sale (70% share)
+
+**Revenue Projections:**
+- First 100 downloads at €0.99: €89 net revenue (validation phase)
+- Next 1,100 at €6.99: €6,919 net revenue
+- Monthly target: €7,000+ net revenue at scale
+
+**Psychological Triggers:**
+- **Anchoring:** Show "Regular €6.99" crossed out
+- **Scarcity:** "Only X spots left at €0.99"
+- **Social Proof:** "Join 50+ users who fixed their Touch Bar"
+- **Loss Aversion:** "Don't pay €700 to Apple"
 
 ### 📈 **ORGANIC GROWTH STRATEGY:**
 
