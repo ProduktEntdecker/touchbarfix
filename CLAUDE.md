@@ -1,6 +1,6 @@
 # TOUCHBARFIX PROJECT - ESSENTIAL INFORMATION FOR CLAUDE
 
-**Last Updated: August 17, 2024 - 12:45 CET**
+**Last Updated: August 19, 2025 - 10:50 CET**
 
 ## 🚨 CRITICAL PROJECT INFORMATION
 
@@ -20,35 +20,57 @@
 - **GitHub**: https://github.com/ProduktEntdecker/touchbarfix
 - **Bundle ID**: com.produktentdecker.touchbarfix
 
-## 📁 CORRECT PATHS:
-- ✅ **Project Root**: `/Users/floriansteiner/Documents/GitHub/touchbarfix`
-- ✅ **App Source**: `/Users/floriansteiner/Documents/GitHub/touchbarfix/App`
-- ✅ **Documentation**: `/Users/floriansteiner/Documents/GitHub/touchbarfix/docs`
-- ❌ **NEVER USE**: `/Users/floriansteiner/Documents/GitHub/touchbar-restarter` (DOES NOT EXIST)
+## 📁 PROJECT STRUCTURE:
+```
+touchbarfix/
+├── App/              # Main application code
+│   ├── Sources/      # Swift source files
+│   ├── Tests/        # Unit tests
+│   └── Release/      # Built app and DMG
+├── Assets/           # TouchBarIcon.png, AppIcon.icns
+├── docs/             
+│   ├── archive/      # Historical documentation
+│   └── LESSONS-LEARNED.md  # Issues and solutions
+├── .github/          # CI/CD workflows
+├── index.html        # Landing page
+├── vercel.json       # Vercel configuration
+├── README.md         # Main documentation
+└── CLAUDE.md         # This file
+```
 
 ## 🚀 CURRENT STATUS (v1.2.1):
 
 ### ✅ COMPLETED:
 - **App**: TouchBarFix.app (Universal Binary - 298KB)
-- **Security**: 8/10 rating (process whitelisting, input validation)
+- **Security**: Process whitelisting, input validation, hardened runtime
 - **Distribution**: TouchBarFix-1.2.1.dmg ready (2.2MB)
-- **Website**: touchbarfix.com (GitHub Pages + custom domain)
-- **Landing Page**: High-converting design with SEO optimization
-- **Marketing**: Growth hacker approach with conversion CTAs
-- **Infrastructure**: GitHub repository, CI/CD pipelines, documentation
-- **Testing**: 6/7 unit tests passing (1 expected mock failure)
-- **Code Quality**: Zero compiler warnings, all naming issues resolved
-- **DevOps**: Complete CI/CD setup with GitHub Actions
+- **Website**: touchbarfix.com (Hosted on Vercel with SSL)
+- **Landing Page**: SEO-optimized, high-converting design
+- **CI/CD**: GitHub Actions for automated builds and tests
+- **Testing**: Unit tests with proper mocking for CI environment
+- **Repository**: Cleaned and organized structure
+- **Documentation**: Comprehensive docs with lessons learned
 
-### 🟡 IN PROGRESS:
-- **SSL Certificate**: GitHub Pages HTTPS provisioning for touchbarfix.com
-- **Beta Testing**: Ready to deploy to test users
+### 🌐 HOSTING MIGRATION (COMPLETED):
+- **From**: GitHub Pages (SSL issues due to repository rename)
+- **To**: Vercel (successful deployment with custom domain)
+- **Domain**: touchbarfix.com pointing to Vercel
+- **SSL**: Automatic provisioning via Vercel
 
-### 📋 NEXT STEPS:
-- Complete SSL setup
-- Deploy to beta testers
-- Apple Developer ID for code signing
-- Public launch preparation
+### 📋 RECENT CHANGES (August 19, 2025):
+1. **Migrated hosting from GitHub Pages to Vercel**
+   - Resolved SSL certificate issues caused by repository rename
+   - Fixed 404 errors with proper configuration
+2. **Fixed CI/CD pipeline**
+   - Updated to actions/checkout@v4 and actions/upload-artifact@v4
+   - Fixed test mocking for Touch Bar detection
+3. **Major project cleanup**
+   - Renamed TouchBarRestartIcon.png to TouchBarIcon.png
+   - Archived historical documentation to docs/archive/
+   - Removed obsolete files and directories
+4. **Updated documentation**
+   - Created LESSONS-LEARNED.md with all issues and solutions
+   - Updated README.md with current project state
 
 ## 🛠 DEVELOPMENT COMMANDS:
 
@@ -57,44 +79,69 @@
 cd /Users/floriansteiner/Documents/GitHub/touchbarfix
 
 # Build app
-cd App && swift build
+cd App && swift build -c release
 
-# Create release app
+# Create release app with universal binary
 ./build-app.sh
 
-# Create DMG
+# Create DMG installer
 ./create-dmg.sh
 
-# Open in Xcode
-cd App && open Package.swift
+# Run tests
+swift test
 
 # Git operations
 git add . && git commit -m "message" && git push origin main
+
+# Check CI/CD status
+# Visit: https://github.com/ProduktEntdecker/touchbarfix/actions
 ```
 
 ## 🔗 IMPORTANT LINKS:
 - **Website**: https://touchbarfix.com
 - **Repository**: https://github.com/ProduktEntdecker/touchbarfix
 - **Issues**: https://github.com/ProduktEntdecker/touchbarfix/issues
+- **Releases**: https://github.com/ProduktEntdecker/touchbarfix/releases
+- **Vercel Dashboard**: https://vercel.com/dashboard (for deployment management)
 
-## ⚠️ CRITICAL REMINDER FOR CLAUDE:
+## ⚠️ CRITICAL REMINDERS:
 
-### 🚨 OLD NAME REFERENCES CAUSE CRITICAL ISSUES:
-- **Git conflicts and SSL certificate problems**
-- **Build failures and deployment errors**
-- **Repository inconsistencies**
+### 🚨 NEVER DO:
+- Rename repository with active GitHub Pages
+- Use deprecated GitHub Actions versions
+- Create multiple index.html files in different directories
+- Mix old branding ("restarter") with new branding ("fix")
 
-### ✅ ALWAYS USE CORRECT NAMES:
-- **Product**: TouchBarFix (NEVER "Touch Bar Restarter")
-- **Executable**: TouchBarFix (NEVER "TouchBarRestarter")
-- **Path**: `/Users/floriansteiner/Documents/GitHub/touchbarfix`
-- **Bundle ID**: com.produktentdecker.touchbarfix
+### ✅ ALWAYS DO:
+- Use TouchBarFix naming consistently
+- Test CI/CD changes in feature branches
+- Mock hardware dependencies in tests
+- Keep single source of truth for files
+- Document issues and solutions immediately
 
-### 🔍 CHECK THESE FILES FOR OLD REFERENCES:
-- Package.swift (executable name)
-- Info.plist (CFBundleExecutable)
-- build-app.sh (binary paths)
-- *.swift files (import statements)
-- GitHub Actions workflows
+### 🔍 KEY FILES TO MONITOR:
+- `Package.swift` - Executable name and dependencies
+- `Info.plist` - Bundle identifiers and app metadata
+- `.github/workflows/` - CI/CD pipeline configuration
+- `vercel.json` - Deployment configuration
+- `index.html` - Landing page (single location in root)
 
-This project is BETA LAUNCH READY as of August 17, 2024
+## 📊 PROJECT METRICS:
+- **App Size**: 298KB (Universal Binary)
+- **DMG Size**: 2.2MB
+- **Test Coverage**: 6/7 tests passing
+- **Security Rating**: Hardened with process validation
+- **Deployment**: Automated via GitHub Actions + Vercel
+- **Domain Status**: Active with SSL on touchbarfix.com
+
+## 🎯 NEXT STEPS:
+1. Beta testing with real users
+2. Apple Developer ID for code signing
+3. App Store or direct distribution decision
+4. Marketing campaign launch
+5. Version 2.0 feature planning
+
+---
+
+**This project is PRODUCTION READY as of August 19, 2025**
+**Landing page is LIVE at touchbarfix.com**
