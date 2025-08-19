@@ -151,6 +151,49 @@ Inconsistent naming across the project after rebrand from "Touch Bar Restarter" 
 
 ---
 
+## IDE and Development Environment Issues
+
+### Problem
+After repository rename, IDE and development tools created unwanted directories with old naming.
+
+### Issues Encountered
+1. **Xcode Workspace References**: `.swiftpm/xcode/package.xcworkspace` retained old repository path
+2. **Claude Code CLI Directory Creation**: Created `/touchbar-restarter/` directory with `.claude/settings.local.json`
+3. **Claude Code CLI Working Directory**: CLI session remained in old working directory path
+4. **Cached Development References**: Tools referenced old paths from previous sessions
+
+### Root Cause Analysis
+- **Claude Code CLI Session State**: When starting claude code in a directory, it remembers that working directory for the entire session
+- **Repository Rename Side Effects**: Old paths cached in IDE settings, CLI sessions, and workspace files
+- **Directory Auto-Creation**: Claude Code CLI creates directories when it can't find expected paths
+
+### Solution
+```bash
+# 1. Remove Xcode workspace with old references
+rm -rf App/.swiftpm/
+
+# 2. Remove unwanted directory created by Claude Code CLI
+rm -rf /path/to/touchbar-restarter/
+
+# 3. CRITICAL: Restart Claude Code CLI in correct directory
+exit  # Exit current session
+cd /correct/path/to/touchbarfix  # Navigate to correct directory
+claude code  # Start new session in correct location
+
+# 4. Regenerate clean workspace (in new session)
+cd App && swift package resolve
+```
+
+### Prevention
+- **Always start Claude Code CLI from the correct project directory**
+- Clean workspace files after repository rename
+- Add `.swiftpm/` to `.gitignore` (already included)
+- **Restart development tools after major project changes**
+- Use `git clean -xfd` to remove all ignored files when needed
+- **Check working directory in CLI prompts** to ensure correct location
+
+---
+
 ## Testing Challenges
 
 ### Problem
