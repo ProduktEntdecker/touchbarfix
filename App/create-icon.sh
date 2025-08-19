@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # === Configuration ===
-ICON_NAME="TouchBarRestartIcon"
+ICON_NAME="TouchBarIcon"
 SOURCE_DIR="../Assets"
 ICONSET_DIR="$SOURCE_DIR/AppIcon.iconset"
 OUTPUT_ICNS="$SOURCE_DIR/AppIcon.icns"
