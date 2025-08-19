@@ -1,6 +1,5 @@
 {
   "framework": null,
-  "functions": {},
   "headers": [
     {
       "source": "/App/(.*)",
