@@ -52,7 +52,8 @@ Requirements:
 - MacBook Pro with Touch Bar (2016-2021 models)
 
 Support:
-Visit https://github.com/ProduktEntdecker/touchbarfix
+Visit https://touchbarfix.com
+Email: florian.steiner@mac.com
 
 © 2024 ProduktEntdecker
 EOF
