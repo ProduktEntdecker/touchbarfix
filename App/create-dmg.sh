@@ -55,7 +55,7 @@ Support:
 Visit https://touchbarfix.com
 Email: florian.steiner@mac.com
 
-© 2024 ProduktEntdecker
+© 2025 ProduktEntdecker
 EOF
 
 # Create DMG
