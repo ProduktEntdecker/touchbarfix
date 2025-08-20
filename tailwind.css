@@ -1,0 +1,38 @@
+@import "tailwindcss";
+
+@keyframes touchBarPulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+.touchbar-broken {
+    animation: touchBarPulse 2s infinite;
+    background: #dc2626;
+}
+
+.touchbar-fixed {
+    background: linear-gradient(90deg, #059669 0%, #10b981 100%);
+}
+
+.hero-gradient {
+    background: linear-gradient(135deg, #f9fafb 0%, #e5e7eb 100%);
+}
+
+.cta-button {
+    background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
+    box-shadow: 0 4px 15px rgba(220, 38, 38, 0.3);
+    transition: all 0.3s ease;
+}
+
+.cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(220, 38, 38, 0.4);
+}
+
+.problem-icon {
+    transition: all 0.5s ease;
+}
+
+.problem-solved {
+    color: #059669;
+}
