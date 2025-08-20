@@ -65,6 +65,11 @@ docs/.build/
 *.secrets
 .env
 .env.local
+*_token*
+*_secret*
+GITHUB_PAT
+.config/claude-code/
+mcp_servers.json
 
 # App specific
 *.dmg.bak
