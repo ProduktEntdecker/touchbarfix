@@ -80,6 +80,17 @@ swift test
 - [Lessons Learned](docs/LESSONS-LEARNED.md) - Issues encountered and solutions
 - [Development Guide](App/DEVELOPMENT.md) - Setup and development instructions
 - [Archived Docs](docs/archive/) - Historical project documentation
+- [Security Audit Report](docs/SECURITY-AUDIT-REPORT.md) - Current findings and pre‑launch remediation plan
+
+## Website Favicons (Deployment)
+
+- Files live in `Assets/` and are served from root URLs via `vercel.json` rewrites:
+  - `/favicon.ico` → `Assets/favicon.ico`
+  - `/apple-touch-icon.png` → `Assets/apple-touch-icon.png`
+- Long‑lived caching headers are configured for these routes (`Cache-Control: public, max-age=31536000, immutable`).
+- `index.html` includes the minimal, Apple‑focused links:
+  - `<link rel="icon" href="/favicon.ico" sizes="any">`
+  - `<link rel="apple-touch-icon" href="/apple-touch-icon.png">`
 
 ## Support
 

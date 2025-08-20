@@ -206,6 +206,18 @@ updates:
 - Monitor domain expiration date
 - Keep DNS records current
 
+### Website Favicons and Caching
+
+- Favicons are stored in `Assets/` and served from root URLs via `vercel.json` rewrites:
+  - `/favicon.ico` → `Assets/favicon.ico`
+  - `/apple-touch-icon.png` → `Assets/apple-touch-icon.png`
+- `index.html` includes minimal, Apple‑focused links only:
+  - `<link rel="icon" href="/favicon.ico" sizes="any">`
+  - `<link rel="apple-touch-icon" href="/apple-touch-icon.png">`
+- Long‑lived caching is configured in `vercel.json` for these routes:
+  - `Cache-Control: public, max-age=31536000, immutable`
+- If icons change, bump a versioned filename or invalidate via redeploy. Ensure rewrites and headers are kept in sync.
+
 ---
 
 ## Troubleshooting

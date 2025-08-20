@@ -684,6 +684,145 @@ xcrun stapler staple [DMG]
 
 ---
 
+## 🤖 **CODERABBIT AI INTEGRATION WITH CLAUDE CODE (August 20, 2025)**
+
+### **Challenge: Integrating AI Code Review with Development Workflow**
+**Context:** Need for automated code quality checks during development, not just at PR stage
+**Solution:** CodeRabbit AI integration via MCP (Model Context Protocol) server
+**Impact:** Real-time code review feedback during Claude Code sessions
+
+### **Implementation Journey**
+
+#### **1. Initial CodeRabbit Setup Issues**
+**Problem:** CodeRabbit YAML configuration parsing errors
+```yaml
+# Error: Expected object, received boolean at "reviews.auto_review"
+```
+**Root Cause:** Incorrect schema assumptions about CodeRabbit configuration format
+**Solution:** Simplified configuration with proper schema reference:
+```yaml
+# yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
+```
+
+#### **2. MCP Server Discovery**
+**Found:** Community-built CodeRabbit MCP server (bradthebeeble/coderabbitai-mcp)
+**Purpose:** Enables Claude Code to interact with CodeRabbit reviews programmatically
+**Capabilities:**
+- Retrieve CodeRabbit reviews for pull requests
+- Get detailed review and comment information
+- Resolve individual comments
+- Automated "/coderabbit-review" workflow
+
+#### **3. Security Implementation**
+**Critical Issue:** GitHub Personal Access Token exposure risk
+**Initial Approach:** Token in configuration file (REJECTED - security risk)
+
+**Secure Solution Implemented:**
+1. **Environment Variable Storage:**
+   ```bash
+   # Added to ~/.zshrc (never in project files)
+   export GITHUB_PAT="ghp_[token]"
+   ```
+
+2. **MCP Configuration Without Secrets:**
+   ```json
+   {
+     "mcpServers": {
+       "coderabbit": {
+         "command": "npx",
+         "args": ["coderabbitai-mcp@latest"]
+       }
+     }
+   }
+   ```
+
+3. **Gitignore Protection:**
+   ```gitignore
+   *_token*
+   *_secret*
+   GITHUB_PAT
+   .config/claude-code/
+   mcp_servers.json
+   ```
+
+#### **4. GitHub Token Scope Requirements**
+**Minimal Required Scopes:**
+- `repo` - Full control of private repositories
+- `public_repo` - Access public repositories
+- `read:user` - Read user profile data
+- `user:email` - Access user email addresses
+
+**Security Principle:** Minimal scope access - never grant admin or delete permissions
+
+### **Workflow Transformation**
+
+#### **Before MCP Integration:**
+```
+Development → Push → PR → CodeRabbit Review → Fix Issues → Merge
+```
+
+#### **After MCP Integration:**
+```
+Development + Real-time CodeRabbit Feedback → Better Code → Push → PR → Merge
+```
+
+### **Testing Strategy Established**
+
+#### **Test Branch Approach:**
+1. Created `test/coderabbit-integration` branch
+2. Added intentional issues (hardcoded 2024 date)
+3. Verified CodeRabbit detection and feedback
+4. Validated configuration changes
+
+### **Security Best Practices Documented**
+
+#### **Token Management:**
+- **NEVER** commit tokens to repositories
+- **ALWAYS** use environment variables for secrets
+- **ROTATE** tokens every 90 days
+- **MINIMAL** scope permissions only
+- **GITIGNORE** all sensitive patterns
+
+#### **Configuration Security:**
+- Local configs in `~/.config/` (user-specific)
+- Project configs without secrets
+- Environment variable references only
+- Multiple gitignore patterns for safety
+
+### **Integration Benefits Realized**
+
+1. **Faster Feedback Loop:** Issues caught during development, not after PR
+2. **Consistent Quality:** AI review ensures standards across all changes
+3. **Learning System:** CodeRabbit learns from feedback patterns
+4. **Reduced Context Switching:** Reviews happen in development environment
+
+### **Commands and Configuration Reference**
+
+#### **Test MCP Connection:**
+```bash
+export GITHUB_PAT="ghp_[token]"
+npx coderabbitai-mcp@latest test
+```
+
+#### **MCP Server Location:**
+```
+~/.config/claude-code/mcp_servers.json
+```
+
+#### **Environment Variable Location:**
+```
+~/.zshrc or ~/.bash_profile
+```
+
+---
+
+**Date Added**: August 20, 2025
+**Category**: AI Integration & Development Workflow
+**Impact**: Transforms code review from post-development to real-time
+**Security Level**: High (environment variables + gitignore protection)
+
+---
+
 *Last Updated: August 20, 2025*
 *Project: TouchBarFix - Production Optimization*
 *Author: Dr. Florian Steiner*
