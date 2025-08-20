@@ -1,50 +1,29 @@
+# yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
+
 # CodeRabbit configuration for TouchBarFix
 # This file configures AI code review settings for the repository
 
 # Review settings
 reviews:
-  # Enable comprehensive reviews
-  auto_review: true
-  
-  # Review configuration
-  request_changes_workflow: false
   high_level_summary: true
   poem: false
   review_status: true
+  collapse_empty_files: true
   
-  # Focus areas for TouchBarFix
-  focus_areas:
-    - "Swift code quality and best practices"
-    - "macOS app security and code signing"
-    - "Touch Bar process management safety"
-    - "Info.plist and bundle configuration"
-    - "DMG creation and distribution"
-    - "Version consistency across files"
-
 # Language-specific settings  
-language_settings:
+language:
   swift:
-    # Swift-specific review focus
-    - "Memory management and ARC"
-    - "SwiftUI best practices" 
-    - "macOS API usage"
-    - "Error handling patterns"
-  
+    level: "standard"
   shell:
-    # Shell script review focus
-    - "Security best practices"
-    - "Error handling with set -e"
-    - "Path validation"
+    level: "standard"
 
 # File patterns to review
 path_filters:
   - "**/*.swift"
-  - "**/*.sh"
+  - "**/*.sh" 
   - "**/Info.plist"
   - "**/Package.swift"
   - "**/*.md"
-  - "**/create-dmg.sh"
-  - "**/build-app.sh"
 
 # Ignore patterns
 path_ignore:
@@ -53,38 +32,3 @@ path_ignore:
   - "*.dmg"
   - "*.app/**"
   - ".git/**"
-
-# Custom prompts for TouchBarFix project
-custom_prompts:
-  - name: "touchbar_safety"
-    prompt: "Ensure Touch Bar process management is safe and only targets authorized processes"
-  
-  - name: "version_consistency" 
-    prompt: "Check that version numbers are consistent across Info.plist, Package.swift, DMG creation scripts, and README files"
-    
-  - name: "security_review"
-    prompt: "Review for macOS security best practices, proper entitlements, and code signing requirements"
-    
-  - name: "distribution_ready"
-    prompt: "Verify the change doesn't break DMG creation, app signing, or distribution process"
-
-# Quality gates
-quality_gates:
-  - name: "no_hardcoded_dates"
-    description: "Prevent hardcoded years like 2024 in copyright notices"
-    
-  - name: "valid_support_urls" 
-    description: "Ensure support URLs point to working endpoints"
-    
-  - name: "proper_swift_patterns"
-    description: "Follow Swift best practices and SwiftUI patterns"
-
-# Integration settings
-integrations:
-  github:
-    # Auto-merge settings (disabled for safety)
-    auto_merge: false
-    
-    # PR settings
-    dismiss_stale_reviews: true
-    require_review_from_codeowners: false
