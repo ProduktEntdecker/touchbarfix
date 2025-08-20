@@ -529,6 +529,161 @@ fetch('YOUR_WEBHOOK_URL', {
 
 ---
 
+## 🔐 **APPLE DEVELOPER CODE SIGNING & NOTARIZATION (August 20, 2025)**
+
+### **Challenge: From Unsigned to Production-Ready Distribution**
+**Context:** User tested unsigned DMG, got Apple security warnings blocking app execution
+**Goal:** Proper code signing and notarization for seamless user experience
+**Timeline:** Apple Developer account activated same morning
+
+### **Issues Encountered**
+
+#### **1. Resource Fork Contamination**
+**Problem:** `codesign: resource fork, Finder information, or similar detritus not allowed`
+**Root Cause:** macOS Finder adds metadata to files accessed through GUI
+**Failed Solutions:**
+- `xattr -cr` (didn't remove all attributes)
+- `dot_clean` (partial cleanup)
+- Building in project directory (Finder contamination persists)
+
+**Working Solution:**
+```bash
+# Build in /tmp to avoid Finder metadata
+mkdir -p /tmp/touchbarfix
+cp -R .build/apple/Products/Release/TouchBarFix /tmp/touchbarfix/
+# Create app bundle in clean environment
+# Sign in /tmp, then copy back
+```
+
+#### **2. Entitlements File Duplicate Keys**
+**Problem:** `AMFIUnserializeXML: duplicate dictionary key near line 39`
+**Cause:** Two identical `com.apple.security.temporary-exception.mach-lookup.global-name` keys
+**Solution:** Consolidated into single key with all required Touch Bar services
+
+#### **3. Info.plist Unresolved Variables**
+**Problem:** `CFBundleDevelopmentRegion` had `$(DEVELOPMENT_LANGUAGE)` placeholder
+**Impact:** Potential App Store rejection
+**Solution:** Changed to explicit `<string>en</string>`
+
+### **Successful Process Documented**
+
+#### **Apple Developer Certificate Setup:**
+1. Login to Apple Developer → Certificates, IDs & Profiles
+2. Create "Developer ID Application" certificate (for non-App Store distribution)
+3. Generate CSR in Keychain Access → Certificate Assistant
+4. Download and install certificate
+
+#### **Code Signing Process:**
+```bash
+# Verify certificate installation
+security find-identity -v -p codesigning
+
+# Clean build environment (critical)
+mkdir -p /tmp/touchbarfix && cd /tmp/touchbarfix
+# Copy fresh binaries and resources
+# Create app bundle structure
+
+# Sign with Developer ID
+codesign --force --sign "Developer ID Application: [NAME] ([TEAM_ID])" --options runtime [App]
+```
+
+#### **Notarization Process:**
+```bash
+# Submit for notarization (2-10 minutes)
+xcrun notarytool submit [DMG] --apple-id [EMAIL] --password [APP_PASSWORD] --team-id [TEAM_ID] --wait
+
+# Check status
+xcrun notarytool info [SUBMISSION_ID] --apple-id [EMAIL] --password [APP_PASSWORD] --team-id [TEAM_ID]
+
+# Staple when approved
+xcrun stapler staple [DMG]
+```
+
+### **Critical Requirements Identified**
+
+#### **For App Store Distribution:**
+- Bundle ID must match registered identifier
+- Proper entitlements for system access
+- Hardened Runtime enabled
+- Valid Info.plist without variables
+- High-resolution app icon (1024x1024 minimum)
+
+#### **For Direct Distribution:**
+- Developer ID Application certificate
+- Notarization (required for macOS 10.14.5+)
+- Proper DMG creation with signed contents
+- README.txt included for user guidance
+
+### **Automation Strategy Planned**
+**Problem:** Manual signing/notarization doesn't scale for iterative development
+**Solution:** GitHub Actions workflow for automated releases
+
+**Workflow Steps:**
+1. **Trigger:** Git tag push (`v1.2.2`)
+2. **Build:** Universal binary creation
+3. **Sign:** Automated code signing with stored certificate
+4. **Package:** DMG creation with proper structure
+5. **Notarize:** Automated submission and waiting
+6. **Deploy:** Update website, Gumroad, App Store
+7. **Notify:** Success/failure notifications
+
+**Required Secrets:**
+- Apple ID credentials (app-specific password)
+- Team ID and certificate access
+- Deployment keys for hosting platforms
+
+### **User Experience Impact**
+
+#### **Before Signing:**
+- "TouchBarFix cannot be opened because it is from an unidentified developer"
+- Multiple security dialogs and warnings
+- Users need to manually bypass security (right-click → Open)
+
+#### **After Signing + Notarization:**
+- Silent installation and execution
+- "This app is from an identified developer" trust message
+- Professional user experience matching commercial software
+
+### **Performance Metrics**
+- **Certificate Setup:** ~15 minutes (first time)
+- **Manual Signing Process:** ~20 minutes (with troubleshooting)
+- **Notarization Time:** 2-10 minutes (Apple's servers)
+- **Total Manual Process:** ~45 minutes
+- **Target Automated Process:** <10 minutes
+
+### **Cost Implications**
+- **Apple Developer Program:** $99/year (already purchased)
+- **No additional costs** for signing/notarization
+- **Time savings with automation:** ~35 minutes per release
+
+### **Lessons Learned**
+
+#### **Technical:**
+- **Never build/sign in Finder-accessed directories** - always use `/tmp` or CI environment
+- **Validate entitlements syntax** before signing attempts
+- **Clean Info.plist of build variables** before production
+- **Resource forks are invisible but fatal** - clean environment is critical
+
+#### **Process:**
+- **Document certificate setup once** - it's complex and easy to forget
+- **Automate early** - manual process is error-prone and time-consuming
+- **Test on clean machines** - signing issues often invisible on dev machine
+
+#### **Strategic:**
+- **Plan for App Store** even if starting with direct distribution
+- **Notarization is mandatory** for modern macOS versions
+- **User trust is worth the complexity** - professional appearance matters
+
+---
+
+**Date Added**: August 20, 2025
+**Category**: Code Signing & Distribution
+**Impact**: Critical for professional app distribution
+**Time Investment**: 45 minutes manual → <10 minutes automated (target)
+**Next Phase**: GitHub Actions implementation for automated releases
+
+---
+
 *Last Updated: August 20, 2025*
 *Project: TouchBarFix - Production Optimization*
 *Author: Dr. Florian Steiner*

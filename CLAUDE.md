@@ -177,12 +177,19 @@ git add . && git commit -m "message" && git push origin main
 - **Alternatives to Research**: Make.com, n8n, custom solution
 
 ## 🎯 NEXT STEPS:
-1. **IMMEDIATE**: Marketing campaign launch (Reddit/HackerNews)
-2. **24-48 Hours**: Apple Developer Program activation
+1. **IMMEDIATE**: Complete notarization and launch marketing campaign
+2. **Short-term**: Create automated CI/CD pipeline for releases
 3. **After 48h Campaign**: Research Zapier alternatives (Make.com, n8n, custom)
 4. **By August 27th**: Cancel Zapier trial before auto-charge
 5. **Week 1**: Convert founders to paid customers (€0.99)
 6. **Long-term**: App Store submission and Version 2.0 planning
+
+## 🏗️ AUTOMATION ROADMAP (August 20, 2025):
+- **Goal**: Fully automated release pipeline
+- **Trigger**: Git tag push (e.g., `git tag v1.2.2 && git push --tags`)
+- **Process**: Build → Sign → Notarize → Deploy → Distribute
+- **Platforms**: Website, Gumroad, App Store
+- **Status**: Manual process documented, automation pending
 
 ---
 
