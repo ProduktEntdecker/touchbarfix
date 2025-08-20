@@ -111,6 +111,9 @@
       "source": "/",
       "destination": "/index.html"
     },
+    { "source": "/privacy", "destination": "/privacy.html" },
+    { "source": "/terms", "destination": "/terms.html" },
+    { "source": "/help", "destination": "/help.html" },
     { "source": "/favicon.ico", "destination": "/Assets/favicon.ico" },
     { "source": "/apple-touch-icon.png", "destination": "/Assets/apple-touch-icon.png" },
     { "source": "/favicon.ico", "destination": "/Assets/favicon.ico" }
