@@ -57,20 +57,17 @@ touchbarfix/
 - **Domain**: touchbarfix.com pointing to Vercel
 - **SSL**: Automatic provisioning via Vercel
 
-### 📋 RECENT CHANGES (August 19, 2025):
-1. **Migrated hosting from GitHub Pages to Vercel**
-   - Resolved SSL certificate issues caused by repository rename
-   - Fixed 404 errors with proper configuration
-2. **Fixed CI/CD pipeline**
-   - Updated to actions/checkout@v4 and actions/upload-artifact@v4
-   - Fixed test mocking for Touch Bar detection
-3. **Major project cleanup**
-   - Renamed TouchBarRestartIcon.png to TouchBarIcon.png
-   - Archived historical documentation to docs/archive/
-   - Removed obsolete files and directories
-4. **Updated documentation**
-   - Created LESSONS-LEARNED.md with all issues and solutions
-   - Updated README.md with current project state
+### 📋 RECENT CHANGES (August 20, 2025):
+1. **Production CSS optimization (August 20)**
+   - Replaced Tailwind CDN with production build (3MB → 77KB)
+   - Added npm package management for Tailwind CSS v4
+   - Eliminated console warnings for production deployment
+   - Maintained all custom animations and styling
+2. **Previous changes (August 19)**:
+   - Migrated hosting from GitHub Pages to Vercel
+   - Fixed CI/CD pipeline with updated GitHub Actions
+   - Major project cleanup and documentation organization
+   - Founders Edition launch with email capture system
 
 ## 🛠 DEVELOPMENT COMMANDS:
 
