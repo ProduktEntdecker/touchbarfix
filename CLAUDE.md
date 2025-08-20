@@ -184,12 +184,27 @@ git add . && git commit -m "message" && git push origin main
 5. **Week 1**: Convert founders to paid customers (€0.99)
 6. **Long-term**: App Store submission and Version 2.0 planning
 
+## ⚠️ CRITICAL TESTING PRINCIPLES (August 20, 2025):
+**Discovered:** Even signed DMG still shows Apple security warning until notarization completes
+
+### 🚨 NEVER DO:
+- **NO customer delivery without testing**
+- **NO marketing promotion without testing**
+- **NO deployment without full user experience verification**
+
+### ✅ ALWAYS DO:
+- **Test complete user journey** (download → install → first launch)
+- **Verify no security warnings** before any promotion
+- **Complete notarization process** before marketing launch
+- **Hard cache refresh** to test real user experience
+
 ## 🏗️ AUTOMATION ROADMAP (August 20, 2025):
-- **Goal**: Fully automated release pipeline
+- **Goal**: Fully automated release pipeline with mandatory testing
 - **Trigger**: Git tag push (e.g., `git tag v1.2.2 && git push --tags`)
-- **Process**: Build → Sign → Notarize → Deploy → Distribute
+- **Process**: Build → Sign → Notarize → **TEST** → Deploy → Distribute
 - **Platforms**: Website, Gumroad, App Store
 - **Status**: Manual process documented, automation pending
+- **Critical**: Automated testing gate before any deployment
 
 ---
 

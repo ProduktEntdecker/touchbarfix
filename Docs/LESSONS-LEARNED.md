@@ -663,16 +663,30 @@ xcrun stapler staple [DMG]
 - **Validate entitlements syntax** before signing attempts
 - **Clean Info.plist of build variables** before production
 - **Resource forks are invisible but fatal** - clean environment is critical
+- **Signing ≠ No Security Warnings** - notarization is required to eliminate all warnings
 
 #### **Process:**
 - **Document certificate setup once** - it's complex and easy to forget
 - **Automate early** - manual process is error-prone and time-consuming
 - **Test on clean machines** - signing issues often invisible on dev machine
+- **NEVER deploy without end-to-end testing** - including download and first launch
 
 #### **Strategic:**
 - **Plan for App Store** even if starting with direct distribution
 - **Notarization is mandatory** for modern macOS versions
 - **User trust is worth the complexity** - professional appearance matters
+
+#### **🚨 CRITICAL DISCOVERY (August 20, 2025):**
+**Problem:** Even with proper code signing, users still see "TouchBarFix Not Opened - Apple could not verify TouchBarFix is free of malware"
+**Root Cause:** Signing provides developer identity but notarization is required to eliminate security warnings
+**Impact:** Would have launched marketing campaign with poor user experience
+**Solution:** Complete notarization process before any customer-facing deployment
+
+#### **Quality Gates Established:**
+1. **NO customer delivery without testing**
+2. **NO marketing promotion without testing**  
+3. **NO deployment without full user experience verification**
+4. **Mandatory notarization completion before launch**
 
 ---
 
