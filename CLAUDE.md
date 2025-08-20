@@ -165,7 +165,26 @@ git add . && git commit -m "message" && git push origin main
 - "FREE for 48 hours" messaging
 - Email list building phase active
 
+## 💳 ZAPIER PROFESSIONAL TRIAL (August 20, 2025):
+- **Trial Started**: August 20, 2025
+- **Trial Expires**: August 27, 2025
+- **Features**: Multi-step automation, 1,000 tasks/month, unlimited Zaps
+- **Cost**: $29.99/month after trial
+- **Current Use**: Email capture → Google Sheets → Gmail automation
+- **Strategy**: Use for 48h Founders Edition campaign only
+- **UX Issues**: Not entirely satisfied with user experience
+- **Plan**: Research alternatives after campaign, cancel before August 27th
+- **Alternatives to Research**: Make.com, n8n, custom solution
+
+## 🎯 NEXT STEPS:
+1. **IMMEDIATE**: Marketing campaign launch (Reddit/HackerNews)
+2. **24-48 Hours**: Apple Developer Program activation
+3. **After 48h Campaign**: Research Zapier alternatives (Make.com, n8n, custom)
+4. **By August 27th**: Cancel Zapier trial before auto-charge
+5. **Week 1**: Convert founders to paid customers (€0.99)
+6. **Long-term**: App Store submission and Version 2.0 planning
+
 ---
 
-**This project is PRODUCTION READY as of August 19, 2025**
+**This project is PRODUCTION READY as of August 20, 2025**
 **Landing page is LIVE at touchbarfix.com**

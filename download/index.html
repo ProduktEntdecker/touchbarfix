@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download TouchBarFix - MacBook Pro Touch Bar Fix</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Download TouchBarFix for free. Fix your MacBook Pro Touch Bar in 30 seconds. No Terminal commands required.">
+    <meta name="robots" content="noindex, nofollow">
+    
+    <!-- Plausible Analytics -->
+    <script defer data-domain="touchbarfix.com" src="https://plausible.io/js/script.file-downloads.outbound-links.tagged-events.js"></script>
+    <script>window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }</script>
+    
+    <link rel="stylesheet" href="../dist/tailwind.css">
+    
+    <script>
+        // Auto-download after 2 seconds
+        let countdown = 2;
+        let countdownInterval;
+        
+        function startDownload() {
+            plausible('Auto Download Started', {props: {file: 'TouchBarFix-1.2.1.dmg'}});
+            window.location.href = '/downloads/TouchBarFix-1.2.1.dmg';
+            
+            // Update UI
+            document.getElementById('countdown').style.display = 'none';
+            document.getElementById('downloading').style.display = 'block';
+        }
+        
+        function manualDownload() {
+            plausible('Manual Download', {props: {file: 'TouchBarFix-1.2.1.dmg'}});
+            window.location.href = '/downloads/TouchBarFix-1.2.1.dmg';
+        }
+        
+        function updateCountdown() {
+            document.getElementById('countdownNumber').textContent = countdown;
+            countdown--;
+            
+            if (countdown < 0) {
+                clearInterval(countdownInterval);
+                startDownload();
+            }
+        }
+        
+        window.onload = function() {
+            // Track page view
+            plausible('Download Page View');
+            
+            // Start countdown
+            updateCountdown();
+            countdownInterval = setInterval(updateCountdown, 1000);
+        }
+    </script>
+</head>
+
+<body class="bg-gray-50 text-gray-900 font-sans min-h-screen flex items-center justify-center px-4">
+    <div class="max-w-2xl mx-auto text-center">
+        <!-- Header -->
+        <div class="mb-8">
+            <div class="text-6xl mb-4">📥</div>
+            <h1 class="text-4xl font-bold text-gray-900 mb-4">
+                Your Download is Starting...
+            </h1>
+        </div>
+        
+        <!-- Countdown Section -->
+        <div id="countdown" class="mb-8">
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <div class="text-6xl font-bold text-blue-600 mb-2">
+                    <span id="countdownNumber">2</span>
+                </div>
+                <p class="text-lg text-gray-600">
+                    TouchBarFix-1.2.1.dmg will download automatically
+                </p>
+            </div>
+        </div>
+        
+        <!-- Downloading Section -->
+        <div id="downloading" class="mb-8 hidden">
+            <div class="bg-green-50 border-2 border-green-200 rounded-lg p-6 mb-6">
+                <div class="text-4xl mb-4">✅</div>
+                <h2 class="text-2xl font-bold text-green-800 mb-2">Download Started!</h2>
+                <p class="text-green-700">
+                    TouchBarFix-1.2.1.dmg should appear in your Downloads folder.
+                </p>
+            </div>
+        </div>
+        
+        <!-- Manual Download Button -->
+        <div class="mb-8">
+            <button onclick="manualDownload()" 
+                    class="bg-red-600 text-white px-8 py-4 rounded-lg text-xl font-bold hover:bg-red-700 transition-colors shadow-lg">
+                Download Manually
+            </button>
+            <p class="text-sm text-gray-500 mt-2">
+                Click if download doesn't start automatically
+            </p>
+        </div>
+        
+        <!-- Installation Instructions -->
+        <div class="bg-white rounded-lg shadow-lg p-8 text-left mb-8">
+            <h2 class="text-2xl font-bold mb-6 text-center">📋 Installation Instructions</h2>
+            
+            <div class="space-y-6">
+                <div class="flex items-start space-x-3">
+                    <div class="bg-blue-100 text-blue-800 rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">1</div>
+                    <div>
+                        <h3 class="font-bold text-lg mb-1">Open the DMG file</h3>
+                        <p class="text-gray-600">Double-click TouchBarFix-1.2.1.dmg in your Downloads folder</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-start space-x-3">
+                    <div class="bg-blue-100 text-blue-800 rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">2</div>
+                    <div>
+                        <h3 class="font-bold text-lg mb-1">Drag to Applications</h3>
+                        <p class="text-gray-600">Drag TouchBarFix.app to your Applications folder</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-start space-x-3">
+                    <div class="bg-blue-100 text-blue-800 rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">3</div>
+                    <div>
+                        <h3 class="font-bold text-lg mb-1">Launch the app</h3>
+                        <p class="text-gray-600">Open TouchBarFix from Applications or Launchpad</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-start space-x-3">
+                    <div class="bg-green-100 text-green-800 rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">4</div>
+                    <div>
+                        <h3 class="font-bold text-lg mb-1">Fix your Touch Bar!</h3>
+                        <p class="text-gray-600">Click "Reset Touch Bar" and watch it come back to life</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Security Note -->
+            <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mt-6">
+                <h4 class="font-bold text-yellow-800 mb-2">⚠️ First Launch Security</h4>
+                <p class="text-yellow-700 text-sm">
+                    macOS may show "TouchBarFix cannot be opened because it is from an unidentified developer." 
+                    Right-click the app and select "Open" to bypass this security warning.
+                </p>
+            </div>
+        </div>
+        
+        <!-- System Requirements -->
+        <div class="bg-gray-100 rounded-lg p-6 mb-8">
+            <h3 class="text-xl font-bold mb-4">💻 System Requirements</h3>
+            <div class="grid md:grid-cols-2 gap-4 text-sm">
+                <div>
+                    <h4 class="font-semibold mb-2">MacBook Pro Models:</h4>
+                    <ul class="text-gray-600 space-y-1">
+                        <li>• MacBook Pro 13" (2016-2020)</li>
+                        <li>• MacBook Pro 15" (2016-2019)</li>
+                        <li>• MacBook Pro 16" (2019-2021)</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-2">macOS Versions:</h4>
+                    <ul class="text-gray-600 space-y-1">
+                        <li>• macOS Big Sur 11.0+</li>
+                        <li>• macOS Monterey 12.0+</li>
+                        <li>• macOS Ventura 13.0+</li>
+                        <li>• macOS Sonoma 14.0+</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Troubleshooting -->
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+            <h3 class="text-xl font-bold mb-4">🔧 Troubleshooting</h3>
+            <div class="text-left space-y-4 text-sm">
+                <div>
+                    <h4 class="font-semibold text-gray-900">Download not starting?</h4>
+                    <p class="text-gray-600">Click the "Download Manually" button above or visit <a href="/" class="text-blue-600 hover:underline">touchbarfix.com</a></p>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-gray-900">App won't open?</h4>
+                    <p class="text-gray-600">Right-click TouchBarFix.app → "Open" to bypass macOS security warning</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-gray-900">Touch Bar still not working?</h4>
+                    <p class="text-gray-600">TouchBarFix fixes ~95% of software issues. Hardware problems may require Apple service.</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-gray-900">Need help?</h4>
+                    <p class="text-gray-600">Contact: <a href="mailto:florian.steiner@mac.com" class="text-blue-600 hover:underline">florian.steiner@mac.com</a></p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Back to Home -->
+        <div class="text-center">
+            <a href="/" class="text-blue-600 hover:text-blue-800 font-semibold">
+                ← Back to TouchBarFix.com
+            </a>
+        </div>
+    </div>
+</body>
+</html>

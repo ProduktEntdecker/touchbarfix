@@ -363,6 +363,172 @@ The project demonstrates that technical excellence must be paired with marketing
 
 ---
 
-*Last Updated: August 19, 2025 - Evening*
-*Project: TouchBarFix - Founders Edition Launch*
+## 🎯 **PRODUCTION OPTIMIZATION: TAILWIND CSS (August 20, 2025)**
+
+### **Issue:** Browser console warning about Tailwind CDN usage in production
+**Warning:** "cdn.tailwindcss.com should not be used in production"  
+**Impact:** Potential performance issues and developer tool warnings  
+
+### **Root Cause Analysis:**
+- Using CDN version of Tailwind CSS (latest from cdn.tailwindcss.com)
+- CDN includes entire framework (~3MB) vs optimized build (~77KB)
+- Console warning indicating non-production-ready setup
+
+### **Solution Implemented:**
+1. **Added npm package management:**
+   ```json
+   "devDependencies": {
+     "tailwindcss": "^4.1.12"
+   }
+   ```
+
+2. **Created production CSS build:**
+   - Source: `tailwind.css` with custom styles and animations
+   - Built: `dist/tailwind.css` (77KB minified)
+   - Content scanning: `--content="index.html"`
+
+3. **Updated HTML to use local build:**
+   ```html
+   <!-- Before -->
+   <script src="https://cdn.tailwindcss.com"></script>
+   
+   <!-- After -->
+   <link rel="stylesheet" href="dist/tailwind.css">
+   ```
+
+4. **Build process using standalone CLI:**
+   ```bash
+   ./tailwindcss-macos-arm64 -i tailwind.css -o dist/tailwind.css --content="index.html" --minify
+   ```
+
+### **Results:**
+- ✅ Console warning eliminated
+- ✅ Performance improved (3MB → 77KB)
+- ✅ Custom animations preserved
+- ✅ Production-ready CSS deployment
+- ✅ CI/CD deployment successful
+
+### **Lessons Learned:**
+- **Production readiness matters:** Even working solutions can be optimized
+- **Build tools simplify optimization:** Tailwind CLI handles minification and purging
+- **Custom styles integration:** Tailwind v4 seamlessly imports custom CSS
+- **Performance gains:** 97% size reduction from CDN to optimized build
+
+---
+
+## 📧 **ZAPIER WEBHOOK TO GOOGLE SHEETS INTEGRATION ISSUES (August 20, 2025)**
+
+### **Problem**
+After setting up a Zapier webhook to capture email addresses and save them to Google Sheets, the Google Sheets step couldn't map fields from the webhook data. The field mapping showed "No matches found" when trying to select webhook data fields.
+
+### **Issues Encountered**
+1. **Missing Test Data**: Zapier needs actual test data from the webhook to enable field mapping
+2. **CORS Errors**: Direct testing from browser console failed due to CORS policy restrictions
+3. **Chrome Security**: Browser console blocked external requests from Chrome internal pages
+4. **Field Mapping**: Yellow warning indicators on fields with no clear error messages
+
+### **Root Cause Analysis**
+- Zapier's field mapping requires test data to be sent to the webhook first
+- The webhook must receive and process data before fields become available for mapping
+- Without test data, Zapier cannot determine the data structure for mapping
+
+### **Solution Process**
+
+#### **Step 1: Send Test Data to Webhook**
+```javascript
+// Run from any regular website console (not Chrome internal pages)
+fetch('https://hooks.zapier.com/hooks/catch/5408728/utm09w5/', {
+  method: 'POST',
+  body: JSON.stringify({
+    email: 'test@example.com',
+    timestamp: new Date().toISOString(),
+    offer: 'founders_edition',
+    user_agent: navigator.userAgent
+  })
+}).then(response => {
+  console.log('✅ Data sent successfully!');
+  return response.text();
+}).then(data => console.log('Response:', data));
+```
+
+#### **Step 2: Load Test Data in Zapier**
+1. Go to Step 1 (Webhook) in Zapier
+2. Click "Test trigger" or "Find new records"
+3. Zapier finds the test data sent above
+4. Click "Continue with selected record"
+
+#### **Step 3: Map Fields in Google Sheets**
+After loading test data:
+1. Go to Step 2 (Google Sheets)
+2. Click in each field (Email, Timestamp, etc.)
+3. Select the corresponding webhook data from dropdown (now populated)
+4. Test the Google Sheets action to verify row creation
+
+### **Email Automation Addition**
+
+#### **Gmail vs Email by Zapier**
+**Decision**: Use Gmail instead of Email by Zapier
+- Email by Zapier: Limited to 10 emails/hour on free plan
+- Gmail: 500 emails/day (regular) or 2,000/day (Workspace)
+- Better deliverability and professional appearance with Gmail
+
+#### **Download Link Strategy**
+**Decision**: Use download link instead of attachment
+- Attachments can trigger spam filters (10-50MB files)
+- Download links allow tracking and analytics
+- Users always get the latest version
+- Faster email delivery without large attachments
+
+#### **Implementation**
+Created `/download/` page with:
+- Auto-download after 2 seconds
+- Manual download backup button
+- Installation instructions
+- Plausible Analytics tracking
+- Direct link to DMG: `https://touchbarfix.com/downloads/TouchBarFix-1.2.1.dmg`
+
+### **Prevention for Future Projects**
+1. **Always send test data first** before attempting field mapping in Zapier
+2. **Use regular websites** (not Chrome internal pages) for testing webhooks
+3. **Document webhook structure** to know what fields to expect
+4. **Test from actual form** on production site for most realistic data
+5. **Choose appropriate email service** based on volume expectations
+6. **Prefer download links over attachments** for better deliverability
+
+### **Key Commands for Testing**
+```bash
+# Allow pasting in Chrome console
+allow pasting
+
+# Test webhook from any website console
+fetch('YOUR_WEBHOOK_URL', {
+  method: 'POST',
+  body: JSON.stringify({YOUR_TEST_DATA})
+});
+
+# CORS-safe version (no Content-Type header)
+fetch('YOUR_WEBHOOK_URL', {
+  method: 'POST',
+  body: JSON.stringify({YOUR_TEST_DATA})
+});
+```
+
+### **Successful Configuration**
+- **Webhook URL**: `https://hooks.zapier.com/hooks/catch/5408728/utm09w5/`
+- **Google Sheet**: TouchBarFix Founders List
+- **Email Service**: Gmail with HTML template
+- **Download System**: Dedicated `/download/` page with auto-download
+- **Analytics**: Plausible events for tracking conversions
+
+---
+
+**Date Added**: August 20, 2025
+**Category**: Integration & Automation
+**Impact**: Critical for email capture and distribution system
+**Time to Resolve**: 2 hours (including troubleshooting and implementation)
+
+---
+
+*Last Updated: August 20, 2025*
+*Project: TouchBarFix - Production Optimization*
 *Author: Dr. Florian Steiner*

@@ -87,9 +87,11 @@
                 <div class="bg-green-100 border-2 border-green-500 rounded-lg px-6 py-3 mb-2">
                     <span class="text-green-800 font-bold text-lg">🚀 FOUNDERS EDITION - FREE for 48 Hours!</span>
                 </div>
-                <button onclick="showEmailModal()" class="cta-button text-white px-12 py-5 rounded-lg text-2xl font-bold inline-block cursor-pointer">
-                    💾 Get TouchBarFix FREE (Limited Time)
-                </button>
+                <a href="/downloads/TouchBarFix-1.2.1.dmg" download 
+                   onclick="plausible('Direct Download Click')"
+                   class="cta-button text-white px-12 py-5 rounded-lg text-2xl font-bold inline-block cursor-pointer">
+                    💾 Download TouchBarFix FREE Now
+                </a>
                 <div class="text-sm text-gray-600 mt-2">
                     <p class="mb-2">✨ First 48 hours only • Then €0.99 launch price → €6.99 regular</p>
                     <p class="text-xs">Apple certification pending (24-48 hours) • Full version with all features</p>
@@ -374,11 +376,11 @@
             </p>
             
             <div class="flex flex-col gap-6 justify-center items-center mb-8">
-                <button onclick="showEmailModal()" 
+                <a href="/downloads/TouchBarFix-1.2.1.dmg" download
                    class="bg-white text-red-600 px-12 py-5 rounded-lg text-2xl font-bold inline-block hover:bg-gray-100 transition-colors shadow-xl cursor-pointer"
                    onclick="plausible('Final CTA Click')">
-                    🎁 Get FREE Founders Edition (48 Hours Only!)
-                </button>
+                    🎁 Download FREE Founders Edition (48 Hours Only!)
+                </a>
                 <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4 text-center">
                     <div class="text-lg font-semibold mb-2">⏰ Limited Time: FREE During Apple Certification</div>
                     <div class="text-white/90">After 48 hours: €0.99 → Then €6.99 regular price</div>
@@ -454,8 +456,8 @@
             // Store email (we'll use a simple webhook for now)
             // In production, you'd want a proper backend
             try {
-                // Send to Zapier webhook
-                await fetch('https://hooks.zapier.com/hooks/catch/5408728/utm09w5/', {
+                // Send to custom Vercel function (replaces Zapier)
+                await fetch('/api/capture-email', {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
                     body: JSON.stringify({
