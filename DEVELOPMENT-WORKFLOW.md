@@ -34,11 +34,7 @@ git add -A
 git commit -m "type: description
 
 - Detail 1
-- Detail 2
-
-🤖 Generated with [Claude Code](https://claude.ai/code)
-
-Co-Authored-By: Claude <noreply@anthropic.com>"
+- Detail 2"
 ```
 
 Commit types:
@@ -97,11 +93,7 @@ git commit -m "feat: add anonymous analytics for success tracking
 
 - Track fix success rate
 - No personal data collected
-- Helps improve the app
-
-🤖 Generated with [Claude Code](https://claude.ai/code)
-
-Co-Authored-By: Claude <noreply@anthropic.com>"
+- Helps improve the app"
 
 # 4. Push
 git push -u origin feature/add-analytics
