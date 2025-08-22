@@ -276,8 +276,8 @@
             <h2>Frequently Asked Questions</h2>
             
             <div class="faq-item">
-                <div class="faq-question">Why does TouchBarFix ask for my password?</div>
-                <div class="faq-answer">TouchBarFix needs administrator privileges to restart system processes. The app runs <code>sudo pkill TouchBarServer</code> which requires your admin password.</div>
+                <div class="faq-question">Does TouchBarFix require my password?</div>
+                <div class="faq-answer">No! TouchBarFix runs entirely in user space and doesn't require administrator privileges. The app restarts Touch Bar processes that belong to your user account, so no password is needed.</div>
             </div>
 
             <div class="faq-item">
@@ -294,7 +294,7 @@
 
             <div class="faq-item">
                 <div class="faq-question">Can I do this for free with Terminal?</div>
-                <div class="faq-answer">Yes! Open Terminal and run <code>sudo pkill TouchBarServer</code> followed by <code>sudo killall ControlStrip</code>. TouchBarFix is just a convenient app interface for these commands.</div>
+                <div class="faq-answer">Yes! Open Terminal and run <code>pkill TouchBarServer</code> and <code>killall ControlStrip</code>. TouchBarFix is just a convenient app interface for these commands (no sudo needed).</div>
             </div>
 
             <div class="faq-item">
@@ -366,7 +366,7 @@
             <h2>Contact Support</h2>
             <p>Have a question not covered above? Send us a message:</p>
             
-            <form class="contact-form" action="https://formspree.io/f/xbljvqrb" method="POST">
+            <form class="contact-form" id="support-form">
                 <div class="form-group">
                     <label for="name">Your Name</label>
                     <input type="text" id="name" name="name" required>
@@ -411,10 +411,7 @@
                     <textarea id="message" name="message" placeholder="Please describe your issue or question..." required></textarea>
                 </div>
                 
-                <input type="hidden" name="_subject" value="TouchBarFix Support Request">
-                <input type="hidden" name="_next" value="https://touchbarfix.com/support.html?sent=true">
-                
-                <button type="submit" class="submit-button">Send Message</button>
+                <button type="button" class="submit-button" onclick="sendEmail()">Send Message</button>
             </form>
         </section>
     </div>
@@ -424,24 +421,54 @@
     </footer>
 
     <script>
-        // Show success message if form was submitted
-        const urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.get('sent') === 'true') {
+        function sendEmail() {
+            // Get form values
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const macbook = document.getElementById('macbook-model').value || 'Not specified';
+            const issueType = document.getElementById('issue-type').value || 'Not specified';
+            const message = document.getElementById('message').value;
+            
+            // Validate form
+            if (!name || !email || !message) {
+                alert('Please fill in all required fields');
+                return;
+            }
+            
+            // Construct email body
+            const emailBody = `TouchBarFix Support Request
+            
+From: ${name} (${email})
+MacBook Model: ${macbook}
+Issue Type: ${issueType}
+
+Message:
+${message}`;
+            
+            // Create mailto link with encoded parameters
+            const subject = encodeURIComponent('TouchBarFix Support: ' + issueType);
+            const body = encodeURIComponent(emailBody);
+            const mailtoLink = `mailto:florian.steiner@mac.com?subject=${subject}&body=${body}`;
+            
+            // Open email client
+            window.location.href = mailtoLink;
+            
+            // Show success notification
             const successMessage = document.createElement('div');
             successMessage.innerHTML = `
                 <div style="position: fixed; top: 20px; right: 20px; background: #34c759; color: white; padding: 16px 20px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 1000;">
-                    ✅ Message sent successfully! We'll respond within 24-48 hours.
+                    ✅ Opening your email client...
                 </div>
             `;
             document.body.appendChild(successMessage);
             
-            // Remove success message after 5 seconds
+            // Remove success message after 3 seconds
             setTimeout(() => {
                 successMessage.remove();
-            }, 5000);
+            }, 3000);
             
-            // Clean URL
-            window.history.replaceState({}, document.title, window.location.pathname);
+            // Reset form
+            document.getElementById('support-form').reset();
         }
     </script>
 </body>

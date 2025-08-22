@@ -195,3 +195,4 @@ git add . && git commit -m "message" && git push origin main
 
 **This project is PRODUCTION READY as of August 20, 2025**
 **Landing page is LIVE at touchbarfix.com**
+- ground product copy in validated facts, if in doubt double check in the documentation or the code base

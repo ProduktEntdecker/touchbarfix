@@ -39,14 +39,14 @@ That's it. It's a simple tool that does one specific thing.
 
 ❌ **Cannot fix hardware problems** - If your Touch Bar is physically damaged, this won't help
 ❌ **Not a prevention tool** - It doesn't stop Touch Bar issues from happening
-❌ **Requires admin password** - You'll need to enter your password to restart system processes
+❌ **Not a permanent fix** - If you have hardware issues, the problem will return
 
 ## Free Alternative
 
 You can achieve the same result using these Terminal commands:
 ```
-sudo pkill TouchBarServer
-sudo killall ControlStrip
+pkill TouchBarServer
+killall ControlStrip
 ```
 
 TouchBarFix simply provides a menu bar interface for these commands. If you're comfortable with Terminal, you don't need this tool.
@@ -55,7 +55,7 @@ TouchBarFix simply provides a menu bar interface for these commands. If you're c
 
 - MacBook Pro with Touch Bar (2016-2020 models)
 - macOS 10.14 or later
-- Administrator privileges
+- macOS user account
 - 5MB free disk space
 
 ## Why €2.99?
