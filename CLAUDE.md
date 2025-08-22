@@ -180,11 +180,13 @@ git pull origin main
 - **Validation**: User feedback and testimonials
 - **Preparation**: Ready for €0.99 paid launch when Apple Developer activates
 
-### **🔄 PENDING (Apple Developer Dependent):**
-- Apple Developer Program activation (24-48 hours)
-- App signing and notarization
+### **✅ DONE:**
+- App signing and notarization (TouchBarFix-1.2.1.dmg)
+- Gumroad store live (produktentdecker.gumroad.com/l/touchbarfix)
+
+### **🔄 PENDING / NEXT STEPS:**
 - App Store submission
-- Gumroad store with signed DMG
+- (If applicable) Apple Developer Program activation for future releases
 
 ### **📈 MARKETING READY:**
 - Reddit launch posts prepared
