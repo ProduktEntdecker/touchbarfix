@@ -2,12 +2,19 @@
 
 This guide provides step-by-step instructions for deploying TouchBarFix to production environments.
 
+## ⚠️ CRITICAL: Development Workflow
+
+**NEVER PUSH DIRECTLY TO MAIN!** All changes must go through pull requests to trigger CodeRabbit code review.
+
+See [DEVELOPMENT-WORKFLOW.md](../DEVELOPMENT-WORKFLOW.md) for the required feature branch workflow.
+
 ## Table of Contents
 1. [Prerequisites](#prerequisites)
-2. [Landing Page Deployment (Vercel)](#landing-page-deployment-vercel)
-3. [App Distribution](#app-distribution)
-4. [CI/CD Pipeline](#cicd-pipeline)
-5. [Monitoring and Maintenance](#monitoring-and-maintenance)
+2. [Development Workflow](#development-workflow)
+3. [Landing Page Deployment (Vercel)](#landing-page-deployment-vercel)
+4. [App Distribution](#app-distribution)
+5. [CI/CD Pipeline](#cicd-pipeline)
+6. [Monitoring and Maintenance](#monitoring-and-maintenance)
 
 ---
 
@@ -65,6 +72,40 @@ Ensure `vercel.json` in repository root contains:
   "framework": null
 }
 ```
+
+---
+
+## Development Workflow
+
+### Required: Feature Branch Workflow
+
+1. **Create feature branch**
+```bash
+git checkout -b feature/your-feature-name
+```
+
+2. **Make changes and commit**
+```bash
+git add -A
+git commit -m "feat: description of changes"
+```
+
+3. **Push to GitHub**
+```bash
+git push -u origin feature/your-feature-name
+```
+
+4. **Create Pull Request**
+- Go to GitHub repository
+- Create PR from feature branch to main
+- Add `@coderabbitai` in description for automated review
+
+5. **Merge after approval**
+- Wait for CodeRabbit review
+- Address any feedback
+- Merge via GitHub interface
+
+**See [DEVELOPMENT-WORKFLOW.md](../DEVELOPMENT-WORKFLOW.md) for complete details.**
 
 ---
 
