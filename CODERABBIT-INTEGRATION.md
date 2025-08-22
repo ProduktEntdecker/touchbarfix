@@ -17,18 +17,30 @@ npx coderabbitai-mcp create-review --repo ProduktEntdecker/touchbarfix --head [b
 
 ## Integration Workflow
 
-### For Claude Code Development:
-1. **Write Code** - Implement features/fixes
-2. **Review with CodeRabbit** - Run MCP command to get suggestions
-3. **Apply Improvements** - Implement CodeRabbit's recommendations
-4. **Commit Final Version** - Push clean, reviewed code
+### Two-Layer Review Process:
 
-### For Pull Requests:
-1. Create feature branch
-2. Make changes
-3. Run CodeRabbit review
-4. Apply suggestions
-5. Create PR (CodeRabbit will auto-review)
+#### Layer 1: MCP Pre-Review (Before Committing)
+1. **Write Code** - Implement features/fixes
+2. **Run MCP Review** - Get instant feedback before committing:
+   ```bash
+   npx coderabbitai-mcp review-commit --repo ProduktEntdecker/touchbarfix --commit HEAD
+   ```
+3. **Apply Improvements** - Fix issues found by CodeRabbit
+4. **Commit Clean Code** - Push reviewed, improved code
+
+#### Layer 2: PR Auto-Review (After Push)
+1. **Create feature branch**: `git checkout -b feature/name`
+2. **Make changes** and commit
+3. **Optional: Run MCP pre-review** to catch issues early
+4. **Push to GitHub**: `git push -u origin feature/name`
+5. **Create PR** - CodeRabbit bot will auto-review
+6. **Address PR feedback** if any additional issues found
+
+### Benefits of Two-Layer Approach:
+- **MCP Review**: Instant feedback during development
+- **PR Review**: Final validation before merge
+- **Cleaner PRs**: Issues fixed before PR creation
+- **Faster Iteration**: No waiting for PR to get feedback
 
 ## CodeRabbit Bot Setup
 

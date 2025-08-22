@@ -19,6 +19,15 @@ git checkout -b fix/issue-description
 - Test changes locally
 - Ensure all tests pass
 
+### 2.5. Pre-Review with CodeRabbit MCP (Optional but Recommended)
+```bash
+# Get instant feedback before committing
+npx coderabbitai-mcp review-commit --repo ProduktEntdecker/touchbarfix --commit HEAD
+
+# Apply any suggested improvements
+# This catches issues early, before PR creation
+```
+
 ### 3. Commit Changes
 ```bash
 git add -A
@@ -192,10 +201,62 @@ When releasing new versions:
 3. Update version in DMG creation scripts
 4. Create git tag: `git tag v1.2.1`
 
+## CodeRabbit MCP Integration
+
+### How to Use MCP for Instant Reviews
+
+The CodeRabbit MCP integration provides instant code review during development:
+
+```bash
+# After making changes, before committing:
+npx coderabbitai-mcp review-commit --repo ProduktEntdecker/touchbarfix --commit HEAD
+
+# This gives you instant feedback on:
+# - Code quality issues
+# - Security concerns
+# - Best practice violations
+# - Documentation gaps
+```
+
+### Complete Example with MCP Integration
+
+```bash
+# 1. Create feature branch
+git checkout -b feature/add-telemetry
+
+# 2. Make your changes
+# ... edit files ...
+
+# 3. Stage changes for review
+git add -A
+git commit -m "feat: add telemetry"
+
+# 4. Run MCP review BEFORE pushing
+npx coderabbitai-mcp review-commit --repo ProduktEntdecker/touchbarfix --commit HEAD
+
+# 5. Apply CodeRabbit suggestions
+# ... fix issues found ...
+git add -A
+git commit -m "fix: address CodeRabbit feedback"
+
+# 6. Push clean code to GitHub
+git push -u origin feature/add-telemetry
+
+# 7. Create PR - CodeRabbit bot will do final review
+# Go to GitHub and create PR with @coderabbitai mention
+```
+
+### Benefits of Using MCP
+
+1. **Instant Feedback**: No waiting for PR creation
+2. **Cleaner PRs**: Issues fixed before push
+3. **Learning**: See issues immediately while context is fresh
+4. **Double Review**: MCP during dev + Bot on PR = higher quality
+
 ## Remember
 
 **Always use feature branches and pull requests!** This ensures:
-- Automated code review by CodeRabbit
+- Automated code review by CodeRabbit (both MCP and bot)
 - Consistent code quality
 - Proper documentation
 - Security validation
