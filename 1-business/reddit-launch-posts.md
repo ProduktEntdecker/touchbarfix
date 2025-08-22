@@ -16,7 +16,7 @@ Like many of you, I've dealt with the infamous frozen Touch Bar issue on my MacB
 **What TouchBarFix does:**
 - Instantly recovers frozen/unresponsive Touch Bar (literally 3 seconds)
 - Prevents future freezes with smart monitoring
-- Works on all Touch Bar MacBooks (2016-2020)
+- Works on all Touch Bar MacBooks (2016–2021)
 - Zero configuration needed - just click and it works
 
 **The problem it solves:**
@@ -119,7 +119,7 @@ Built this after my own Touch Bar started freezing and Apple wanted €700 to "f
 **Quick facts:**
 - Fixes frozen Touch Bar in 3 seconds
 - Prevents future freezes
-- Works on all Touch Bar models (2016-2020)
+- Works on all Touch Bar models (2016–2021)
 - €6.99 (launch week special with code REDDIT50)
 
 Download: [produktentdecker.gumroad.com/l/touchbarfix](https://produktentdecker.gumroad.com/l/touchbarfix)

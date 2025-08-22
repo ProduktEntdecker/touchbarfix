@@ -44,10 +44,10 @@ TouchBarFix simply provides a button interface for these commands. We charge €
 
 ### Technical Details
 - **Size**: 3.1MB DMG installer
-- **Compatibility**: MacBook Pro with Touch Bar (2016-2020), macOS 10.14+
+- **Compatibility**: MacBook Pro 2016–2021, macOS 11 (Big Sur) through macOS 14 (Sonoma)
 - **Security**: Notarized by Apple, runs in user space
 - **Architecture**: Universal Binary (Intel + Apple Silicon)
-- **No admin password required**
+- **No administrator privileges required**
 
 ### What You Get
 - TouchBarFix.dmg (ready to install)
