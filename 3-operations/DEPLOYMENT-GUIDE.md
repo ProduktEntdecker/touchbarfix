@@ -56,7 +56,7 @@ Configure these records at your domain registrar:
 
 ```
 Type    Name    Value
-A       @       216.198.79.1
+A       @       76.76.21.21  # or the A record value shown in your Vercel Domain Settings
 CNAME   www     cname.vercel-dns.com
 ```
 
