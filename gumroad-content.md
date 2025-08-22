@@ -43,14 +43,14 @@ killall ControlStrip
 TouchBarFix simply provides a button interface for these commands. We charge €2.99 for the convenience of not having to remember or type Terminal commands.
 
 ### Technical Details
-- **Size**: 3.1MB DMG installer
+- **Size**: Small DMG installer (~2-3MB)
 - **Compatibility**: MacBook Pro 2016–2021, macOS 11 (Big Sur) through macOS 14 (Sonoma)
 - **Security**: Notarized by Apple, runs in user space
 - **Architecture**: Universal Binary (Intel + Apple Silicon)
 - **No administrator privileges required**
 
 ### What You Get
-- TouchBarFix.dmg (ready to install)
+- TouchBarFix-1.2.1.dmg (ready to install)
 - Simple drag-to-Applications installation
 - Works immediately, no configuration needed
 - Email support if you have any issues
