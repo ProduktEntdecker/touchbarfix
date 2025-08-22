@@ -41,7 +41,7 @@ Commit types:
 - `feat:` New feature
 - `fix:` Bug fix
 - `docs:` Documentation only
-- `style:` Formatting, missing semi-colons, etc
+- `style:` Formatting, missing semi-colons, etc.
 - `refactor:` Code change that neither fixes a bug nor adds a feature
 - `test:` Adding missing tests
 - `chore:` Changes to build process or auxiliary tools
