@@ -89,8 +89,9 @@
             
             <!-- CTA Button -->
             <div class="flex flex-col gap-4 justify-center items-center">
-                <a href="https://produktentdecker.gumroad.com/l/touchbarfix" 
-                   onclick="plausible('Direct Download Click')"
+                <a href="https://produktentdecker.gumroad.com/l/touchbarfix?utm_source=website&utm_medium=cta&utm_campaign=homepage_hero" 
+                   onclick="plausible('Gumroad CTA Click', {props: {placement: 'hero'}})"
+                   target="_blank" rel="noopener noreferrer"
                    class="bg-blue-600 hover:bg-blue-700 text-white px-12 py-4 rounded-lg text-xl font-semibold inline-block cursor-pointer transition-colors">
                     Download TouchBarFix
                 </a>
@@ -356,9 +357,10 @@
             </p>
             
             <div class="flex flex-col gap-6 justify-center items-center mb-8">
-                <a href="https://produktentdecker.gumroad.com/l/touchbarfix"
+                <a href="https://produktentdecker.gumroad.com/l/touchbarfix?utm_source=website&utm_medium=cta&utm_campaign=homepage_footer"
                    class="bg-white text-blue-600 px-12 py-5 rounded-lg text-xl font-semibold inline-block hover:bg-gray-100 transition-colors shadow-lg cursor-pointer"
-                   onclick="plausible('Final CTA Click')">
+                   onclick="plausible('Gumroad CTA Click', {props: {placement: 'footer'}})"
+                   target="_blank" rel="noopener noreferrer">
                     Download TouchBarFix
                 </a>
                 <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4 text-center">
