@@ -83,10 +83,11 @@ git commit -m "feature: implement new functionality"
 # Review with CodeRabbit
 npx coderabbitai-mcp review-commit --repo ProduktEntdecker/touchbarfix --commit HEAD
 
-# Apply suggestions, then:
+# Apply suggestions, then push your feature branch and open a PR:
 git add .
 git commit -m "fix: apply CodeRabbit suggestions"
-git push origin main
+git push -u origin feature/your-feature-name
+# Open a PR from feature/your-feature-name → main (CodeRabbit will auto-review)
 ```
 
 ## Why CodeRabbit Might Not Trigger
