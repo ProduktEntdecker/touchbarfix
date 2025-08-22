@@ -232,7 +232,7 @@ Most Mac "hardware" problems are actually software issues. Apple's solution? Rep
 TouchBarFix has already optimized 12,847+ Macs and saved users thousands in unnecessary repairs.
 
 **Launch week special:** €6.99 (normally €13.99)
-**Link:** gumroad.com/l/touchbarfix
+**Link:** https://produktentdecker.gumroad.com/l/touchbarfix
 
 This is just the first Mac Intelligence tool. Planning KeyboardFix, DisplayFix, and AudioFix based on the same philosophy.
 
@@ -267,7 +267,7 @@ Mac Intelligence approach: Smart software prevention for €6.99
 "My Touch Bar hasn't failed once since the intelligent recovery kicked in" - Mike R.
 
 ### 🎯 Perfect For:
-- MacBook Pro users (2016-2020) experiencing Touch Bar issues
+- MacBook Pro users (2016–2021) experiencing Touch Bar issues
 - Professionals who value intelligent solutions over expensive repairs
 - Mac enthusiasts interested in optimization technology
 - Anyone tired of Apple's "replace hardware" approach

@@ -14,15 +14,15 @@ I built TouchBarFix to restart frozen Touch Bar processes on MacBook Pro.
 **What it does:**
 - Restarts Touch Bar when it freezes or shows black screen
 - One-click alternative to Terminal commands
-- Works on MacBook Pro 2016-2020 models
+- Works on MacBook Pro 2016–2021 models
 
 **How it works:**
 1. Launch TouchBarFix.app
-2. Enter admin password when prompted
+2. TouchBarFix restarts the Touch Bar processes (no password required)
 3. Touch Bar restarts automatically
 
 **Terminal alternative:**
-You can do the same for free with: `sudo pkill TouchBarServer`
+You can do the same for free with: `pkill TouchBarServer`
 
 TouchBarFix is just a convenient app interface for this command.
 

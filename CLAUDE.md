@@ -71,9 +71,17 @@ touchbarfix/
 
 ## 🛠 DEVELOPMENT COMMANDS:
 
+### ⚠️ CRITICAL: NEVER PUSH DIRECTLY TO MAIN!
+**All changes must go through pull requests for CodeRabbit review**
+
 ```bash
 # Navigate to project
 cd /Users/floriansteiner/Documents/GitHub/touchbarfix
+
+# ALWAYS CREATE FEATURE BRANCH FIRST
+git checkout -b feature/your-feature-name
+# or for fixes:
+git checkout -b fix/issue-description
 
 # Build app
 cd App && swift build -c release
@@ -87,12 +95,27 @@ cd App && swift build -c release
 # Run tests
 swift test
 
-# Git operations
-git add . && git commit -m "message" && git push origin main
+# Git operations (FEATURE BRANCH WORKFLOW)
+git add -A
+git commit -m "type: description"
+git push -u origin feature/your-branch-name
+
+# Create Pull Request
+# Go to: https://github.com/ProduktEntdecker/touchbarfix
+# Create PR and add @coderabbitai in description
+
+# After CodeRabbit approval, merge via GitHub interface
+# Then update local main:
+git checkout main
+git pull origin main
 
 # Check CI/CD status
 # Visit: https://github.com/ProduktEntdecker/touchbarfix/actions
 ```
+
+### 📚 REQUIRED READING:
+- **[DEVELOPMENT-WORKFLOW.md](DEVELOPMENT-WORKFLOW.md)** - Complete feature branch workflow
+- **[3-operations/DEPLOYMENT-GUIDE.md](3-operations/DEPLOYMENT-GUIDE.md)** - Deployment procedures
 
 ## 🔗 IMPORTANT LINKS:
 - **Website**: https://touchbarfix.com
@@ -104,17 +127,21 @@ git add . && git commit -m "message" && git push origin main
 ## ⚠️ CRITICAL REMINDERS:
 
 ### 🚨 NEVER DO:
+- **PUSH DIRECTLY TO MAIN BRANCH** (breaks CodeRabbit review)
 - Rename repository with active GitHub Pages
 - Use deprecated GitHub Actions versions
 - Create multiple index.html files in different directories
 - Mix old branding ("restarter") with new branding ("fix")
+- Make false claims (e.g., "requires admin password" - it doesn't!)
 
 ### ✅ ALWAYS DO:
+- **USE FEATURE BRANCHES AND PULL REQUESTS** (for CodeRabbit review)
 - Use TouchBarFix naming consistently
 - Test CI/CD changes in feature branches
 - Mock hardware dependencies in tests
 - Keep single source of truth for files
 - Document issues and solutions immediately
+- Verify all marketing claims with actual code behavior
 
 ### 🔍 KEY FILES TO MONITOR:
 - `Package.swift` - Executable name and dependencies
@@ -153,11 +180,13 @@ git add . && git commit -m "message" && git push origin main
 - **Validation**: User feedback and testimonials
 - **Preparation**: Ready for €0.99 paid launch when Apple Developer activates
 
-### **🔄 PENDING (Apple Developer Dependent):**
-- Apple Developer Program activation (24-48 hours)
-- App signing and notarization
+### **✅ DONE:**
+- App signing and notarization (TouchBarFix-1.2.1.dmg)
+- Gumroad store live (produktentdecker.gumroad.com/l/touchbarfix)
+
+### **🔄 PENDING / NEXT STEPS:**
 - App Store submission
-- Gumroad store with signed DMG
+- (If applicable) Apple Developer Program activation for future releases
 
 ### **📈 MARKETING READY:**
 - Reddit launch posts prepared

@@ -57,7 +57,7 @@ Apple charges €700+ to replace a "faulty" Touch Bar that's usually just frozen
 - 5MB free disk space
 
 ### 🚀 Installation:
-1. Download TouchBarFix.dmg
+1. Download TouchBarFix-1.2.1.dmg
 2. Drag to Applications folder
 3. Click once to fix Touch Bar forever
 
@@ -170,7 +170,7 @@ Just launched TouchBarFix on @gumroad!
 Fix your frozen MacBook Touch Bar in 3 seconds instead of paying Apple €700 for repairs.
 
 Launch week: 50% off with code LAUNCH50
-→ gumroad.com/l/touchbarfix
+→ https://produktentdecker.gumroad.com/l/touchbarfix
 
 #MacBook #TouchBar #IndieHacker
 ```
@@ -189,7 +189,7 @@ What it does:
 - Works on all Touch Bar MacBooks (2016-2020)
 
 Launch week special: 50% off with code REDDIT50
-Link: gumroad.com/l/touchbarfix
+Link: https://produktentdecker.gumroad.com/l/touchbarfix
 
 Happy to answer any questions!
 ```

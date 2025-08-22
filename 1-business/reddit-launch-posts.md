@@ -16,7 +16,7 @@ Like many of you, I've dealt with the infamous frozen Touch Bar issue on my MacB
 **What TouchBarFix does:**
 - Instantly recovers frozen/unresponsive Touch Bar (literally 3 seconds)
 - Prevents future freezes with smart monitoring
-- Works on all Touch Bar MacBooks (2016-2020)
+- Works on all Touch Bar MacBooks (2016–2021)
 - Zero configuration needed - just click and it works
 
 **The problem it solves:**
@@ -28,7 +28,7 @@ To celebrate the launch, I'm offering 50% off for the next 48 hours.
 - Launch price: €6.99
 - Use code: REDDIT50
 
-**Download:** [gumroad.com/l/touchbarfix](https://gumroad.com/l/touchbarfix)
+**Download:** [produktentdecker.gumroad.com/l/touchbarfix](https://produktentdecker.gumroad.com/l/touchbarfix)
 
 The app is fully notarized by Apple and includes a 30-day money-back guarantee if it doesn't solve your Touch Bar issues.
 
@@ -59,7 +59,7 @@ I built TouchBarFix to solve this permanently. It:
 
 I've been using it for months, and my Touch Bar hasn't frozen once since. 
 
-Currently doing a launch sale at €6.99 (normally €13.99): [gumroad.com/l/touchbarfix](https://gumroad.com/l/touchbarfix)
+Currently doing a launch sale at €6.99 (normally €13.99): [produktentdecker.gumroad.com/l/touchbarfix](https://produktentdecker.gumroad.com/l/touchbarfix)
 
 Includes 30-day refund if it doesn't work for you (though it's worked for everyone so far).
 
@@ -96,7 +96,7 @@ Built TouchBarFix - a simple menu bar app that:
 Been using it for 3 months. Zero Touch Bar issues since. Saved €700.
 
 **Sharing the Solution:**
-Made it available for others facing the same problem: [gumroad.com/l/touchbarfix](https://gumroad.com/l/touchbarfix)
+Made it available for others facing the same problem: [produktentdecker.gumroad.com/l/touchbarfix](https://produktentdecker.gumroad.com/l/touchbarfix)
 
 Currently €6.99 (launch week special). Includes 30-day guarantee.
 
@@ -119,10 +119,10 @@ Built this after my own Touch Bar started freezing and Apple wanted €700 to "f
 **Quick facts:**
 - Fixes frozen Touch Bar in 3 seconds
 - Prevents future freezes
-- Works on all Touch Bar models (2016-2020)
+- Works on all Touch Bar models (2016–2021)
 - €6.99 (launch week special with code REDDIT50)
 
-Download: [gumroad.com/l/touchbarfix](https://gumroad.com/l/touchbarfix)
+Download: [produktentdecker.gumroad.com/l/touchbarfix](https://produktentdecker.gumroad.com/l/touchbarfix)
 
 It's just a simple menu bar app that restarts the Touch Bar agent when needed. Nothing fancy, but it works.
 
@@ -166,7 +166,7 @@ TouchBarFix does three things:
 3. Saves you €693 💰
 
 Launch week: €6.99 (normally €13.99)
-Link: gumroad.com/l/touchbarfix
+Link: produktentdecker.gumroad.com/l/touchbarfix
 
 RT to save a MacBook owner €700 today 🙏
 ```
@@ -195,7 +195,7 @@ Technical details:
 - Universal binary (Intel + Apple Silicon)
 - Fully sandboxed and notarized
 
-Available on Gumroad for €6.99: gumroad.com/l/touchbarfix
+Available on Gumroad for €6.99: produktentdecker.gumroad.com/l/touchbarfix
 
 Source isn't open (yet) but happy to discuss the technical approach. The Touch Bar issues are fascinating from an engineering perspective - it's essentially a separate iOS device running on your Mac that sometimes loses communication with the main system.
 
@@ -226,7 +226,7 @@ Launched today on Gumroad and already helping MacBook users save money.
 
 Sometimes the best business ideas come from solving your own problems.
 
-If you know anyone with Touch Bar issues, they can grab it here: gumroad.com/l/touchbarfix
+If you know anyone with Touch Bar issues, they can grab it here: produktentdecker.gumroad.com/l/touchbarfix
 
 #entrepreneurship #saas #productlaunch #apple #macbook
 ```

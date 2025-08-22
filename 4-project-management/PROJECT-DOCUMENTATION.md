@@ -57,8 +57,8 @@
 
 3. **Packaged in DMG** ✅
    - Professional .app bundle structure
-   - Custom AppIcon.icns (1.7MB) generated from source image
-   - DMG installer created (2.2MB)
+   - Custom AppIcon.icns generated from source image
+   - DMG installer created (TouchBarFix-1.2.1.dmg)
    - README included in DMG
    - Applications folder symlink for easy installation
 

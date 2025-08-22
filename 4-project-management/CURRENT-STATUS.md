@@ -14,7 +14,7 @@
   - Enhanced ContentView.swift (10.6KB)
 
 ### **Distribution State:**
-- ✅ **Enhanced version BUILT** (TouchBarFix-1.2.1.dmg - 3.2MB with viral features)
+- ✅ **Enhanced version BUILT** (TouchBarFix-1.2.1.dmg with viral features)
 - ❌ **Enhanced version NOT notarized** (needs 2-4 hour Apple process)
 - ✅ **Basic version LIVE** on touchbarfix.com (works, no viral features)
 

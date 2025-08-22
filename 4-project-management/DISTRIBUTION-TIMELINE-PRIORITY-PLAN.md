@@ -33,7 +33,7 @@ PHASE 3: OPTIMIZATION (Days 8-14)
 
 **Priority 1: Gumroad Product Setup (4 hours)**
 - [ ] Create Gumroad account/verify existing
-- [ ] Upload TouchBarFix-1.2.1.dmg (2.3MB)
+- [ ] Upload TouchBarFix-1.2.1.dmg
 - [ ] Configure product page with optimized description
 - [ ] Set up tiered pricing (€6.99 Solo, €12.99 Power, €29.99 Affiliate)
 - [ ] Enable instant download delivery

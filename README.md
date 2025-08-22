@@ -20,8 +20,8 @@ Many MacBook Pros (2016–2021) experience flickering or non-responsive Touch Ba
 
 ## Supported Models
 
-- MacBook Pro 2016-2021 (all Touch Bar models)
-- macOS 11.0 (Big Sur) or later (including Sonoma and Ventura)
+- MacBook Pro 2016–2021 (all Touch Bar models)
+- macOS 11 (Big Sur) through macOS 14 (Sonoma)
 - Specifically tested on MacBookPro17,1 (M1, 2020)
 
 ## Installation

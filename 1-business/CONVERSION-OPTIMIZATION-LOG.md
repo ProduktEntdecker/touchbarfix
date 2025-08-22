@@ -42,7 +42,7 @@
 Fix Your Touch Bar in 30 Seconds</h1>
 <p>Your Touch Bar is frozen. Apple wants €700 to fix it.<br>
 <span class="font-semibold text-red-600">We'll fix it in 30 seconds for €6.99.</span></p>
-<a href="https://floriansteiner.gumroad.com/l/touchbarfix">💾 Download TouchBarFix - €6.99</a>
+<a href="https://produktentdecker.gumroad.com/l/touchbarfix">💾 Download TouchBarFix - €6.99</a>
 ```
 
 **Impact:** Lead with loss aversion (€700 cost) instead of features

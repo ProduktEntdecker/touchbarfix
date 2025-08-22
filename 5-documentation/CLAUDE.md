@@ -48,7 +48,7 @@ touchbarfix/
 ### ✅ COMPLETED:
 - **App**: TouchBarFix.app (Universal Binary - 298KB)
 - **Security**: Process whitelisting, input validation, hardened runtime
-- **Distribution**: TouchBarFix-1.2.1.dmg ready (2.2MB)
+- **Distribution**: TouchBarFix-1.2.1.dmg ready
 - **Website**: touchbarfix.com (Hosted on Vercel with SSL)
 - **Landing Page**: SEO-optimized, high-converting design
 - **CI/CD**: GitHub Actions for automated builds and tests

@@ -161,7 +161,7 @@
 - [ ] **No new bugs introduced** by viral features
 - [ ] **Performance not degraded** from previous version
 - [ ] **Compatibility maintained** with supported macOS versions
-- [ ] **File size reasonable** (should be ~2.3MB)
+- [ ] **File size reasonable** (typically 2-3MB)
 
 **Results**: _____________________  
 **Issues**: _____________________

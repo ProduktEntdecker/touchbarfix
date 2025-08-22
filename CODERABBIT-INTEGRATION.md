@@ -17,18 +17,32 @@ npx coderabbitai-mcp create-review --repo ProduktEntdecker/touchbarfix --head [b
 
 ## Integration Workflow
 
-### For Claude Code Development:
-1. **Write Code** - Implement features/fixes
-2. **Review with CodeRabbit** - Run MCP command to get suggestions
-3. **Apply Improvements** - Implement CodeRabbit's recommendations
-4. **Commit Final Version** - Push clean, reviewed code
+### Two-Layer Review Process:
 
-### For Pull Requests:
-1. Create feature branch
-2. Make changes
-3. Run CodeRabbit review
-4. Apply suggestions
-5. Create PR (CodeRabbit will auto-review)
+#### Layer 1: MCP Pre-Review (Before Committing)
+1. **Write Code** - Implement features/fixes
+2. **Run MCP Review** - Make a temporary WIP commit, then get instant feedback:
+   ```bash
+   git add -A
+   git commit -m "chore: WIP pre-review"
+   npx coderabbitai-mcp review-commit --repo ProduktEntdecker/touchbarfix --commit $(git rev-parse HEAD)
+   ```
+3. **Apply Improvements** - Fix issues found by CodeRabbit
+4. **Amend/Squash WIP** - Amend or squash the WIP commit before pushing
+
+#### Layer 2: PR Auto-Review (After Push)
+1. **Create feature branch**: `git checkout -b feature/name`
+2. **Make changes** and commit
+3. **Optional: Run MCP pre-review** to catch issues early
+4. **Push to GitHub**: `git push -u origin feature/name`
+5. **Create PR** - CodeRabbit bot will auto-review
+6. **Address PR feedback** if any additional issues found
+
+### Benefits of Two-Layer Approach:
+- **MCP Review**: Instant feedback during development
+- **PR Review**: Final validation before merge
+- **Cleaner PRs**: Issues fixed before PR creation
+- **Faster Iteration**: No waiting for PR to get feedback
 
 ## CodeRabbit Bot Setup
 
@@ -56,25 +70,30 @@ CodeRabbit found these issues that need fixing:
 ## Manual Review Process
 
 When CodeRabbit doesn't trigger automatically:
-1. Run manual review: `npx coderabbitai-mcp review-commit --repo ProduktEntdecker/touchbarfix --commit HEAD`
-2. Apply suggested improvements
-3. Commit fixes
-4. Verify with another review if needed
+1. Create WIP commit: `git add -A && git commit -m "chore: WIP for review"`
+2. Run manual review: `npx coderabbitai-mcp review-commit --repo ProduktEntdecker/touchbarfix --commit HEAD`
+3. Apply suggested improvements
+4. Amend WIP commit with fixes: `git add -A && git commit --amend`
+5. Verify with another review if needed
 
 ## Integration with Development Flow
 
 ```bash
 # Standard development process with CodeRabbit:
+# 1. Create WIP commit for review
 git add .
-git commit -m "feature: implement new functionality"
+git commit -m "chore: WIP - implement new functionality"
 
-# Review with CodeRabbit
+# 2. Review with CodeRabbit
 npx coderabbitai-mcp review-commit --repo ProduktEntdecker/touchbarfix --commit HEAD
 
-# Apply suggestions, then:
+# 3. Apply suggestions and amend the WIP commit:
 git add .
-git commit -m "fix: apply CodeRabbit suggestions"
-git push origin main
+git commit --amend -m "feature: implement new functionality"
+
+# 4. Push clean, reviewed code:
+git push -u origin feature/your-feature-name
+# Open a PR from feature/your-feature-name → main (CodeRabbit will auto-review)
 ```
 
 ## Why CodeRabbit Might Not Trigger

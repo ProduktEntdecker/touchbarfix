@@ -172,13 +172,13 @@ Price Justification:
 🎉 CONGRATULATIONS! Your TouchBarFix download is ready.
 
 NEXT STEPS:
-1. ⬇️ Download TouchBarFix.dmg (2.3MB)
+1. ⬇️ Download TouchBarFix-1.2.1.dmg
 2. 🚀 Install and fix your Touch Bar  
 3. 💬 Share your success story
 4. 💰 Start earning 50% commissions
 
 INSTANT ACCESS LINKS:
-• Download TouchBarFix.dmg
+• Download TouchBarFix-1.2.1.dmg
 • Join Discord Community (500+ users)
 • Get your unique affiliate link
 • Access bonus MacBook toolkit

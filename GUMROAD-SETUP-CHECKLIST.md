@@ -19,7 +19,7 @@ TouchBarFix - Touch Bar Restart Utility
 ```
 touchbarfix
 ```
-*This will create: gumroad.com/l/touchbarfix*
+*This will create: https://produktentdecker.gumroad.com/l/touchbarfix*
 
 #### Category
 - **Primary**: Software & Applications
@@ -232,7 +232,7 @@ Before going live:
 #### Update Website Link
 Once product is live, update `index-clean.html`:
 ```html
-<a href="https://gumroad.com/l/touchbarfix" class="cta-button">Buy on Gumroad - €2.99</a>
+<a href="https://produktentdecker.gumroad.com/l/touchbarfix" class="cta-button">Buy on Gumroad - €2.99</a>
 ```
 
 #### Monitor Performance
@@ -243,4 +243,4 @@ Once product is live, update `index-clean.html`:
 
 ---
 
-**After setup, the link gumroad.com/l/touchbarfix will work and customers can purchase TouchBarFix!**
+**After setup, the link https://produktentdecker.gumroad.com/l/touchbarfix will work and customers can purchase TouchBarFix!**

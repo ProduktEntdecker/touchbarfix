@@ -1,10 +1,12 @@
+# yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
 # CodeRabbit configuration for TouchBarFix
 # This file configures AI code review settings for the repository
 
 # Review settings
 reviews:
   # Enable comprehensive reviews
-  auto_review: true
+  auto_review:
+    enabled: true
   
   # Review configuration
   request_changes_workflow: false
