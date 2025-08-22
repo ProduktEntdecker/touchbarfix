@@ -104,11 +104,6 @@
       "source": "/CLAUDE.md",
       "destination": "/404.html",
       "statusCode": 404
-    },
-    {
-      "source": "/gumroad-*.html",
-      "destination": "/404.html",
-      "statusCode": 404
     }
   ],
   "rewrites": [
