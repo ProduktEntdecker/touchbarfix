@@ -13,7 +13,7 @@
 3. **Check**: Title says "TouchBarFix"
 4. **Verify**: No security warnings or crashes
 
-**✅ PASS / ❌ FAIL**: ________________
+**✅ PASS / ❌ FAIL**: there is an onboarding screen that was not part of the requirement and is uneccesary, because it distracts the user from the goal to restart the touchbar
 
 ### **Test 2: Touch Bar Detection (1 minute)**
 1. **Read the subtitle** under TouchBarFix logo
@@ -21,7 +21,7 @@
 3. **Expected on non-Touch Bar Mac**: "No Touch Bar detected on this device"
 4. **Check**: Button is blue (enabled) or gray (disabled) appropriately
 
-**✅ PASS / ❌ FAIL**: ________________
+**✅ PASS / ❌ FAIL**: ________________Pass
 
 ### **Test 3: Core Functionality (5 minutes)**
 1. **Click "Fix Touch Bar" button**
@@ -31,7 +31,7 @@
 5. **Wait**: Should complete in 3-10 seconds
 6. **Expected**: Success dialog appears with "Touch Bar has been successfully restarted!"
 
-**✅ PASS / ❌ FAIL**: ________________  
+**✅ PASS / ❌ FAIL**: No password was asked and that is also my expectation and was also the same behaviour in earlier releases, touch bar restarted 
 **Touch Bar actually restarted**: YES / NO / CAN'T TELL
 
 ### **Test 4: Success Dialog (2 minutes)**
@@ -40,14 +40,14 @@
 3. **"Quit" button**: Should close the app
 4. **Test both buttons** work as expected
 
-**✅ PASS / ❌ FAIL**: ________________
+**✅ PASS / ❌ FAIL**: PASS_success dialog appears, fix again restarts, quit works
 
 ### **Test 5: Help Function (1 minute)**
 1. **Click "Help" button** (question mark icon)
 2. **Expected**: Opens touchbarfix.com/help in browser
 3. **Check**: Website loads correctly
 
-**✅ PASS / ❌ FAIL**: ________________
+**✅ PASS / ❌ FAIL**: Fail, leads to 404 page
 
 ### **Test 6: Single Instance (2 minutes)**
 1. **Keep TouchBarFix open**
@@ -55,7 +55,7 @@
 3. **Expected**: Warning dialog appears "TouchBarFix is Already Running"
 4. **Click OK**: Dialog closes, original app stays open
 
-**✅ PASS / ❌ FAIL**: ________________
+**✅ PASS / ❌ FAIL**: Fail, but I think we can get rid of this, because this seems only be an issue with menu bar items
 
 ### **Test 7: Error Handling (2 minutes)**
 1. **Click "Fix Touch Bar"** again
@@ -63,7 +63,7 @@
 3. **Expected**: Should handle cancellation gracefully
 4. **Try with wrong password** (if you want to test)
 
-**✅ PASS / ❌ FAIL**: ________________
+**✅ PASS / ❌ FAIL**: Fail there is no password prompt
 
 ---
 
@@ -88,7 +88,7 @@
 
 **Overall Result**: ✅ READY TO SHIP / ❌ NEEDS FIXES
 
-**Notes**: ________________________________
+**Notes**: Need fixes
 
 **Tested by**: Dr. Florian Steiner  
 **Date**: _______________  

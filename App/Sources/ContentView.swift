@@ -122,15 +122,19 @@ struct ContentView: View {
         }
         .padding(32)
         .frame(width: 420, height: 360)
-        .background(Color.white) // White background instead of grey
+        .background(Color.white)
         .alert(alertTitle, isPresented: $showingAlert) {
             if showingSuccess {
+                Button("Done") {
+                    quitApp()
+                }
                 Button("Fix Again") { 
                     showingSuccess = false
                     restartTouchBar()
                 }
-                Button("Quit", role: .cancel) {
-                    quitApp()
+                // Subtle sharing option - not pushy
+                Button("Tell a Friend") {
+                    shareSuccess()
                 }
             } else {
                 Button("OK") { }
@@ -155,7 +159,9 @@ struct ContentView: View {
                 switch result {
                 case .success:
                     alertTitle = "Success! ✅"
-                    alertMessage = "Touch Bar has been successfully restarted!\n\nYour Touch Bar should now be responsive. If you need to restart it again, click \"Fix Again\" or quit and relaunch the app."
+                    // Priority 1: Celebrate success
+                    // Priority 2: Subtle sharing suggestion
+                    alertMessage = "Touch Bar has been successfully restarted!\n\nYour Touch Bar should now be responsive."
                     showingSuccess = true
                 case .failure(let error):
                     alertTitle = "Error ❌"
@@ -164,6 +170,34 @@ struct ContentView: View {
                 }
                 showingAlert = true
             }
+        }
+    }
+    
+    private func shareSuccess() {
+        let text = "PSA: TouchBarFix just instantly solved my frozen Touch Bar issue. Bookmarking this for the next time someone complains about unresponsive Touch Bar controls 🙌"
+        let url = URL(string: "https://touchbarfix.com?utm_source=app&utm_medium=share")!
+        
+        let items: [Any] = [text, url]
+        
+        // Priority order: Slack > Email > Messages > Generic
+        let preferredServices: [NSSharingService.Name] = [
+            .init("com.tinyspeck.slackmacgap"), // Slack
+            .composeEmail,
+            .composeMessage
+        ]
+        
+        // Try to find preferred service first
+        if let preferredService = preferredServices.compactMap({ NSSharingService(named: $0) }).first {
+            if preferredService.canPerform(withItems: items) {
+                preferredService.perform(withItems: items)
+                return
+            }
+        }
+        
+        // Fallback to picker
+        let activityVC = NSSharingServicePicker(items: items)
+        if let window = NSApp.windows.first {
+            activityVC.show(relativeTo: .zero, of: window.contentView!, preferredEdge: .minY)
         }
     }
     
@@ -176,7 +210,7 @@ struct ContentView: View {
     }
     
     private func showHelp() {
-        if let url = URL(string: "https://touchbarfix.com/help") {
+        if let url = URL(string: "https://touchbarfix.com/support.html") {
             NSWorkspace.shared.open(url)
         }
     }
@@ -184,7 +218,6 @@ struct ContentView: View {
     private func quitApp() {
         NSApplication.shared.terminate(nil)
     }
-    
 }
 
 #Preview {
