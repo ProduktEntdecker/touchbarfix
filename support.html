@@ -366,7 +366,7 @@
             <h2>Contact Support</h2>
             <p>Have a question not covered above? Send us a message:</p>
             
-            <form class="contact-form" action="https://formspree.io/f/info@produktentdecker.com" method="POST">
+            <form class="contact-form" action="https://formspree.io/f/xbljvqrb" method="POST">
                 <div class="form-group">
                     <label for="name">Your Name</label>
                     <input type="text" id="name" name="name" required>
@@ -412,7 +412,7 @@
                 </div>
                 
                 <input type="hidden" name="_subject" value="TouchBarFix Support Request">
-                <input type="hidden" name="_next" value="https://touchbarfix.com/support-thank-you.html">
+                <input type="hidden" name="_next" value="https://touchbarfix.com/support.html?sent=true">
                 
                 <button type="submit" class="submit-button">Send Message</button>
             </form>
@@ -422,5 +422,27 @@
     <footer style="text-align: center; padding: 40px 0; color: #86868b; font-size: 14px;">
         <p>&copy; 2025 TouchBarFix • Created by Dr. Florian Steiner, AI Product Manager • Co-created with Claude Code</p>
     </footer>
+
+    <script>
+        // Show success message if form was submitted
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('sent') === 'true') {
+            const successMessage = document.createElement('div');
+            successMessage.innerHTML = `
+                <div style="position: fixed; top: 20px; right: 20px; background: #34c759; color: white; padding: 16px 20px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 1000;">
+                    ✅ Message sent successfully! We'll respond within 24-48 hours.
+                </div>
+            `;
+            document.body.appendChild(successMessage);
+            
+            // Remove success message after 5 seconds
+            setTimeout(() => {
+                successMessage.remove();
+            }, 5000);
+            
+            // Clean URL
+            window.history.replaceState({}, document.title, window.location.pathname);
+        }
+    </script>
 </body>
 </html>

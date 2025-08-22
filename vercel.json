@@ -112,7 +112,6 @@
       "destination": "/index.html"
     },
     { "source": "/favicon.ico", "destination": "/Assets/favicon.ico" },
-    { "source": "/apple-touch-icon.png", "destination": "/Assets/apple-touch-icon.png" },
-    { "source": "/favicon.ico", "destination": "/Assets/favicon.ico" }
+    { "source": "/apple-touch-icon.png", "destination": "/Assets/apple-touch-icon.png" }
   ]
 }
