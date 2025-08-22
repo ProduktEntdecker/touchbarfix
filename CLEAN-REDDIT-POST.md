@@ -43,6 +43,8 @@ Download: [Gumroad link]
 **Note:** If TouchBarFix doesn't solve your issue, you likely need Apple hardware repair. This only fixes software-related freezing.
 
 Happy to answer questions about Touch Bar issues.
+
+**Team:** Created by Dr. Florian Steiner (AI Product Manager) with technical implementation by Claude Code and our specialist agent team.
 ```
 
 ---

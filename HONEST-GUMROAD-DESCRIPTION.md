@@ -62,9 +62,9 @@ TouchBarFix simply provides a menu bar interface for these commands. If you're c
 
 This is a convenience fee for users who prefer clicking a menu bar icon over typing Terminal commands. The price reflects the simple nature of the tool - it's not a complex application, just a user-friendly interface for system commands.
 
-## About the Developer
+## About the Creator
 
-Created by Dr. Florian Steiner, an independent Mac developer who believes in honest, straightforward software that does exactly what it claims to do.
+Created by Dr. Florian Steiner, AI Product Manager and solopreneur who believes in straightforward software that does exactly what it claims to do.
 
 ## What You Get
 

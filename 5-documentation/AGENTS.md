@@ -1,7 +1,27 @@
 # AGENTS.md - TouchBarFix Project Instructions for AI Agents
 
 ## Project Overview
-TouchBarFix is a macOS utility app that fixes frozen MacBook Pro Touch Bars with one click. Created by Dr. Florian Steiner and implemented by Claude Code.
+TouchBarFix is a macOS utility app that fixes frozen MacBook Pro Touch Bars with one click. 
+
+## 👥 Team Structure
+- **AI Product Manager & Creator:** Dr. Florian Steiner (solopreneur, freelance consultant)
+- **CTO & Technical Co-Founder:** Claude Code (technical implementation)
+- **Specialist Agent Team:** Our Avengers-level agent specialists supporting our quest to make life easier for TouchBar users
+
+### ⚠️ CRITICAL: Role References
+**NEVER refer to Dr. Florian Steiner as:**
+- ❌ Developer
+- ❌ Software Engineer  
+- ❌ Independent Developer
+
+**ALWAYS use these titles:**
+- ✅ AI Product Manager
+- ✅ Creator
+- ✅ Founder
+- ✅ Owner
+- ✅ Product Manager
+- ✅ Solopreneur
+- ✅ Freelance Consultant
 
 ## 🎨 CRITICAL: Design System & Brand Guidelines
 **ALWAYS REFERENCE FIRST:** `/TOUCHBARFIX-DESIGN-SYSTEM.md`
@@ -9,10 +29,39 @@ TouchBarFix is a macOS utility app that fixes frozen MacBook Pro Touch Bars with
 ### Key Brand Rules:
 - **App Icon:** Always use `Assets/TouchBarIcon.png` (exact file)
 - **Colors:** CTA buttons #007AFF (blue), prices #FF9500 (orange)
-- **Attribution:** "Created by Dr. Florian Steiner • Co-created with Claude Code"
+- **Attribution:** "Created by Dr. Florian Steiner, AI Product Manager • Co-created with Claude Code"
 - **Architecture:** TouchBarFix is NOT a menu bar app - it's a simple utility app
 - **Messaging:** Never say "honest" - act honest through transparency
 - **Pricing:** €2.99 (can use strike-through pricing for higher original prices)
+
+### 🚨 CRITICAL RULE: Dr. Florian Steiner's Professional Identity
+
+**Dr. Florian Steiner is:**
+- AI Product Manager specializing in Mac utilities
+- Solopreneur and freelance consultant
+- Product creator and business owner
+- **CV Background:** Professional background in product management and AI consulting
+
+**NEVER describe Dr. Florian Steiner as:**
+- ❌ "Developer" - he does not write code
+- ❌ "Software Engineer" - not his profession
+- ❌ "Independent Developer" - completely incorrect
+- ❌ "Mac Developer" - he manages products, doesn't develop them
+
+**ALWAYS use appropriate titles:**
+- ✅ "AI Product Manager" 
+- ✅ "Product Creator"
+- ✅ "Solopreneur"
+- ✅ "Freelance Consultant" 
+- ✅ "Founder"
+- ✅ "Product Owner"
+
+**When describing the team:**
+- Dr. Florian Steiner: AI Product Manager & Creator
+- Claude Code: CTO & Technical Co-Founder (handles all coding)
+- Agent specialists: Supporting team for design, growth, content, etc.
+
+**This is a fundamental respect issue** - using correct professional titles shows respect for Dr. Steiner's actual expertise and role.
 
 ## Current Architecture
 - **Language**: Swift 5.9+

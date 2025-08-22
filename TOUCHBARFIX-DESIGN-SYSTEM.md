@@ -2,8 +2,8 @@
 
 **Version:** 1.0  
 **Updated:** August 22, 2025  
-**Product Manager:** Dr. Florian Steiner  
-**Developer:** Claude Code  
+**AI Product Manager:** Dr. Florian Steiner  
+**CTO & Technical Co-Founder:** Claude Code  
 
 ## 🎯 Brand Positioning
 
@@ -219,7 +219,7 @@ Instead of saying "honest," demonstrate through:
 
 ## 📚 Usage Guidelines
 
-### For Developers
+### For Technical Implementation
 1. Always use the exact TouchBarIcon.png from Assets/
 2. Follow the color palette strictly
 3. Use Apple system fonts
