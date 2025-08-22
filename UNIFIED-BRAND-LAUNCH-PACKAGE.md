@@ -267,7 +267,7 @@ Mac Intelligence approach: Smart software prevention for €6.99
 "My Touch Bar hasn't failed once since the intelligent recovery kicked in" - Mike R.
 
 ### 🎯 Perfect For:
-- MacBook Pro users (2016-2020) experiencing Touch Bar issues
+- MacBook Pro users (2016–2021) experiencing Touch Bar issues
 - Professionals who value intelligent solutions over expensive repairs
 - Mac enthusiasts interested in optimization technology
 - Anyone tired of Apple's "replace hardware" approach

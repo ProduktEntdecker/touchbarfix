@@ -25,8 +25,8 @@
 
 ### **Test 3: Core Functionality (5 minutes)**
 1. **Click "Fix Touch Bar" button**
-2. **Expected**: Password prompt appears
-3. **Enter admin password** and click OK
+2. **Expected**: No password prompt (operates in user space)
+3. **Expected**: Process completes automatically
 4. **Expected**: Button shows "Fixing Touch Bar..." with progress spinner
 5. **Wait**: Should complete in 3-10 seconds
 6. **Expected**: Success dialog appears with "Touch Bar has been successfully restarted!"

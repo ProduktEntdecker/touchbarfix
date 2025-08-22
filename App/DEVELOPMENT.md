@@ -111,7 +111,7 @@ Currently configured for non-sandboxed distribution because:
 
 ## 🐛 Known Issues & Limitations
 
-1. **Requires Admin Privileges**: Killing system processes may require admin access
+1. **No Administrator Privileges Required**: User-space process termination only
 2. **Not Sandboxed**: Can't be distributed via Mac App Store in current form
 3. **Process Names**: Hardcoded process names may change in future macOS versions
 4. **M1 Pro/Max Detection**: Touch Bar detection might need updates for newer models
