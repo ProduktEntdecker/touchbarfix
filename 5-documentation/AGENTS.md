@@ -1,7 +1,18 @@
 # AGENTS.md - TouchBarFix Project Instructions for AI Agents
 
 ## Project Overview
-TouchBarFix is a macOS utility app that fixes frozen MacBook Pro Touch Bars with one click. Built by AI Product Manager Dr. Florian Steiner using Claude Code as primary development assistant.
+TouchBarFix is a macOS utility app that fixes frozen MacBook Pro Touch Bars with one click. Created by Dr. Florian Steiner and implemented by Claude Code.
+
+## 🎨 CRITICAL: Design System & Brand Guidelines
+**ALWAYS REFERENCE FIRST:** `/TOUCHBARFIX-DESIGN-SYSTEM.md`
+
+### Key Brand Rules:
+- **App Icon:** Always use `Assets/TouchBarIcon.png` (exact file)
+- **Colors:** CTA buttons #007AFF (blue), prices #FF9500 (orange)
+- **Attribution:** "Created by Dr. Florian Steiner • Co-created with Claude Code"
+- **Architecture:** TouchBarFix is NOT a menu bar app - it's a simple utility app
+- **Messaging:** Never say "honest" - act honest through transparency
+- **Pricing:** €2.99 (can use strike-through pricing for higher original prices)
 
 ## Current Architecture
 - **Language**: Swift 5.9+

@@ -7,7 +7,7 @@
 
 .touchbar-broken {
     animation: touchBarPulse 2s infinite;
-    background: #dc2626;
+    background: #ef4444;
 }
 
 .touchbar-fixed {
@@ -15,22 +15,11 @@
 }
 
 .hero-gradient {
-    background: linear-gradient(135deg, #f9fafb 0%, #e5e7eb 100%);
-}
-
-.cta-button {
-    background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
-    box-shadow: 0 4px 15px rgba(220, 38, 38, 0.3);
-    transition: all 0.3s ease;
-}
-
-.cta-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(220, 38, 38, 0.4);
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
 }
 
 .problem-icon {
-    transition: all 0.5s ease;
+    transition: all 0.3s ease;
 }
 
 .problem-solved {

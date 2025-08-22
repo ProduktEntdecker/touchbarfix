@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TouchBarFix Support - Help & FAQ</title>
+    <meta name="description" content="TouchBarFix support, frequently asked questions, and troubleshooting guide for MacBook Pro Touch Bar issues.">
+    <link rel="icon" href="Assets/favicon.ico" type="image/x-icon">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", system-ui, sans-serif;
+            line-height: 1.6;
+            color: #1d1d1f;
+            background: #f5f5f7;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 42px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #1d1d1f;
+        }
+
+        .subtitle {
+            font-size: 21px;
+            color: #86868b;
+            font-weight: 400;
+        }
+
+        .back-link {
+            display: inline-block;
+            color: #007aff;
+            text-decoration: none;
+            margin-bottom: 20px;
+            font-size: 17px;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .section {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .section h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #1d1d1f;
+        }
+
+        .faq-item {
+            margin-bottom: 24px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .faq-question {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1d1d1f;
+            margin-bottom: 8px;
+        }
+
+        .faq-answer {
+            font-size: 16px;
+            color: #1d1d1f;
+            line-height: 1.5;
+        }
+
+        .faq-answer code {
+            background: #f0f0f0;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 14px;
+        }
+
+        .warning {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            padding: 16px;
+            border-radius: 8px;
+            margin: 16px 0;
+        }
+
+        .warning p {
+            color: #856404;
+            font-size: 15px;
+            margin: 0;
+        }
+
+        /* Contact Form */
+        .contact-form {
+            margin-top: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #1d1d1f;
+        }
+
+        input[type="text"], 
+        input[type="email"], 
+        textarea,
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d0d0d0;
+            border-radius: 8px;
+            font-size: 16px;
+            font-family: inherit;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: #007aff;
+            box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
+        }
+
+        textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        .submit-button {
+            background: #007aff;
+            color: white;
+            padding: 14px 28px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 17px;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .submit-button:hover {
+            background: #0056cc;
+        }
+
+        /* Steps */
+        .steps {
+            counter-reset: step-counter;
+        }
+
+        .step {
+            counter-increment: step-counter;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .step::before {
+            content: counter(step-counter);
+            background: #007aff;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 600;
+            margin-right: 12px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px 16px;
+            }
+
+            h1 {
+                font-size: 32px;
+            }
+
+            .subtitle {
+                font-size: 18px;
+            }
+
+            .section {
+                padding: 24px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 16px 12px;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+
+            .section {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/" class="back-link">← Back to TouchBarFix</a>
+        
+        <header>
+            <h1>TouchBarFix Support</h1>
+            <p class="subtitle">Help, FAQ, and troubleshooting</p>
+        </header>
+
+        <section class="section">
+            <h2>How to Use TouchBarFix</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-content">
+                        <strong>Launch TouchBarFix.app</strong> from your Applications folder
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-content">
+                        <strong>Enter your password</strong> when prompted (needed to restart system processes)
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-content">
+                        <strong>Wait for completion</strong> - TouchBarFix will restart the Touch Bar and show a success message
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Frequently Asked Questions</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">Why does TouchBarFix ask for my password?</div>
+                <div class="faq-answer">TouchBarFix needs administrator privileges to restart system processes. The app runs <code>sudo pkill TouchBarServer</code> which requires your admin password.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">TouchBarFix didn't work. What now?</div>
+                <div class="faq-answer">
+                    <p>If TouchBarFix doesn't solve your issue, you likely have a hardware problem rather than software. Try:</p>
+                    <ul style="margin: 8px 0 0 20px;">
+                        <li>Restart your MacBook completely</li>
+                        <li>Reset SMC (System Management Controller)</li>
+                        <li>Contact Apple Support for hardware diagnosis</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Can I do this for free with Terminal?</div>
+                <div class="faq-answer">Yes! Open Terminal and run <code>sudo pkill TouchBarServer</code> followed by <code>sudo killall ControlStrip</code>. TouchBarFix is just a convenient app interface for these commands.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Which MacBooks does this work on?</div>
+                <div class="faq-answer">TouchBarFix works on MacBook Pro models from 2016-2020 that have the Touch Bar. It requires macOS 10.14 (Mojave) or later.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Does TouchBarFix prevent future freezing?</div>
+                <div class="faq-answer">No, TouchBarFix only restarts frozen processes. It doesn't prevent Touch Bar issues from happening again. If your Touch Bar freezes frequently, you may have a hardware problem.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Is TouchBarFix safe to use?</div>
+                <div class="faq-answer">Yes, TouchBarFix is fully notarized by Apple and only runs standard system commands. It doesn't modify any files or install background processes.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Can I get a refund?</div>
+                <div class="faq-answer">If TouchBarFix doesn't work as described, contact us using the form below for a full refund.</div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Troubleshooting</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">Touch Bar still frozen after using TouchBarFix</div>
+                <div class="faq-answer">
+                    <p>This usually means you have a hardware issue. Try these steps:</p>
+                    <div class="steps">
+                        <div class="step">
+                            <div class="step-content">Restart your MacBook completely (not just sleep/wake)</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-content">Try TouchBarFix again after restart</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-content">If still not working, contact Apple Support - likely hardware failure</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">"TouchBarFix can't be opened" error</div>
+                <div class="faq-answer">
+                    <p>This happens when macOS blocks the app. To fix:</p>
+                    <div class="steps">
+                        <div class="step">
+                            <div class="step-content">Go to System Settings → Privacy & Security</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-content">Look for a message about TouchBarFix being blocked</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-content">Click "Open Anyway" to allow TouchBarFix</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="warning">
+                <p><strong>Hardware vs Software Issues:</strong> TouchBarFix only fixes software problems where the Touch Bar process has crashed. If your Touch Bar has physical damage, water damage, or genuine hardware failure, TouchBarFix cannot help.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Contact Support</h2>
+            <p>Have a question not covered above? Send us a message:</p>
+            
+            <form class="contact-form" action="https://formspree.io/f/info@produktentdecker.com" method="POST">
+                <div class="form-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="macbook-model">MacBook Model (if relevant)</label>
+                    <select id="macbook-model" name="macbook-model">
+                        <option value="">Select your MacBook</option>
+                        <option value="MacBook Pro 13-inch 2016">MacBook Pro 13-inch 2016</option>
+                        <option value="MacBook Pro 15-inch 2016">MacBook Pro 15-inch 2016</option>
+                        <option value="MacBook Pro 13-inch 2017">MacBook Pro 13-inch 2017</option>
+                        <option value="MacBook Pro 15-inch 2017">MacBook Pro 15-inch 2017</option>
+                        <option value="MacBook Pro 13-inch 2018">MacBook Pro 13-inch 2018</option>
+                        <option value="MacBook Pro 15-inch 2018">MacBook Pro 15-inch 2018</option>
+                        <option value="MacBook Pro 13-inch 2019">MacBook Pro 13-inch 2019</option>
+                        <option value="MacBook Pro 16-inch 2019">MacBook Pro 16-inch 2019</option>
+                        <option value="MacBook Pro 13-inch 2020">MacBook Pro 13-inch 2020</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="issue-type">Issue Type</label>
+                    <select id="issue-type" name="issue-type">
+                        <option value="">Select issue type</option>
+                        <option value="TouchBarFix not working">TouchBarFix not working</option>
+                        <option value="Installation problem">Installation problem</option>
+                        <option value="Refund request">Refund request</option>
+                        <option value="General question">General question</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" placeholder="Please describe your issue or question..." required></textarea>
+                </div>
+                
+                <input type="hidden" name="_subject" value="TouchBarFix Support Request">
+                <input type="hidden" name="_next" value="https://touchbarfix.com/support-thank-you.html">
+                
+                <button type="submit" class="submit-button">Send Message</button>
+            </form>
+        </section>
+    </div>
+
+    <footer style="text-align: center; padding: 40px 0; color: #86868b; font-size: 14px;">
+        <p>&copy; 2025 TouchBarFix • Created by Dr. Florian Steiner • Co-created with Claude Code</p>
+    </footer>
+</body>
+</html>
