@@ -1,9 +1,9 @@
 # TouchBarFix - Project Knowledge Index
-**The Single Source of Truth - Read This First**
+## The Single Source of Truth — Read This First
 
 > **🚨 CRITICAL**: Every new Claude instance must read this document first to understand current status, find relevant information, and avoid creating redundant documentation.
 
-*Last Updated: August 23, 2025 - 13:45 CEST*
+Last updated: August 23, 2025 — 13:45 CEST
 
 ---
 
@@ -12,8 +12,8 @@
 ### **Production Status (August 23, 2025)**
 - **Product**: TouchBarFix v1.2.1 (Universal Binary, Notarized)
 - **Revenue**: €2.99 on Gumroad - LIVE and generating sales
-- **Website**: https://touchbarfix.com (Vercel, SSL, Analytics)
-- **Repository**: https://github.com/ProduktEntdecker/touchbarfix
+- **Website**: [touchbarfix.com](https://touchbarfix.com) (Vercel, SSL, Analytics)
+- **Repository**: [github.com/ProduktEntdecker/touchbarfix](https://github.com/ProduktEntdecker/touchbarfix)
 - **Documentation Status**: ✅ **ARCHITECTURE IMPLEMENTED** (111 → 80 files, 28% reduction complete)
 
 ### **Current Priority (August 23, 2025)**
@@ -37,12 +37,14 @@
 ## 🗂️ ESSENTIAL DOCUMENTS (Master List)
 
 ### **📍 ALWAYS READ FIRST**
+
 | Document | Purpose | Path | Status |
 |----------|---------|------|--------|
 | **PROJECT-KNOWLEDGE-INDEX.md** | This file - master overview | `/` | ✅ Current |
 | **CLAUDE.md** | Claude Code instructions & context | `/` | ✅ Current |
 
 ### **🚀 CORE OPERATIONAL**
+
 | Document | Purpose | Path | Status |
 |----------|---------|------|--------|
 | **CURRENT-STATUS.md** | Daily operational status | `/4-project-management/` | ✅ Current |
@@ -50,12 +52,15 @@
 | **AUTOMATION-GUIDE.md** | Autonomous operation guide | `/` | ✅ Current |
 
 ### **📋 CONTEXT & HISTORY**
+
 | Document | Purpose | Path | Status |
 |----------|---------|------|--------|
 | **PROJECT-DOCUMENTATION.md** | Complete project history | `/4-project-management/` | ✅ Current |
 | **LESSONS-LEARNED.md** | Critical mistakes to avoid | `/docs/` | ✅ Current |
+| **LINEAR-INTEGRATION-GUIDE.md** | Task management workflow | `/` | ✅ Current |
 
 ### **🎯 ACTIVE WORK**
+
 | Document | Purpose | Path | Status |
 |----------|---------|------|--------|
 | **README.md** | Repository overview | `/` | ✅ Current |
@@ -77,14 +82,17 @@
    - Marketing questions → `MARKETING-ASSETS.md` (45 seconds)
 
 #### **Step 2: Task Context (1 minute)**
+- Check Linear issues: Linear workspace "ProduktEntdecker" project "TouchBarFix" 
 - Check GitHub issues: `gh issue list --repo ProduktEntdecker/touchbarfix --state open`
 - Check CodeRabbit feedback: `./read-coderabbit-comments.sh`
 - Review TodoWrite from previous sessions
 
-#### **Step 3: Work Protocol**
-- Address CodeRabbit feedback first (highest priority)
-- Work on open GitHub issues second
+#### **Step 3: Work Protocol - LINEAR INTEGRATION ACTIVE**
+- **PRIMARY**: Linear issue assignments ("work on PRO-X") take highest priority
+- Address CodeRabbit feedback second (highest priority)
+- Work on open GitHub issues third
 - New development only after cleanup complete
+- Update Linear issues with progress comments
 - Update relevant documentation as you work
 
 ---
