@@ -398,15 +398,18 @@
                                 class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg text-lg font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
                             Send Feedback
                         </button>
+                        <p class="mt-3 text-xs text-gray-500">
+                            We automatically detect your macOS version and device type to help with debugging. No personal data is collected.
+                        </p>
                     </div>
                 </form>
 
                 <!-- Success Message (Hidden by default) -->
-                <div id="feedback-success" class="hidden bg-green-50 border border-green-200 rounded-lg p-6 text-center">
-                    <div class="text-4xl mb-4">✅</div>
-                    <h3 class="text-xl font-bold text-green-800 mb-2">Thank You!</h3>
-                    <p class="text-green-700">
-                        Your feedback has been received. We appreciate you taking the time to help us improve TouchBarFix.
+                <div id="feedback-success" class="hidden bg-blue-50 border border-blue-200 rounded-lg p-6 text-center">
+                    <div class="text-4xl mb-4">📧</div>
+                    <h3 class="text-xl font-bold text-blue-800 mb-2">Check Your Email Client</h3>
+                    <p class="text-blue-700">
+                        We've opened a pre-filled email for you. Please review and press Send in your email client to deliver your feedback.
                     </p>
                 </div>
 
@@ -604,13 +607,13 @@ Source: ${feedbackData.source}
                     // If mailto fails, just continue to show success message
                 }
 
-                // Show success message
+                // Show instruction message (not claiming receipt yet)
                 document.getElementById('feedback-form').classList.add('hidden');
                 document.getElementById('feedback-success').classList.remove('hidden');
 
-                // Track successful form completion
+                // Track that email client was opened (not that feedback was sent)
                 if (window.plausible) {
-                    window.plausible('Feedback Form Success');
+                    window.plausible('Feedback Email Client Opened');
                 }
 
             } catch (error) {
