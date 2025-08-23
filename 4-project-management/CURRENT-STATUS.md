@@ -4,7 +4,7 @@
 ## 🎯 PRODUCTION STATUS - GUMROAD STORE LIVE
 
 ### **✅ INFRASTRUCTURE COMPLETE (August 22):**
-- **Product**: TouchBarFix-1.2.1.dmg (notarized, 2.3MB) 
+- **Product**: TouchBarFix-1.2.1.dmg (notarized) 
 - **Store**: Live at produktentdecker.gumroad.com/l/touchbarfix
 - **Price**: €2.99 (generating €2.39 net profit per sale after fees)
 - **Landing**: touchbarfix.com with UTM tracking and analytics

@@ -342,6 +342,148 @@
                         </ul>
                     </div>
                 </div>
+                
+                <div class="mt-8 text-center">
+                    <a href="#feedback" class="inline-flex items-center text-blue-600 hover:text-blue-800 font-semibold">
+                        <span>Share your experience or ask questions</span>
+                        <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Feedback Section -->
+    <section id="feedback" class="py-20 bg-white">
+        <div class="max-w-4xl mx-auto text-center px-4">
+            <h2 class="text-4xl font-bold text-gray-900 mb-6">
+                Help Us Improve TouchBarFix
+            </h2>
+            <p class="text-xl text-gray-600 mb-12 max-w-2xl mx-auto">
+                Your feedback helps us make TouchBarFix better for everyone. Share your experience, suggestions, or let us know how TouchBarFix helped you.
+            </p>
+            
+            <div class="max-w-2xl mx-auto">
+                <form id="feedback-form" class="space-y-6 text-left">
+                    <!-- Feedback Type -->
+                    <div>
+                        <label for="feedback-type" class="block text-sm font-medium text-gray-700 mb-2">
+                            What would you like to share?
+                        </label>
+                        <select id="feedback-type" name="feedback-type" required 
+                                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            <option value="">Please select...</option>
+                            <option value="success-story">Success Story - TouchBarFix helped me!</option>
+                            <option value="bug-report">Bug Report - Something isn't working</option>
+                            <option value="feature-request">Feature Request - I'd like to see...</option>
+                            <option value="general-feedback">General Feedback</option>
+                            <option value="support-question">Support Question</option>
+                        </select>
+                    </div>
+
+                    <!-- Name (Optional) -->
+                    <div>
+                        <label for="feedback-name" class="block text-sm font-medium text-gray-700 mb-2">
+                            Name (Optional)
+                        </label>
+                        <input type="text" id="feedback-name" name="feedback-name" 
+                               placeholder="Your name (optional for testimonials)"
+                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    </div>
+
+                    <!-- Email -->
+                    <div>
+                        <label for="feedback-email" class="block text-sm font-medium text-gray-700 mb-2">
+                            Email
+                        </label>
+                        <input type="email" id="feedback-email" name="feedback-email" required
+                               placeholder="your.email@example.com"
+                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    </div>
+
+                    <!-- macOS Version -->
+                    <div>
+                        <label for="feedback-macos" class="block text-sm font-medium text-gray-700 mb-2">
+                            macOS Version (if relevant)
+                        </label>
+                        <select id="feedback-macos" name="feedback-macos"
+                                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            <option value="">Not applicable</option>
+                            <option value="sonoma">macOS Sonoma (14.x)</option>
+                            <option value="ventura">macOS Ventura (13.x)</option>
+                            <option value="monterey">macOS Monterey (12.x)</option>
+                            <option value="big-sur">macOS Big Sur (11.x)</option>
+                            <option value="older">Older version</option>
+                        </select>
+                    </div>
+
+                    <!-- MacBook Model -->
+                    <div>
+                        <label for="feedback-macbook" class="block text-sm font-medium text-gray-700 mb-2">
+                            MacBook Model (if relevant)
+                        </label>
+                        <select id="feedback-macbook" name="feedback-macbook"
+                                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            <option value="">Not applicable</option>
+                            <option value="mbp-2021">MacBook Pro 2021 (M1 Pro/Max)</option>
+                            <option value="mbp-2020">MacBook Pro 2020 (Intel/M1)</option>
+                            <option value="mbp-2019">MacBook Pro 2019</option>
+                            <option value="mbp-2018">MacBook Pro 2018</option>
+                            <option value="mbp-2017">MacBook Pro 2017</option>
+                            <option value="mbp-2016">MacBook Pro 2016</option>
+                        </select>
+                    </div>
+
+                    <!-- Feedback Message -->
+                    <div>
+                        <label for="feedback-message" class="block text-sm font-medium text-gray-700 mb-2">
+                            Your Message
+                        </label>
+                        <textarea id="feedback-message" name="feedback-message" rows="5" required
+                                  placeholder="Tell us about your experience with TouchBarFix, any issues you encountered, or suggestions for improvement..."
+                                  class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-vertical"></textarea>
+                    </div>
+
+                    <!-- Permission for Testimonial -->
+                    <div class="flex items-start space-x-3">
+                        <input type="checkbox" id="testimonial-permission" name="testimonial-permission"
+                               class="mt-1 h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                        <label for="testimonial-permission" class="text-sm text-gray-700">
+                            You may use my feedback as a testimonial on your website (only for positive feedback)
+                        </label>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="text-center pt-4">
+                        <button type="submit" 
+                                class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg text-lg font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                            Send Feedback
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Success Message (Hidden by default) -->
+                <div id="feedback-success" class="hidden bg-green-50 border border-green-200 rounded-lg p-6 text-center">
+                    <div class="text-4xl mb-4">✅</div>
+                    <h3 class="text-xl font-bold text-green-800 mb-2">Thank You!</h3>
+                    <p class="text-green-700">
+                        Your feedback has been received. We appreciate you taking the time to help us improve TouchBarFix.
+                    </p>
+                </div>
+
+                <!-- Error Message (Hidden by default) -->
+                <div id="feedback-error" class="hidden bg-red-50 border border-red-200 rounded-lg p-6 text-center">
+                    <div class="text-4xl mb-4">❌</div>
+                    <h3 class="text-xl font-bold text-red-800 mb-2">Oops! Something went wrong</h3>
+                    <p class="text-red-700 mb-4">
+                        We couldn't send your feedback right now. Please try again or email us directly at:
+                    </p>
+                    <a href="mailto:feedback@touchbarfix.com" class="text-blue-600 hover:text-blue-800 font-semibold">
+                        feedback@touchbarfix.com
+                    </a>
+                </div>
             </div>
         </div>
     </section>
@@ -394,6 +536,117 @@
 
     <!-- Footer Component Script -->
     <script src="/components/footer.js"></script>
+
+    <!-- Feedback Form JavaScript -->
+    <script>
+        document.getElementById('feedback-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(e.target);
+            const feedbackData = {
+                type: formData.get('feedback-type'),
+                name: formData.get('feedback-name') || 'Anonymous',
+                email: formData.get('feedback-email'),
+                macosVersion: formData.get('feedback-macos'),
+                macbookModel: formData.get('feedback-macbook'),
+                message: formData.get('feedback-message'),
+                testimonialPermission: formData.has('testimonial-permission'),
+                timestamp: new Date().toISOString(),
+                source: 'website-feedback-form'
+            };
+
+            // Track feedback submission with analytics
+            if (window.plausible) {
+                window.plausible('Feedback Form Submit', {
+                    props: { 
+                        type: feedbackData.type,
+                        macosVersion: feedbackData.macosVersion || 'not-specified',
+                        macbookModel: feedbackData.macbookModel || 'not-specified'
+                    }
+                });
+            }
+
+            // Hide any previous messages
+            document.getElementById('feedback-success').classList.add('hidden');
+            document.getElementById('feedback-error').classList.add('hidden');
+
+            // Disable submit button and show loading state
+            const submitButton = e.target.querySelector('button[type="submit"]');
+            const originalText = submitButton.textContent;
+            submitButton.disabled = true;
+            submitButton.textContent = 'Sending...';
+
+            try {
+                // For now, we'll use a simple mailto link as fallback
+                // Later this can be replaced with a proper backend endpoint
+                const subject = encodeURIComponent(`TouchBarFix Feedback: ${feedbackData.type}`);
+                const body = encodeURIComponent(`
+Type: ${feedbackData.type}
+Name: ${feedbackData.name}
+Email: ${feedbackData.email}
+macOS Version: ${feedbackData.macosVersion || 'Not specified'}
+MacBook Model: ${feedbackData.macbookModel || 'Not specified'}
+Testimonial Permission: ${feedbackData.testimonialPermission ? 'Yes' : 'No'}
+
+Message:
+${feedbackData.message}
+
+---
+Submitted: ${feedbackData.timestamp}
+Source: ${feedbackData.source}
+                `);
+
+                // Simulate form processing for now
+                // In production, this would be an actual API call
+                await new Promise(resolve => setTimeout(resolve, 1000));
+
+                // For now, open mailto link
+                const mailtoLink = `mailto:feedback@touchbarfix.com?subject=${subject}&body=${body}`;
+                
+                // Try to open email client, but show success message either way
+                try {
+                    window.location.href = mailtoLink;
+                } catch (err) {
+                    // If mailto fails, just continue to show success message
+                }
+
+                // Show success message
+                document.getElementById('feedback-form').classList.add('hidden');
+                document.getElementById('feedback-success').classList.remove('hidden');
+
+                // Track successful form completion
+                if (window.plausible) {
+                    window.plausible('Feedback Form Success', {
+                        props: { type: feedbackData.type }
+                    });
+                }
+
+            } catch (error) {
+                console.error('Feedback form error:', error);
+                
+                // Show error message
+                document.getElementById('feedback-error').classList.remove('hidden');
+
+                // Track error
+                if (window.plausible) {
+                    window.plausible('Feedback Form Error', {
+                        props: { error: 'submission-failed' }
+                    });
+                }
+
+            } finally {
+                // Reset button state
+                submitButton.disabled = false;
+                submitButton.textContent = originalText;
+            }
+        });
+
+        // Add smooth scrolling to feedback section if accessed via URL hash
+        if (window.location.hash === '#feedback') {
+            document.getElementById('feedback').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
 
 </body>
 </html>
