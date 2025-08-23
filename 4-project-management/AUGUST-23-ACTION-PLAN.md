@@ -1,5 +1,5 @@
 # TouchBarFix Action Plan - August 23, 2025
-**Session: 9:00-17:00 CET (8 hours total)**
+**Session: 9:00-17:00 CEST (UTC+2, 8 hours total)**
 
 ## 🐸 THE ONE THING (9:00-10:30)
 **PRIORITY 1: Launch Marketing Campaign**
@@ -74,10 +74,13 @@
 
 ## 📊 SUCCESS METRICS FOR TODAY
 
-### **Revenue Goals:**
+### **Revenue Goals (Totals):**
 - **Minimum**: 5 sales (€14.95 gross, €11.82 net)
 - **Target**: 10 sales (€29.90 gross, €23.64 net)
 - **Stretch**: 20 sales (€59.80 gross, €47.28 net)
+
+Notes:
+- Net = after Gumroad fees/VAT. Profit = Net − costs. Current net profit per sale is €2.39.
 
 ### **Traffic Goals:**
 - **Website visitors**: 200+ (UTM tracked)

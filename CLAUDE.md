@@ -127,10 +127,19 @@ git pull origin main
 ## 📋 GITHUB ISSUES WORKFLOW (August 23, 2025):
 - **Issue Templates**: Complete set in `.github/ISSUE_TEMPLATE/`
 - **Workflow Documentation**: `GITHUB-ISSUES-WORKFLOW.md`
+- **Session Startup**: `SESSION-STARTUP-CHECKLIST.md` - **MANDATORY FIRST STEP**
 - **Branch Naming**: `[type]/issue-[number]-[description]`
 - **PR Format**: `[type]: [description] (fixes #[number])`
 - **Auto-Assignment**: Claude Code self-assigns issues
 - **Auto-Closing**: PRs with "fixes #123" close issues on merge
+
+## 🚨 SESSION START PROTOCOL:
+**EVERY SESSION MUST START WITH:**
+1. `gh issue list --repo ProduktEntdecker/touchbarfix --state open`
+2. Review any open issues and prioritize immediately
+3. Self-assign and create feature branches for new issues
+4. Update TodoWrite with issue-driven tasks
+5. Work issues first, then planned work
 
 ## ⚠️ CRITICAL REMINDERS:
 
@@ -179,7 +188,7 @@ git pull origin main
 
 ### **🚀 CURRENT PRODUCT STATUS:**
 - **Price**: €2.99 on Gumroad (live and working)
-- **Product**: TouchBarFix-1.2.1.dmg (notarized, 2.3MB)
+- **Product**: TouchBarFix-1.2.1.dmg (notarized)
 - **Compatibility**: MacBook Pro 2016–2021, macOS 11 (Big Sur) through 14 (Sonoma)
 - **Security**: No administrator privileges required
 - **Revenue**: Ready to generate immediate sales

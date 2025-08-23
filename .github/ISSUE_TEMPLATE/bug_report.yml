@@ -74,12 +74,13 @@ body:
         - MacBook Pro 13" 2018 (Touch Bar)
         - MacBook Pro 13" 2019 (Touch Bar)
         - MacBook Pro 13" 2020 (Intel, Touch Bar)
-        - MacBook Pro 14" 2021 (M1 Pro/Max)
-        - MacBook Pro 16" 2016 (Touch Bar)
-        - MacBook Pro 16" 2017 (Touch Bar)
-        - MacBook Pro 16" 2018 (Touch Bar)
+        - MacBook Pro 13" 2020 (M1, Touch Bar)
+        - MacBook Pro 13" 2022 (M2, Touch Bar)
+        - MacBook Pro 15" 2016 (Touch Bar)
+        - MacBook Pro 15" 2017 (Touch Bar)
+        - MacBook Pro 15" 2018 (Touch Bar)
+        - MacBook Pro 15" 2019 (Touch Bar)
         - MacBook Pro 16" 2019 (Touch Bar)
-        - MacBook Pro 16" 2021 (M1 Pro/Max)
         - Other (specify in additional context)
     validations:
       required: true
