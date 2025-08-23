@@ -23,5 +23,8 @@
   "homepage": "https://github.com/ProduktEntdecker/touchbarfix#readme",
   "devDependencies": {
     "tailwindcss": "^4.1.12"
+  },
+  "dependencies": {
+    "@octokit/rest": "^22.0.0"
   }
 }

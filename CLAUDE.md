@@ -124,6 +124,14 @@ git pull origin main
 - **Releases**: https://github.com/ProduktEntdecker/touchbarfix/releases
 - **Vercel Dashboard**: https://vercel.com/dashboard (for deployment management)
 
+## 📋 GITHUB ISSUES WORKFLOW (August 23, 2025):
+- **Issue Templates**: Complete set in `.github/ISSUE_TEMPLATE/`
+- **Workflow Documentation**: `GITHUB-ISSUES-WORKFLOW.md`
+- **Branch Naming**: `[type]/issue-[number]-[description]`
+- **PR Format**: `[type]: [description] (fixes #[number])`
+- **Auto-Assignment**: Claude Code self-assigns issues
+- **Auto-Closing**: PRs with "fixes #123" close issues on merge
+
 ## ⚠️ CRITICAL REMINDERS:
 
 ### 🚨 NEVER DO:

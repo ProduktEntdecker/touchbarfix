@@ -1,0 +1,126 @@
+name: ✨ Feature Request
+description: Suggest a new feature or enhancement for TouchBarFix
+title: "[Feature]: "
+labels: ["enhancement", "ready"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting a new feature! Please provide as much detail as possible to help us understand your request.
+
+  - type: textarea
+    id: feature-description
+    attributes:
+      label: Feature Description
+      description: What functionality should be added to TouchBarFix?
+      placeholder: Add support for automatically restarting Touch Bar when it becomes unresponsive...
+    validations:
+      required: true
+
+  - type: textarea
+    id: user-story
+    attributes:
+      label: User Story
+      description: Describe who would benefit and how
+      placeholder: "As a MacBook Pro user, I want TouchBarFix to automatically detect when my Touch Bar is frozen so that I don't have to manually restart it every time..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: technical-requirements
+    attributes:
+      label: Technical Requirements
+      description: Specific implementation details, if you have ideas about how this should work
+      placeholder: |
+        - Monitor Touch Bar processes every 30 seconds
+        - Detect when TouchBarServer becomes unresponsive
+        - Automatically restart affected processes
+        - Show notification when auto-restart occurs
+
+  - type: textarea
+    id: files-to-modify
+    attributes:
+      label: Files Expected to Modify
+      description: List components or files that likely need changes (if known)
+      placeholder: |
+        - [ ] App/Sources/TouchBarManager.swift (main logic)
+        - [ ] App/Sources/ProcessMonitor.swift (new monitoring class)
+        - [ ] README.md (document new feature)
+        - [ ] Tests/TouchBarManagerTests.swift (add tests)
+
+  - type: textarea
+    id: ui-requirements
+    attributes:
+      label: UI/UX Requirements
+      description: How should this feature appear to users? Include mockups or descriptions.
+      placeholder: |
+        - Add "Auto-restart" toggle in preferences
+        - Show system notification when auto-restart occurs
+        - Display status indicator in menu bar (optional)
+
+  - type: checkboxes
+    id: acceptance-criteria
+    attributes:
+      label: Acceptance Criteria
+      description: Specific deliverables that define when this feature is complete
+      options:
+        - label: Feature implemented and working as described
+          required: false
+        - label: Unit tests added for new functionality
+          required: false
+        - label: Integration tests pass
+          required: false
+        - label: User interface is intuitive and polished
+          required: false
+        - label: Documentation updated (README, help text, etc.)
+          required: false
+        - label: CodeRabbit review passes
+          required: false
+        - label: No breaking changes to existing functionality
+          required: false
+        - label: Performance impact is minimal
+          required: false
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority Level
+      description: How important is this feature?
+      options:
+        - High (Critical for next release)
+        - Medium (Improves user experience significantly)
+        - Low (Nice to have enhancement)
+    validations:
+      required: true
+
+  - type: dropdown
+    id: complexity
+    attributes:
+      label: Estimated Complexity
+      description: How complex do you think this feature is to implement?
+      options:
+        - Small (Few hours of work)
+        - Medium (Half day to full day)
+        - Large (Multiple days)
+        - Unknown (Need technical analysis)
+    validations:
+      required: false
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternative Solutions
+      description: Have you considered any alternative approaches or workarounds?
+      placeholder: Currently users must manually click "Restart Touch Bar" when it freezes...
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional Context
+      description: Add any other context, mockups, related issues, or examples here
+      placeholder: |
+        - Screenshots or mockups
+        - Links to similar features in other apps
+        - Related GitHub issues
+        - User feedback or requests

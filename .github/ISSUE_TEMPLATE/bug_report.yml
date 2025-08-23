@@ -1,0 +1,137 @@
+name: 🐛 Bug Report
+description: Report a bug or issue with TouchBarFix
+title: "[Bug]: "
+labels: ["bug", "ready"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug! Please fill out this form to help us understand and fix the issue.
+
+  - type: textarea
+    id: bug-description
+    attributes:
+      label: Bug Description
+      description: A clear and concise description of what the bug is.
+      placeholder: The Touch Bar becomes unresponsive after...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: Expected Behavior
+      description: What should happen instead?
+      placeholder: The Touch Bar should respond normally...
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual-behavior
+    attributes:
+      label: Actual Behavior
+      description: What actually happens? Include any error messages.
+      placeholder: Instead, the Touch Bar shows a black screen and...
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction-steps
+    attributes:
+      label: Steps to Reproduce
+      description: How can we reproduce this bug?
+      placeholder: |
+        1. Open TouchBarFix
+        2. Click "Restart Touch Bar"
+        3. Wait for 30 seconds
+        4. Touch Bar becomes unresponsive
+    validations:
+      required: true
+
+  - type: dropdown
+    id: macos-version
+    attributes:
+      label: macOS Version
+      description: What version of macOS are you running?
+      options:
+        - macOS 11 (Big Sur)
+        - macOS 12 (Monterey)
+        - macOS 13 (Ventura)
+        - macOS 14 (Sonoma)
+        - Other (specify in additional context)
+    validations:
+      required: true
+
+  - type: dropdown
+    id: macbook-model
+    attributes:
+      label: MacBook Model
+      description: Which MacBook Pro model are you using?
+      options:
+        - MacBook Pro 13" 2016 (Touch Bar)
+        - MacBook Pro 13" 2017 (Touch Bar)
+        - MacBook Pro 13" 2018 (Touch Bar)
+        - MacBook Pro 13" 2019 (Touch Bar)
+        - MacBook Pro 13" 2020 (Intel, Touch Bar)
+        - MacBook Pro 14" 2021 (M1 Pro/Max)
+        - MacBook Pro 16" 2016 (Touch Bar)
+        - MacBook Pro 16" 2017 (Touch Bar)
+        - MacBook Pro 16" 2018 (Touch Bar)
+        - MacBook Pro 16" 2019 (Touch Bar)
+        - MacBook Pro 16" 2021 (M1 Pro/Max)
+        - Other (specify in additional context)
+    validations:
+      required: true
+
+  - type: input
+    id: touchbarfix-version
+    attributes:
+      label: TouchBarFix Version
+      description: Which version of TouchBarFix are you using? (Check About menu)
+      placeholder: v1.2.1
+    validations:
+      required: true
+
+  - type: textarea
+    id: files-affected
+    attributes:
+      label: Files or Components Affected
+      description: If you know which parts of the app are involved, list them here
+      placeholder: Touch Bar detection, specific processes, etc.
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority Level
+      description: How severe is this bug?
+      options:
+        - High (App crashes or completely unusable)
+        - Medium (Feature is broken but app still works)
+        - Low (Minor issue, workaround available)
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: acceptance-criteria
+    attributes:
+      label: Acceptance Criteria
+      description: What needs to be done to resolve this bug?
+      options:
+        - label: Bug is completely fixed
+          required: false
+        - label: All existing tests still pass
+          required: false
+        - label: New test added to prevent regression
+          required: false
+        - label: No new issues introduced
+          required: false
+        - label: Documentation updated if needed
+          required: false
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional Context
+      description: Add any other context, screenshots, logs, or relevant information about the bug here.
+      placeholder: Screenshots, console output, or any other helpful information...
