@@ -127,10 +127,19 @@ git pull origin main
 ## 📋 GITHUB ISSUES WORKFLOW (August 23, 2025):
 - **Issue Templates**: Complete set in `.github/ISSUE_TEMPLATE/`
 - **Workflow Documentation**: `GITHUB-ISSUES-WORKFLOW.md`
+- **Session Startup**: `SESSION-STARTUP-CHECKLIST.md` - **MANDATORY FIRST STEP**
 - **Branch Naming**: `[type]/issue-[number]-[description]`
 - **PR Format**: `[type]: [description] (fixes #[number])`
 - **Auto-Assignment**: Claude Code self-assigns issues
 - **Auto-Closing**: PRs with "fixes #123" close issues on merge
+
+## 🚨 SESSION START PROTOCOL:
+**EVERY SESSION MUST START WITH:**
+1. `gh issue list --repo ProduktEntdecker/touchbarfix --state open`
+2. Review any open issues and prioritize immediately
+3. Self-assign and create feature branches for new issues
+4. Update TodoWrite with issue-driven tasks
+5. Work issues first, then planned work
 
 ## ⚠️ CRITICAL REMINDERS:
 

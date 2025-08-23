@@ -1,0 +1,71 @@
+<!-- TouchBarFix Footer Component -->
+<!-- Usage: Include this file in your HTML pages -->
+<!-- For Tailwind CSS pages: Use the tailwind-footer class -->
+<!-- For inline CSS pages: Use the simple-footer class -->
+
+<!-- Tailwind CSS Footer (for pages with Tailwind loaded) -->
+<footer class="bg-gray-900 text-white py-12 tailwind-footer">
+    <div class="max-w-4xl mx-auto text-center px-4">
+        <h3 class="text-2xl font-bold mb-4">TouchBarFix</h3>
+        <p class="text-gray-400 mb-6">Simple automation for Touch Bar software restarts</p>
+        
+        <div class="flex justify-center space-x-6 mb-6">
+            <a href="/support.html" class="text-gray-400 hover:text-white transition-colors">
+                Support
+            </a>
+            <a href="/terms.html" class="text-gray-400 hover:text-white transition-colors">
+                Terms
+            </a>
+            <a href="/privacy.html" class="text-gray-400 hover:text-white transition-colors">
+                Privacy
+            </a>
+            <a href="/imprint.html" class="text-gray-400 hover:text-white transition-colors">
+                Imprint
+            </a>
+        </div>
+        
+        <p class="text-gray-500 text-sm">
+            © 2025 TouchBarFix • Created by Dr. Florian Steiner, AI Product Manager • Co-created with Claude Code
+        </p>
+    </div>
+</footer>
+
+<!-- Simple CSS Footer (for pages without Tailwind) -->
+<footer class="simple-footer" style="background: #111827; color: white; padding: 48px 0; text-align: center; display: none;">
+    <div style="max-width: 1024px; margin: 0 auto; padding: 0 16px;">
+        <h3 style="font-size: 24px; font-weight: bold; margin-bottom: 16px; color: white;">TouchBarFix</h3>
+        <p style="color: #9ca3af; margin-bottom: 24px; font-size: 16px;">Simple automation for Touch Bar software restarts</p>
+        
+        <div style="margin-bottom: 24px;">
+            <a href="/support.html" style="color: #9ca3af; text-decoration: none; margin: 0 12px; font-size: 16px; transition: color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#9ca3af'">Support</a>
+            <a href="/terms.html" style="color: #9ca3af; text-decoration: none; margin: 0 12px; font-size: 16px; transition: color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#9ca3af'">Terms</a>
+            <a href="/privacy.html" style="color: #9ca3af; text-decoration: none; margin: 0 12px; font-size: 16px; transition: color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#9ca3af'">Privacy</a>
+            <a href="/imprint.html" style="color: #9ca3af; text-decoration: none; margin: 0 12px; font-size: 16px; transition: color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#9ca3af'">Imprint</a>
+        </div>
+        
+        <p style="color: #6b7280; font-size: 14px; margin: 0;">
+            © 2025 TouchBarFix • Created by Dr. Florian Steiner, AI Product Manager • Co-created with Claude Code
+        </p>
+    </div>
+</footer>
+
+<script>
+// Footer Component Auto-Detection Script
+// Automatically shows the appropriate footer based on page context
+(function() {
+    const hasTailwind = document.querySelector('link[href*="tailwind"]') || 
+                       document.querySelector('script[src*="tailwind"]') || 
+                       document.querySelector('.tailwind');
+    
+    const tailwindFooter = document.querySelector('.tailwind-footer');
+    const simpleFooter = document.querySelector('.simple-footer');
+    
+    if (hasTailwind && tailwindFooter) {
+        tailwindFooter.style.display = 'block';
+        if (simpleFooter) simpleFooter.style.display = 'none';
+    } else if (simpleFooter) {
+        simpleFooter.style.display = 'block';
+        if (tailwindFooter) tailwindFooter.style.display = 'none';
+    }
+})();
+</script>
