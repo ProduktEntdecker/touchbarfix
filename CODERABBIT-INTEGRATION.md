@@ -1,11 +1,43 @@
 # CodeRabbit Integration for TouchBarFix
 
-## Current Status
-CodeRabbit MCP server is available and can be used for code review.
+## Current Status ✅ FULLY WORKING
+CodeRabbit MCP server is integrated and working with proper GitHub token scopes.
+
+**Last Updated**: August 23, 2025
+**Integration Status**: Complete - Claude Code can read and respond to CodeRabbit reviews
+
+## Required GitHub Token Scopes ⚠️ CRITICAL
+Your GitHub token must have these scopes for full integration:
+- `repo` - Repository access
+- `read:user` - User profile data
+- `user:email` - Email addresses  
+- `read:org` - Organization membership (for PR comments)
+- `read:discussion` - Discussion threads (for PR reviews)
+- `write:discussion` - Post feedback to CodeRabbit (optional)
+
+**Setup**: https://github.com/settings/tokens
 
 ## Available Commands
 
-### Review Latest Changes
+### Test MCP Connection
+```bash
+export GH_TOKEN=$GITHUB_PAT
+npx coderabbitai-mcp --version
+```
+
+### Read PR Reviews (New with proper scopes)
+```bash
+# List PRs
+gh pr list --repo ProduktEntdecker/touchbarfix --state all
+
+# Read specific PR comments
+gh pr view [PR_NUMBER] --repo ProduktEntdecker/touchbarfix --comments
+
+# Get CodeRabbit review via MCP
+npx coderabbitai-mcp review-pr --repo ProduktEntdecker/touchbarfix --pr [PR_NUMBER]
+```
+
+### Review Latest Changes  
 ```bash
 npx coderabbitai-mcp review-commit --repo ProduktEntdecker/touchbarfix --commit $(git rev-parse HEAD)
 ```
@@ -15,34 +47,53 @@ npx coderabbitai-mcp review-commit --repo ProduktEntdecker/touchbarfix --commit 
 npx coderabbitai-mcp create-review --repo ProduktEntdecker/touchbarfix --head [branch] --base main
 ```
 
-## Integration Workflow
+## Complete Integration Workflow 🚀
 
-### Two-Layer Review Process:
+### FULL AUTOMATED WORKFLOW (August 23, 2025)
+**Claude Code ↔ CodeRabbit ↔ GitHub Integration**
 
-#### Layer 1: MCP Pre-Review (Before Committing)
-1. **Write Code** - Implement features/fixes
-2. **Run MCP Review** - Make a temporary WIP commit, then get instant feedback:
+#### Phase 1: Development with Real-Time Review
+1. **Write Code** in Claude Code
+2. **Optional Pre-Review**: Test with MCP before committing
    ```bash
-   git add -A
-   git commit -m "chore: WIP pre-review"
-   npx coderabbitai-mcp review-commit --repo ProduktEntdecker/touchbarfix --commit $(git rev-parse HEAD)
+   git add -A && git commit -m "chore: WIP for review"
+   npx coderabbitai-mcp review-commit --repo ProduktEntdecker/touchbarfix --commit HEAD
+   git commit --amend  # Fix issues and update commit
    ```
-3. **Apply Improvements** - Fix issues found by CodeRabbit
-4. **Amend/Squash WIP** - Amend or squash the WIP commit before pushing
 
-#### Layer 2: PR Auto-Review (After Push)
-1. **Create feature branch**: `git checkout -b feature/name`
-2. **Make changes** and commit
-3. **Optional: Run MCP pre-review** to catch issues early
-4. **Push to GitHub**: `git push -u origin feature/name`
-5. **Create PR** - CodeRabbit bot will auto-review
-6. **Address PR feedback** if any additional issues found
+#### Phase 2: PR Creation and Auto-Review
+3. **Create Feature Branch**: `git checkout -b feature/functionality`
+4. **Push and Create PR**:
+   ```bash
+   git push -u origin feature/functionality
+   gh pr create --title "feat: implement functionality" --body "@coderabbitai review"
+   ```
+5. **CodeRabbit Auto-Reviews** (webhook triggered automatically)
 
-### Benefits of Two-Layer Approach:
-- **MCP Review**: Instant feedback during development
-- **PR Review**: Final validation before merge
-- **Cleaner PRs**: Issues fixed before PR creation
-- **Faster Iteration**: No waiting for PR to get feedback
+#### Phase 3: Claude Code Reviews CodeRabbit 🆕
+6. **Read CodeRabbit Reviews** (now possible with proper token scopes):
+   ```bash
+   export GH_TOKEN=$GITHUB_PAT
+   gh pr view [PR_NUMBER] --comments  # Read all comments
+   npx coderabbitai-mcp review-pr --repo ProduktEntdecker/touchbarfix --pr [PR_NUMBER]
+   ```
+7. **Apply Fixes Based on Reviews**:
+   ```bash
+   # Claude Code can now read and understand CodeRabbit feedback
+   git add -A && git commit -m "fix: address CodeRabbit review comments"
+   git push  # Updates PR automatically
+   ```
+
+#### Phase 4: Iteration Until Approval
+8. **Repeat Until Clean**: CodeRabbit re-reviews each push
+9. **Merge When Approved**: Manual or auto-merge when all issues resolved
+
+### Benefits of Full Integration:
+- ✅ **No Manual Copy-Paste**: Claude Code reads reviews directly
+- ✅ **Real-Time Feedback Loop**: Fix → Push → Review → Fix cycle
+- ✅ **Consistent Quality**: AI reviews every change
+- ✅ **Learning System**: CodeRabbit learns from patterns
+- ✅ **Professional Workflow**: Same process as enterprise teams
 
 ## CodeRabbit Bot Setup
 

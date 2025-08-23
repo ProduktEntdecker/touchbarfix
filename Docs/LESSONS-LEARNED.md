@@ -823,6 +823,123 @@ npx coderabbitai-mcp@latest test
 
 ---
 
-*Last Updated: August 20, 2025*
-*Project: TouchBarFix - Production Optimization*
+## 🔗 **GITHUB TOKEN SCOPES FOR CODERABBIT INTEGRATION (August 23, 2025)**
+
+### **Issue: Claude Code Cannot Read CodeRabbit PR Comments**
+**Problem:** `gh pr view --comments` failing with scope errors when trying to access PR reviews
+**Error Messages:**
+- `Your token has not been granted the required scopes to execute this query`
+- `The 'login' field requires one of the following scopes: ['read:org']`
+- `The 'name' field requires one of the following scopes: ['read:org', 'read:discussion']`
+
+### **Root Cause Analysis**
+CodeRabbit MCP server connects successfully with basic scopes, but GitHub CLI requires additional permissions to read PR comments and discussions:
+
+**Original Token Scopes (Working for MCP):**
+- `audit_log` - CodeRabbit platform access
+- `read:user` - User profile access
+- `repo` - Repository access  
+- `user:email` - User email access
+
+**Missing Scopes for PR Comment Access:**
+- `read:org` - Required for user organization info in PR comments
+- `read:discussion` - Required for PR discussion threads and reviews
+
+### **Solution Process**
+
+#### **Step 1: Token Scope Update**
+Visit: https://github.com/settings/tokens
+1. Edit existing CodeRabbit token
+2. Add required scopes:
+   - ✅ `read:org` (Read org and team membership, read org projects)
+   - ✅ `read:discussion` (Read team discussions)
+   - ✅ `write:discussion` (Write team discussions) - *Added for Claude Code feedback*
+
+#### **Step 2: Verification Commands**
+```bash
+# Test MCP connection (should work)
+export GH_TOKEN=$GITHUB_PAT
+npx coderabbitai-mcp --version
+
+# Test GitHub CLI PR access (should now work)
+gh pr list --repo ProduktEntdecker/touchbarfix --state all
+gh pr view 4 --repo ProduktEntdecker/touchbarfix --comments
+
+# Test CodeRabbit review reading
+npx coderabbitai-mcp review-pr --repo ProduktEntdecker/touchbarfix --pr 4
+```
+
+### **Updated Workflow: Complete CodeRabbit Integration**
+
+#### **Development Process:**
+1. **Write Code** in Claude Code
+2. **Create Feature Branch** and commit changes
+3. **Push and Create PR** with `gh pr create`
+4. **CodeRabbit Auto-Reviews** PR (webhook triggered)
+5. **Claude Code Reads Reviews** via MCP server
+6. **Fix Issues** based on CodeRabbit feedback
+7. **Push Updates** until CodeRabbit approves
+8. **Auto-merge** or manual merge when clean
+
+#### **Commands for Claude Code Integration:**
+```bash
+# Create PR with CodeRabbit auto-review
+git checkout -b feature/new-functionality
+git push -u origin feature/new-functionality
+gh pr create --title "feat: implement new functionality" --body "@coderabbitai review"
+
+# Read CodeRabbit reviews (now works with proper scopes)
+npx coderabbitai-mcp review-pr --repo ProduktEntdecker/touchbarfix --pr [PR_NUMBER]
+gh pr view [PR_NUMBER] --comments
+
+# Apply fixes and update PR
+git add -A && git commit -m "fix: address CodeRabbit review comments" 
+git push
+
+# Check final status
+gh pr checks [PR_NUMBER]
+```
+
+### **Scope Requirements Reference**
+
+#### **Minimum for MCP Connection:**
+- `repo` - Repository access
+- `read:user` - User profile data  
+- `user:email` - Email addresses
+
+#### **Required for PR Comment Access:**
+- `read:org` - Organization membership info
+- `read:discussion` - Discussion thread access
+- `write:discussion` - Post feedback to CodeRabbit (optional)
+
+#### **Security Best Practice:**
+- Never add `admin` or `delete` scopes unless absolutely necessary
+- Use fine-grained tokens when available (organization specific)
+- Rotate tokens every 90 days
+- Monitor token usage in GitHub settings
+
+### **Integration Testing Results**
+After scope update, the complete workflow should work:
+- ✅ CodeRabbit MCP server connects
+- ✅ GitHub CLI can read PR comments
+- ✅ Claude Code can parse CodeRabbit reviews
+- ✅ Automated PR review → fix → merge cycle
+
+### **Prevention for Future Projects**
+1. **Always include `read:org` and `read:discussion`** in CodeRabbit tokens
+2. **Test complete workflow** including PR comment reading during setup
+3. **Document required scopes** in project README or setup instructions
+4. **Verify token scopes match workflow requirements** before development starts
+
+---
+
+**Date Added**: August 23, 2025
+**Category**: GitHub Integration & Token Management
+**Impact**: Critical for automated code review workflow
+**Time to Resolution**: ~10 minutes (token update + verification)
+
+---
+
+*Last Updated: August 23, 2025*
+*Project: TouchBarFix - CodeRabbit Integration*
 *Author: Dr. Florian Steiner*

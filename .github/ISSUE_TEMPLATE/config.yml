@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 💬 Discussion / Question
+    url: https://github.com/ProduktEntdecker/touchbarfix/discussions
+    about: Ask questions or discuss ideas with the community
+  - name: 🔒 Security Issue
+    url: mailto:florian@produktentdecker.com
+    about: Report security vulnerabilities privately via email
+  - name: 📧 General Support
+    url: mailto:support@touchbarfix.com
+    about: Get help with TouchBarFix usage and troubleshooting

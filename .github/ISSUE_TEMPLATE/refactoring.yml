@@ -1,0 +1,171 @@
+name: 🔧 Technical Debt / Refactoring
+description: Improve code quality, architecture, or technical infrastructure
+title: "[Refactor]: "
+labels: ["refactor", "ready"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template for code improvements, technical debt reduction, or architectural changes that don't add new features.
+
+  - type: textarea
+    id: current-state
+    attributes:
+      label: Current State
+      description: What code or architecture needs improvement?
+      placeholder: The TouchBarManager class has grown large and handles too many responsibilities...
+    validations:
+      required: true
+
+  - type: textarea
+    id: problems
+    attributes:
+      label: Problems with Current Approach
+      description: Why does this need to be refactored? What issues does it cause?
+      placeholder: |
+        - Code is difficult to test due to tight coupling
+        - Adding new features requires modifying multiple unrelated methods
+        - Performance issues due to inefficient algorithms
+        - Code duplication across multiple classes
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed-solution
+    attributes:
+      label: Proposed Solution
+      description: How should the code/architecture be improved?
+      placeholder: |
+        Split TouchBarManager into:
+        - TouchBarDetector (hardware detection)
+        - ProcessManager (process control)
+        - StatusMonitor (monitoring state)
+    validations:
+      required: true
+
+  - type: textarea
+    id: benefits
+    attributes:
+      label: Benefits
+      description: What will improve after this refactoring?
+      placeholder: |
+        - Easier to unit test individual components
+        - Simpler to add new features
+        - Better separation of concerns
+        - Improved code maintainability
+    validations:
+      required: true
+
+  - type: textarea
+    id: implementation-plan
+    attributes:
+      label: Implementation Plan
+      description: Step-by-step approach to safely implement these changes
+      placeholder: |
+        1. Create new ProcessManager class with extracted methods
+        2. Update TouchBarManager to use ProcessManager
+        3. Add unit tests for ProcessManager
+        4. Verify all existing tests still pass
+        5. Remove old duplicate code from TouchBarManager
+    validations:
+      required: true
+
+  - type: textarea
+    id: files-to-refactor
+    attributes:
+      label: Files to Refactor
+      description: List specific files and what changes each needs
+      placeholder: |
+        - App/Sources/TouchBarManager.swift (extract process management)
+        - App/Sources/ProcessManager.swift (new class)
+        - Tests/TouchBarManagerTests.swift (update tests)
+        - Tests/ProcessManagerTests.swift (new test file)
+
+  - type: checkboxes
+    id: risk-assessment
+    attributes:
+      label: Risk Assessment
+      description: What are the potential risks of this refactoring?
+      options:
+        - label: May introduce breaking changes to public API
+          required: false
+        - label: Requires extensive testing to avoid regressions
+          required: false
+        - label: May temporarily affect performance during transition
+          required: false
+        - label: Could impact compatibility with existing integrations
+          required: false
+        - label: Low risk - internal changes only
+          required: false
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority Level
+      description: How urgent is this refactoring?
+      options:
+        - High (Blocking other work or causing significant issues)
+        - Medium (Improving maintainability and future development)
+        - Low (Nice to have, can be deferred)
+    validations:
+      required: true
+
+  - type: dropdown
+    id: scope
+    attributes:
+      label: Refactoring Scope
+      description: How extensive is this refactoring?
+      options:
+        - Small (Single file or method)
+        - Medium (Few related files/classes)
+        - Large (Major architectural change)
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: acceptance-criteria
+    attributes:
+      label: Acceptance Criteria
+      description: What must be accomplished for this refactoring to be complete?
+      options:
+        - label: Code quality metrics improved (complexity, maintainability)
+          required: false
+        - label: All existing functionality preserved
+          required: false
+        - label: All existing tests pass without modification
+          required: false
+        - label: New unit tests added for refactored components
+          required: false
+        - label: Performance maintained or improved
+          required: false
+        - label: No breaking changes to public API
+          required: false
+        - label: Code follows project style guidelines
+          required: false
+        - label: Documentation updated to reflect changes
+          required: false
+        - label: CodeRabbit review passes
+          required: false
+
+  - type: textarea
+    id: testing-strategy
+    attributes:
+      label: Testing Strategy
+      description: How will you ensure the refactoring doesn't break existing functionality?
+      placeholder: |
+        - Run full test suite before and after changes
+        - Add specific tests for refactored components
+        - Manual testing of critical user flows
+        - Performance benchmarking if applicable
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional Context
+      description: Any other relevant information, related issues, or considerations
+      placeholder: |
+        - Links to related technical debt issues
+        - Performance profiling data
+        - Code complexity metrics
+        - Timeline constraints

@@ -1,0 +1,174 @@
+name: 📚 Documentation Update
+description: Improve, update, or create documentation
+title: "[Docs]: "
+labels: ["docs", "ready"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template for documentation improvements, updates, or new documentation needs.
+
+  - type: dropdown
+    id: documentation-type
+    attributes:
+      label: Documentation Type
+      description: What type of documentation needs attention?
+      options:
+        - User Documentation (README, user guides)
+        - Developer Documentation (code comments, API docs)
+        - Process Documentation (workflows, procedures)
+        - Marketing Documentation (website, product descriptions)
+        - Technical Documentation (architecture, deployment)
+    validations:
+      required: true
+
+  - type: textarea
+    id: documentation-scope
+    attributes:
+      label: Documentation Scope
+      description: What specific documentation needs to be updated or created?
+      placeholder: Update README.md with new installation instructions for macOS Sonoma...
+    validations:
+      required: true
+
+  - type: textarea
+    id: current-issues
+    attributes:
+      label: Current Issues
+      description: What's wrong or missing with the current documentation?
+      placeholder: |
+        - Installation instructions are outdated
+        - Missing troubleshooting section
+        - Screenshots are from old version
+        - API documentation is incomplete
+    validations:
+      required: true
+
+  - type: textarea
+    id: required-changes
+    attributes:
+      label: Required Changes
+      description: What specific changes need to be made?
+      placeholder: |
+        - [ ] Update system requirements section
+        - [ ] Add new troubleshooting FAQ entries
+        - [ ] Replace old screenshots with current version
+        - [ ] Add code examples for new API methods
+    validations:
+      required: true
+
+  - type: textarea
+    id: files-to-update
+    attributes:
+      label: Files to Update
+      description: List specific documentation files that need changes
+      placeholder: |
+        - [ ] README.md (main user documentation)
+        - [ ] docs/INSTALLATION.md (installation guide)
+        - [ ] docs/TROUBLESHOOTING.md (user support)
+        - [ ] App/Sources/TouchBarManager.swift (code comments)
+        - [ ] website/index.html (if applicable)
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority Level
+      description: How important is this documentation update?
+      options:
+        - High (Blocking users or development)
+        - Medium (Improves user experience)
+        - Low (Nice to have improvement)
+    validations:
+      required: true
+
+  - type: dropdown
+    id: audience
+    attributes:
+      label: Target Audience
+      description: Who is the primary audience for this documentation?
+      options:
+        - End Users (TouchBarFix users)
+        - Developers (contributors, integrators)
+        - Project Maintainers (internal processes)
+        - Mixed Audience (users and developers)
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: content-requirements
+    attributes:
+      label: Content Requirements
+      description: What types of content need to be included?
+      options:
+        - label: Step-by-step instructions
+          required: false
+        - label: Screenshots or diagrams
+          required: false
+        - label: Code examples
+          required: false
+        - label: Troubleshooting information
+          required: false
+        - label: API reference
+          required: false
+        - label: Configuration examples
+          required: false
+        - label: Links to related resources
+          required: false
+        - label: Version compatibility information
+          required: false
+
+  - type: checkboxes
+    id: acceptance-criteria
+    attributes:
+      label: Acceptance Criteria
+      description: What defines complete and quality documentation?
+      options:
+        - label: All information is accurate and up-to-date
+          required: false
+        - label: All links work correctly
+          required: false
+        - label: Screenshots reflect current version
+          required: false
+        - label: Grammar and spelling are correct
+          required: false
+        - label: Content is well-organized and easy to follow
+          required: false
+        - label: Code examples are tested and working
+          required: false
+        - label: Covers all necessary use cases
+          required: false
+        - label: Follows project documentation standards
+          required: false
+
+  - type: textarea
+    id: existing-resources
+    attributes:
+      label: Existing Resources
+      description: Are there existing resources that can be referenced or need updating?
+      placeholder: |
+        - Current README.md has basic info but needs expansion
+        - Old screenshots saved in /docs/images/
+        - Previous version documentation in /docs/archive/
+
+  - type: textarea
+    id: success-metrics
+    attributes:
+      label: Success Metrics
+      description: How will you measure if this documentation is successful?
+      placeholder: |
+        - Reduced support questions about installation
+        - Faster developer onboarding
+        - Improved user satisfaction scores
+        - Better GitHub issue quality (users provide better info)
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional Context
+      description: Any other relevant information, examples, or considerations
+      placeholder: |
+        - Links to good documentation examples
+        - User feedback about current documentation
+        - Related issues or feature requests
+        - Style guide or formatting requirements

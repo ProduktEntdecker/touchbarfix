@@ -78,3 +78,6 @@ mcp_servers.json
 # Testing
 coverage/
 *.lcov
+
+# Node modules
+node_modules/
