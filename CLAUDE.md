@@ -1,6 +1,13 @@
 # TOUCHBARFIX PROJECT - ESSENTIAL INFORMATION FOR CLAUDE
 
-**Last Updated: August 19, 2025 - 10:50 CET**
+**Last Updated: August 23, 2025 - 13:45 CEST**
+
+## 🚨 MANDATORY FIRST STEP:
+**READ PROJECT-KNOWLEDGE-INDEX.md FIRST** - This provides complete current context, project status, and document locations. This file contains implementation details only.
+
+Quick Start: `cat PROJECT-KNOWLEDGE-INDEX.md`
+
+---
 
 ## 🚨 CRITICAL PROJECT INFORMATION
 
