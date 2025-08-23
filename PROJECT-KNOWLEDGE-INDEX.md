@@ -1,9 +1,9 @@
 # TouchBarFix - Project Knowledge Index
-**The Single Source of Truth - Read This First**
+## The Single Source of Truth — Read This First
 
 > **🚨 CRITICAL**: Every new Claude instance must read this document first to understand current status, find relevant information, and avoid creating redundant documentation.
 
-*Last Updated: August 23, 2025 - 13:45 CEST*
+Last updated: August 23, 2025 — 13:45 CEST
 
 ---
 
@@ -12,8 +12,8 @@
 ### **Production Status (August 23, 2025)**
 - **Product**: TouchBarFix v1.2.1 (Universal Binary, Notarized)
 - **Revenue**: €2.99 on Gumroad - LIVE and generating sales
-- **Website**: https://touchbarfix.com (Vercel, SSL, Analytics)
-- **Repository**: https://github.com/ProduktEntdecker/touchbarfix
+- **Website**: [touchbarfix.com](https://touchbarfix.com) (Vercel, SSL, Analytics)
+- **Repository**: [github.com/ProduktEntdecker/touchbarfix](https://github.com/ProduktEntdecker/touchbarfix)
 - **Documentation Status**: ✅ **ARCHITECTURE IMPLEMENTED** (111 → 80 files, 28% reduction complete)
 
 ### **Current Priority (August 23, 2025)**
@@ -37,12 +37,14 @@
 ## 🗂️ ESSENTIAL DOCUMENTS (Master List)
 
 ### **📍 ALWAYS READ FIRST**
+
 | Document | Purpose | Path | Status |
 |----------|---------|------|--------|
 | **PROJECT-KNOWLEDGE-INDEX.md** | This file - master overview | `/` | ✅ Current |
 | **CLAUDE.md** | Claude Code instructions & context | `/` | ✅ Current |
 
 ### **🚀 CORE OPERATIONAL**
+
 | Document | Purpose | Path | Status |
 |----------|---------|------|--------|
 | **CURRENT-STATUS.md** | Daily operational status | `/4-project-management/` | ✅ Current |
@@ -50,12 +52,14 @@
 | **AUTOMATION-GUIDE.md** | Autonomous operation guide | `/` | ✅ Current |
 
 ### **📋 CONTEXT & HISTORY**
+
 | Document | Purpose | Path | Status |
 |----------|---------|------|--------|
 | **PROJECT-DOCUMENTATION.md** | Complete project history | `/4-project-management/` | ✅ Current |
 | **LESSONS-LEARNED.md** | Critical mistakes to avoid | `/docs/` | ✅ Current |
 
 ### **🎯 ACTIVE WORK**
+
 | Document | Purpose | Path | Status |
 |----------|---------|------|--------|
 | **README.md** | Repository overview | `/` | ✅ Current |

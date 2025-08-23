@@ -1,9 +1,9 @@
-# TOUCHBARFIX PROJECT - ESSENTIAL INFORMATION FOR CLAUDE
+# TouchBarFix — Essential Information for Claude
 
 **Last Updated: August 23, 2025 - 13:45 CEST**
 
-## 🚨 MANDATORY FIRST STEP:
-**READ PROJECT-KNOWLEDGE-INDEX.md FIRST** - This provides complete current context, project status, and document locations. This file contains implementation details only.
+## 🚨 MANDATORY FIRST STEP
+Read [PROJECT-KNOWLEDGE-INDEX.md](PROJECT-KNOWLEDGE-INDEX.md) FIRST — it provides current context, project status, and document locations. This file contains implementation details only.
 
 Quick Start: `cat PROJECT-KNOWLEDGE-INDEX.md`
 
@@ -14,11 +14,8 @@ Quick Start: `cat PROJECT-KNOWLEDGE-INDEX.md`
 ### PROJECT REBRAND COMPLETED
 **Renamed on August 16, 2024 at 18:00 CET**
 
-## ❌ OLD NAMES (NEVER USE):
-- Touch Bar Restarter
-- touchbar-restarter 
-- TouchBarRestarter
-- Any variation with "restarter"
+## ❌ LEGACY BRANDING (NEVER USE)
+- Do not use any legacy product names or "restarter" variants in documentation or UI.
 
 ## ✅ CURRENT NAMES (ALWAYS USE):
 - **Product Name**: TouchBarFix
@@ -83,7 +80,7 @@ touchbarfix/
 
 ```bash
 # Navigate to project
-cd /Users/floriansteiner/Documents/GitHub/touchbarfix
+cd ~/GitHub/touchbarfix
 
 # ALWAYS CREATE FEATURE BRANCH FIRST
 git checkout -b feature/your-feature-name
@@ -125,11 +122,11 @@ git pull origin main
 - **[3-operations/DEPLOYMENT-GUIDE.md](3-operations/DEPLOYMENT-GUIDE.md)** - Deployment procedures
 
 ## 🔗 IMPORTANT LINKS:
-- **Website**: https://touchbarfix.com
-- **Repository**: https://github.com/ProduktEntdecker/touchbarfix
-- **Issues**: https://github.com/ProduktEntdecker/touchbarfix/issues
-- **Releases**: https://github.com/ProduktEntdecker/touchbarfix/releases
-- **Vercel Dashboard**: https://vercel.com/dashboard (for deployment management)
+- **Website**: [touchbarfix.com](https://touchbarfix.com)
+- **Repository**: [github.com/ProduktEntdecker/touchbarfix](https://github.com/ProduktEntdecker/touchbarfix)
+- **Issues**: [Issues](https://github.com/ProduktEntdecker/touchbarfix/issues)
+- **Releases**: [Releases](https://github.com/ProduktEntdecker/touchbarfix/releases)
+- **Vercel Dashboard**: [Vercel Dashboard](https://vercel.com/dashboard) (for deployment management)
 
 ## 📋 GITHUB ISSUES WORKFLOW (August 23, 2025):
 - **Issue Templates**: Complete set in `.github/ISSUE_TEMPLATE/`
@@ -155,7 +152,7 @@ git pull origin main
 - Rename repository with active GitHub Pages
 - Use deprecated GitHub Actions versions
 - Create multiple index.html files in different directories
-- Mix old branding ("restarter") with new branding ("fix")
+- Mix legacy branding with current "TouchBarFix" branding
 - Make false claims (e.g., "requires admin password" - it doesn't!)
 
 ### ✅ ALWAYS DO:
