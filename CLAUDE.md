@@ -139,11 +139,11 @@ git pull origin main
 
 ## 🚨 SESSION START PROTOCOL:
 **EVERY SESSION MUST START WITH:**
-1. `gh issue list --repo ProduktEntdecker/touchbarfix --state open`
-2. Review any open issues and prioritize immediately
-3. Self-assign and create feature branches for new issues
-4. Update TodoWrite with issue-driven tasks
-5. Work issues first, then planned work
+1. **LINEAR INTEGRATION ACTIVE**: Read `LINEAR-INTEGRATION-GUIDE.md` for task management workflow
+2. **Linear Commands**: Ready to handle "work on PRO-X" assignments immediately  
+3. Check GitHub issues: `gh issue list --repo ProduktEntdecker/touchbarfix --state open`
+4. Review CodeRabbit feedback for any urgent fixes
+5. **Priority Order**: Linear tasks → CodeRabbit → GitHub → New development
 
 ## ⚠️ CRITICAL REMINDERS:
 

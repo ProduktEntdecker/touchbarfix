@@ -57,6 +57,7 @@ Last updated: August 23, 2025 — 13:45 CEST
 |----------|---------|------|--------|
 | **PROJECT-DOCUMENTATION.md** | Complete project history | `/4-project-management/` | ✅ Current |
 | **LESSONS-LEARNED.md** | Critical mistakes to avoid | `/docs/` | ✅ Current |
+| **LINEAR-INTEGRATION-GUIDE.md** | Task management workflow | `/` | ✅ Current |
 
 ### **🎯 ACTIVE WORK**
 
@@ -81,14 +82,17 @@ Last updated: August 23, 2025 — 13:45 CEST
    - Marketing questions → `MARKETING-ASSETS.md` (45 seconds)
 
 #### **Step 2: Task Context (1 minute)**
+- Check Linear issues: Linear workspace "ProduktEntdecker" project "TouchBarFix" 
 - Check GitHub issues: `gh issue list --repo ProduktEntdecker/touchbarfix --state open`
 - Check CodeRabbit feedback: `./read-coderabbit-comments.sh`
 - Review TodoWrite from previous sessions
 
-#### **Step 3: Work Protocol**
-- Address CodeRabbit feedback first (highest priority)
-- Work on open GitHub issues second
+#### **Step 3: Work Protocol - LINEAR INTEGRATION ACTIVE**
+- **PRIMARY**: Linear issue assignments ("work on PRO-X") take highest priority
+- Address CodeRabbit feedback second (highest priority)
+- Work on open GitHub issues third
 - New development only after cleanup complete
+- Update Linear issues with progress comments
 - Update relevant documentation as you work
 
 ---
