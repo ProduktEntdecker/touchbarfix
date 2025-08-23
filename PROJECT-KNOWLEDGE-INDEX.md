@@ -28,7 +28,7 @@
 - ✅ **Technical Guide**: TECHNICAL-GUIDE.md (consolidated 12 files)
 - ✅ **Marketing Assets**: MARKETING-ASSETS.md (consolidated 23 files)
 - ✅ **Standards & Templates**: DOCUMENTATION-STANDARDS.md
-- ✅ **Archive System**: 31 files moved to /archive/ folder
+- ✅ **Archive System**: 31 files moved to docs/archive/ folder
 - ✅ **Claude Integration**: CLAUDE.md updated to reference this file first
 - ✅ **Validation**: ARCHITECTURE-VALIDATION.md confirms <4 minute context loading
 
