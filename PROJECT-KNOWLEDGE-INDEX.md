@@ -40,6 +40,7 @@ Last updated: August 23, 2025 — 13:45 CEST
 
 | Document | Purpose | Path | Status |
 |----------|---------|------|--------|
+| **NEW-SESSION-QUICK-START.md** | 60-second Linear integration setup | `/` | ✅ Current |
 | **PROJECT-KNOWLEDGE-INDEX.md** | This file - master overview | `/` | ✅ Current |
 | **CLAUDE.md** | Claude Code instructions & context | `/` | ✅ Current |
 

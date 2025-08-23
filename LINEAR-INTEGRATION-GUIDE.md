@@ -29,26 +29,29 @@
 
 ## 💬 **Command Syntax for New Claude Sessions**
 
+### **🔧 SOLUTION: Linear Bridge Scripts**
+
+**The MCP integration gap has been solved with bridge scripts that any Claude session can use:**
+
 ### **Working on Assigned Tasks:**
-```
-"work on PRO-15"
-"work on PRO-40"  
-"update PRO-23 to In Progress"
-"add progress comment to PRO-8"
+```bash
+# Primary command - works in any new Claude session
+./work-on PRO-15
+./work-on 41  # PRO- prefix optional
+
+# Manual bridge commands
+node linear-bridge.js get-issue 41
+node linear-bridge.js update-status 41 "In Progress"
+node linear-bridge.js add-comment 41 "Progress update"
+node linear-bridge.js list
 ```
 
-### **Creating New Tasks:**
+### **Natural Language Commands (Now Supported):**
 ```
-"create Linear issue for implementing dark mode"
-"create high-priority issue for fixing payment bug"
-"add Linear task: App Store screenshot generation"
-```
-
-### **Status Queries:**
-```
-"show me all high-priority Linear issues"
-"what's the status of marketing tasks in Linear?"
-"list all Linear issues assigned to Florian"
+"work on PRO-40" → Claude will execute: ./work-on 40
+"update PRO-23 to Done" → Claude will execute: node linear-bridge.js update-status 23 "Done"  
+"show all Linear issues" → Claude will execute: node linear-bridge.js list
+"add comment to PRO-8" → Claude will execute: node linear-bridge.js add-comment 8 "[comment]"
 ```
 
 ---
