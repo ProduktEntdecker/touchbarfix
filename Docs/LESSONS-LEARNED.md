@@ -1003,6 +1003,88 @@ After scope update, the complete workflow should work:
 
 ---
 
+## Issue #41: Footer Component Race Condition & Static HTML Migration (PRO-47)
+
+**Problem**: 
+- Footer was missing from homepage but working on other pages
+- JavaScript dependency for legally required content (imprint links)
+- Race condition between footer.js loading and feedback form JavaScript
+- Inconsistent footer implementation across different pages
+
+**Root Cause Analysis**:
+Technical architect consultation revealed:
+1. Race condition: Footer JavaScript competed with feedback form initialization
+2. Legal risk: German Impressumspflicht requires accessible footer links
+3. Architectural flaw: JavaScript dependency for static content
+4. Progressive enhancement failure: No fallback for JavaScript failures
+
+**Solution Strategy - Option B (Comprehensive Static HTML)**:
+1. Convert all footer instances from JavaScript-dependent to static HTML
+2. Move feedback form from landing page to support page for better UX
+3. Eliminate race conditions through static implementation
+4. Ensure legal compliance with reliable footer links
+
+**Implementation**:
+1. **Static Footer Conversion**: Replaced `<div id="footer"></div>` with complete static HTML across all pages:
+   ```html
+   <footer class="bg-gray-900 text-white py-12">
+       <div class="max-w-4xl mx-auto text-center px-4">
+           <h3 class="text-2xl font-bold mb-4">TouchBarFix</h3>
+           <p class="text-gray-400 mb-6">Simple automation for Touch Bar software restarts</p>
+           <div class="flex justify-center space-x-6 mb-6">
+               <a href="/support.html" class="text-gray-400 hover:text-white transition-colors">Support</a>
+               <a href="/terms.html" class="text-gray-400 hover:text-white transition-colors">Terms</a>
+               <a href="/privacy.html" class="text-gray-400 hover:text-white transition-colors">Privacy</a>
+               <a href="/imprint.html" class="text-gray-400 hover:text-white transition-colors">Imprint</a>
+           </div>
+       </div>
+   </footer>
+   ```
+
+2. **Feedback Form Migration**: Moved complete feedback section from index.html to support.html with:
+   - Full JavaScript functionality for auto-detection
+   - System info collection (macOS version, device architecture)
+   - Privacy notices and user consent
+   - Updated anchor link targeting (#feedback)
+
+3. **Navigation Updates**: Updated all feedback-related links to point to "/support.html#feedback"
+
+**Benefits Realized**:
+- ✅ Eliminated race conditions completely
+- ✅ German legal compliance guaranteed (static footer always loads)
+- ✅ Improved landing page performance (reduced JavaScript complexity)
+- ✅ Better UX (feedback form in logical location)
+- ✅ Progressive enhancement principle followed
+- ✅ Consistent footer implementation across all pages
+
+**Technical Details**:
+- Files Modified: index.html, support.html, terms.html, privacy.html, imprint.html
+- JavaScript Dependencies: Reduced from 2 competing scripts to 1 focused script
+- Legal Risk: Eliminated (footer links always accessible)
+- Performance Impact: Positive (less JavaScript, faster page load)
+
+**Lessons Learned**:
+- **Systems Thinking First**: Always analyze architectural implications before implementation
+- **Legal Content = Static Content**: Never use JavaScript for legally required elements
+- **Consult Technical Architects**: Complex issues benefit from expert analysis
+- **Progressive Enhancement**: Build static foundation first, enhance with JavaScript
+- **Race Conditions**: Competing JavaScript scripts create unpredictable behaviors
+
+**Static Site Generator Recommendation**:
+For future scalability, consider migration to Hugo (Go-based static site generator):
+- Eliminates all race conditions through pre-build compilation
+- Maintains component reusability (partials/templates)
+- Superior performance (static HTML delivery)
+- Better SEO and accessibility
+- Simplified deployment workflow
+
+**Date Added**: August 23, 2025
+**Category**: Architecture & Systems Design
+**Impact**: Critical architectural fix ensuring legal compliance and UX reliability
+**Time to Resolution**: ~45 minutes (analysis + implementation)
+
+---
+
 *Last Updated: August 23, 2025*
 *Project: TouchBarFix - Legal Compliance & UX Optimization*
 *Author: Dr. Florian Steiner*

@@ -6,6 +6,14 @@
     <title>TouchBarFix Support - Help & FAQ</title>
     <meta name="description" content="TouchBarFix support, frequently asked questions, and troubleshooting guide for MacBook Pro Touch Bar issues.">
     <link rel="icon" href="Assets/favicon.ico" type="image/x-icon">
+    
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="dist/tailwind.css">
+    
+    <!-- Plausible Analytics -->
+    <script defer data-domain="touchbarfix.com" src="https://plausible.io/js/script.file-downloads.outbound-links.tagged-events.js"></script>
+    <script>window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }</script>
+    
     <style>
         * {
             margin: 0;
@@ -242,10 +250,25 @@
         }
     </style>
 </head>
-<body>
+<body class="bg-white">
+    
+    <!-- Header -->
+    <header class="bg-white border-b border-gray-200">
+        <div class="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
+            <a href="/" class="flex items-center space-x-2">
+                <div class="w-8 h-8 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
+                    <span class="text-white font-bold text-sm">TB</span>
+                </div>
+                <span class="font-bold text-xl text-gray-900">TouchBarFix</span>
+            </a>
+            <nav class="flex space-x-6">
+                <a href="/" class="text-gray-600 hover:text-gray-900 transition-colors">Home</a>
+                <a href="/support.html" class="text-gray-900 font-semibold transition-colors">Support</a>
+            </nav>
+        </div>
+    </header>
+
     <div class="container">
-        <a href="/" class="back-link">← Back to TouchBarFix</a>
-        
         <header>
             <h1>TouchBarFix Support</h1>
             <p class="subtitle">Help, FAQ, and troubleshooting</p>
