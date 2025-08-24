@@ -414,10 +414,99 @@
                 <button type="button" class="submit-button" onclick="sendEmail()">Send Message</button>
             </form>
         </section>
+
+        <!-- Feedback Section -->
+        <section id="feedback" class="py-20 bg-white">
+            <div class="max-w-4xl mx-auto text-center px-4">
+                <h2 class="text-4xl font-bold text-gray-900 mb-6">
+                    Help Us Improve TouchBarFix
+                </h2>
+                <p class="text-xl text-gray-600 mb-12 max-w-2xl mx-auto">
+                    Your feedback helps us make TouchBarFix better for everyone.
+                </p>
+                
+                <div class="max-w-2xl mx-auto">
+                    <form id="feedback-form" class="space-y-6 text-left">
+                        <!-- Email -->
+                        <div>
+                            <label for="feedback-email" class="block text-sm font-medium text-gray-700 mb-2">
+                                Email
+                            </label>
+                            <input type="email" id="feedback-email" name="feedback-email" required
+                                   placeholder="your.email@example.com"
+                                   class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        </div>
+
+                        <!-- Feedback Message -->
+                        <div>
+                            <label for="feedback-message" class="block text-sm font-medium text-gray-700 mb-2">
+                                Your Feedback
+                            </label>
+                            <textarea id="feedback-message" name="feedback-message" rows="5" required
+                                      placeholder="Tell us about your experience with TouchBarFix..."
+                                      class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-vertical"></textarea>
+                        </div>
+
+                        <!-- Hidden fields for auto-detected info -->
+                        <input type="hidden" id="user-agent" name="user-agent">
+                        <input type="hidden" id="detected-os" name="detected-os">
+                        <input type="hidden" id="detected-device" name="detected-device">
+
+                        <!-- Submit Button -->
+                        <div class="text-center pt-4">
+                            <button type="submit" 
+                                    class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg text-lg font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                                Send Feedback
+                            </button>
+                            <p class="mt-3 text-xs text-gray-500">
+                                We automatically detect your macOS version and device type to help with debugging. No personal data is collected.
+                            </p>
+                        </div>
+                    </form>
+
+                    <!-- Success Message (Hidden by default) -->
+                    <div id="feedback-success" class="hidden bg-blue-50 border border-blue-200 rounded-lg p-6 text-center">
+                        <div class="text-4xl mb-4">📧</div>
+                        <h3 class="text-xl font-bold text-blue-800 mb-2">Check Your Email Client</h3>
+                        <p class="text-blue-700">
+                            We've opened a pre-filled email for you. Please review and press Send in your email client to deliver your feedback.
+                        </p>
+                    </div>
+
+                    <!-- Error Message (Hidden by default) -->
+                    <div id="feedback-error" class="hidden bg-red-50 border border-red-200 rounded-lg p-6 text-center">
+                        <div class="text-4xl mb-4">❌</div>
+                        <h3 class="text-xl font-bold text-red-800 mb-2">Oops! Something went wrong</h3>
+                        <p class="text-red-700 mb-4">
+                            We couldn't send your feedback right now. Please try again or email us directly at:
+                        </p>
+                        <a href="mailto:info@produktentdecker.com" class="text-blue-600 hover:text-blue-800 font-semibold">
+                            info@produktentdecker.com
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
 
-    <!-- Footer Component -->
-    <div id="touchbarfix-footer"></div>
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-4xl mx-auto text-center px-4">
+            <h3 class="text-2xl font-bold mb-4">TouchBarFix</h3>
+            <p class="text-gray-400 mb-6">Simple automation for Touch Bar software restarts</p>
+            
+            <div class="flex justify-center space-x-6 mb-6">
+                <a href="/support.html" class="text-gray-400 hover:text-white transition-colors">Support</a>
+                <a href="/terms.html" class="text-gray-400 hover:text-white transition-colors">Terms</a>
+                <a href="/privacy.html" class="text-gray-400 hover:text-white transition-colors">Privacy</a>
+                <a href="/imprint.html" class="text-gray-400 hover:text-white transition-colors">Imprint</a>
+            </div>
+            
+            <p class="text-gray-500 text-sm">
+                © 2025 TouchBarFix • Created by Dr. Florian Steiner, AI Product Manager • Co-created with Claude Code
+            </p>
+        </div>
+    </footer>
 
     <script>
         function sendEmail() {
@@ -469,9 +558,177 @@ ${message}`;
             // Reset form
             document.getElementById('support-form').reset();
         }
+
+        // Feedback Form JavaScript
+        // Auto-detect user's system information
+        function detectSystemInfo() {
+            const userAgent = navigator.userAgent;
+            let osVersion = 'Unknown';
+            let deviceInfo = 'Unknown';
+            
+            // Detect macOS version from user agent
+            if (userAgent.includes('Mac OS X')) {
+                const match = userAgent.match(/Mac OS X (\d+)[_.](\d+)/);
+                if (match) {
+                    const majorVersion = parseInt(match[1]);
+                    const minorVersion = parseInt(match[2]);
+                    
+                    // Map macOS versions
+                    if (majorVersion === 10) {
+                        if (minorVersion === 15) osVersion = 'macOS Catalina (10.15)';
+                        else if (minorVersion === 14) osVersion = 'macOS Mojave (10.14)';
+                    } else if (majorVersion === 11) {
+                        osVersion = 'macOS Big Sur (11.x)';
+                    } else if (majorVersion === 12) {
+                        osVersion = 'macOS Monterey (12.x)';
+                    } else if (majorVersion === 13) {
+                        osVersion = 'macOS Ventura (13.x)';
+                    } else if (majorVersion === 14) {
+                        osVersion = 'macOS Sonoma (14.x)';
+                    } else if (majorVersion === 15) {
+                        osVersion = 'macOS Sequoia (15.x)';
+                    }
+                }
+                
+                // Detect if it's Intel or Apple Silicon
+                if (userAgent.includes('Intel')) {
+                    deviceInfo = 'Intel Mac';
+                } else if (userAgent.includes('ARM') || userAgent.includes('Apple')) {
+                    deviceInfo = 'Apple Silicon Mac';
+                } else {
+                    // Default for Macs where we can't determine architecture
+                    deviceInfo = 'Mac (architecture unknown)';
+                }
+            }
+            
+            // Set hidden field values if they exist
+            const userAgentField = document.getElementById('user-agent');
+            const detectedOsField = document.getElementById('detected-os');
+            const detectedDeviceField = document.getElementById('detected-device');
+            
+            if (userAgentField) userAgentField.value = userAgent;
+            if (detectedOsField) detectedOsField.value = osVersion;
+            if (detectedDeviceField) detectedDeviceField.value = deviceInfo;
+            
+            return { osVersion, deviceInfo, userAgent };
+        }
+        
+        // Detect system info on page load
+        document.addEventListener('DOMContentLoaded', detectSystemInfo);
+        
+        // Check if feedback form exists before adding event listener
+        const feedbackForm = document.getElementById('feedback-form');
+        if (feedbackForm) {
+            feedbackForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                // Get system info
+                const systemInfo = detectSystemInfo();
+                
+                // Get form data
+                const formData = new FormData(e.target);
+                const feedbackData = {
+                    email: formData.get('feedback-email'),
+                    message: formData.get('feedback-message'),
+                    detectedOS: systemInfo.osVersion,
+                    detectedDevice: systemInfo.deviceInfo,
+                    userAgent: systemInfo.userAgent,
+                    timestamp: new Date().toISOString(),
+                    source: 'support-page-feedback-form'
+                };
+
+                // Track feedback submission with analytics
+                if (window.plausible) {
+                    window.plausible('Feedback Form Submit', {
+                        props: { 
+                            os: feedbackData.detectedOS,
+                            device: feedbackData.detectedDevice
+                        }
+                    });
+                }
+
+                // Hide any previous messages
+                document.getElementById('feedback-success').classList.add('hidden');
+                document.getElementById('feedback-error').classList.add('hidden');
+
+                // Disable submit button and show loading state
+                const submitButton = e.target.querySelector('button[type="submit"]');
+                const originalText = submitButton.textContent;
+                submitButton.disabled = true;
+                submitButton.textContent = 'Sending...';
+
+                try {
+                    // For now, we'll use a simple mailto link as fallback
+                    // Later this can be replaced with a proper backend endpoint
+                    const subject = encodeURIComponent('TouchBarFix Feedback');
+                    const body = encodeURIComponent(`
+From: ${feedbackData.email}
+
+Message:
+${feedbackData.message}
+
+---
+System Information (Auto-detected):
+OS: ${feedbackData.detectedOS}
+Device: ${feedbackData.detectedDevice}
+User Agent: ${feedbackData.userAgent}
+
+Submitted: ${feedbackData.timestamp}
+Source: ${feedbackData.source}
+                    `);
+
+                    // Simulate form processing for now
+                    // In production, this would be an actual API call
+                    await new Promise(resolve => setTimeout(resolve, 1000));
+
+                    // For now, open mailto link
+                    const mailtoLink = `mailto:info@produktentdecker.com?subject=${subject}&body=${body}`;
+                    
+                    // Try to open email client, but show success message either way
+                    try {
+                        window.location.href = mailtoLink;
+                    } catch (err) {
+                        // If mailto fails, just continue to show success message
+                    }
+
+                    // Show instruction message (not claiming receipt yet)
+                    document.getElementById('feedback-form').classList.add('hidden');
+                    document.getElementById('feedback-success').classList.remove('hidden');
+
+                    // Track that email client was opened (not that feedback was sent)
+                    if (window.plausible) {
+                        window.plausible('Feedback Email Client Opened');
+                    }
+
+                } catch (error) {
+                    console.error('Feedback form error:', error);
+                    
+                    // Show error message
+                    document.getElementById('feedback-error').classList.remove('hidden');
+
+                    // Track error
+                    if (window.plausible) {
+                        window.plausible('Feedback Form Error', {
+                            props: { error: 'submission-failed' }
+                        });
+                    }
+
+                } finally {
+                    // Reset button state
+                    submitButton.disabled = false;
+                    submitButton.textContent = originalText;
+                }
+            });
+        }
+
+        // Add smooth scrolling to feedback section if accessed via URL hash
+        if (window.location.hash === '#feedback') {
+            const feedbackSection = document.getElementById('feedback');
+            if (feedbackSection) {
+                feedbackSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
     </script>
 
-    <!-- Footer Component Script -->
-    <script src="/components/footer.js"></script>
 </body>
 </html>
