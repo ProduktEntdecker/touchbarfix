@@ -940,6 +940,69 @@ After scope update, the complete workflow should work:
 
 ---
 
+## Issue #39: Feedback Form UX Optimization (PRO-45)
+
+**Problem**: 
+- Feedback form requested too much information (6 fields)
+- High friction for users wanting to submit feedback
+- Manual entry of system information that could be auto-detected
+
+**Solution**:
+- Simplified form to just 2 fields (email + message)
+- Auto-detect macOS version and device architecture via JavaScript
+- Removed unnecessary fields: name, feedback type, OS/device dropdowns, testimonial permission
+
+**Implementation**:
+1. Used `navigator.userAgent` parsing to detect macOS versions
+2. Hidden fields store auto-detected system info
+3. Clear privacy notice about auto-detection
+4. Changed success message to be accurate about email client opening
+
+**Lessons Learned**:
+- Minimize form fields to reduce user friction
+- Auto-detect technical information when possible
+- Be transparent about data collection with privacy notices
+- Don't claim success until action is actually completed (email sent vs email client opened)
+
+**Date Added**: August 23, 2025
+**Category**: UX Optimization & Form Design
+**Impact**: Significant reduction in feedback submission friction
+**Time to Resolution**: ~30 minutes
+
+---
+
+## Issue #40: German Legal Compliance - Imprint Page (PRO-44)
+
+**Problem**:
+- Imprint page had placeholder text for address and VAT information
+- Non-compliance with German Impressumspflicht requirements
+- Incorrect email addresses referenced
+
+**Solution**:
+- Added complete business address: St.-Ingbert-Str. 9, 81541 Munich
+- Added VAT ID: DE326074672
+- Updated all email references to info@produktentdecker.com
+- Used semantic HTML (`<address>` tag) for better accessibility
+
+**Implementation**:
+1. Replaced all placeholder text with actual legal information
+2. Used semantic HTML elements for better structure
+3. Added German VAT label (USt-IdNr.) for clarity
+4. Ensured consistency across all pages
+
+**Lessons Learned**:
+- Never leave placeholder text in production legal pages
+- Always verify legal compliance requirements for target markets
+- Use semantic HTML for better accessibility and SEO
+- Keep contact information consistent across all pages
+
+**Date Added**: August 23, 2025
+**Category**: Legal Compliance & Documentation
+**Impact**: Critical for German law compliance
+**Time to Resolution**: ~15 minutes
+
+---
+
 *Last Updated: August 23, 2025*
-*Project: TouchBarFix - CodeRabbit Integration*
+*Project: TouchBarFix - Legal Compliance & UX Optimization*
 *Author: Dr. Florian Steiner*
