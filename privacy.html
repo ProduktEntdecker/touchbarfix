@@ -5,7 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TouchBarFix Privacy Policy</title>
     <meta name="description" content="TouchBarFix privacy policy - how we handle your data and protect your privacy.">
+    <meta name="robots" content="noindex, follow">
     <link rel="icon" href="Assets/favicon.ico" type="image/x-icon">
+    
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="dist/tailwind.css">
+    
+    <!-- Plausible Analytics -->
+    <script defer data-domain="touchbarfix.com" src="https://plausible.io/js/script.file-downloads.outbound-links.tagged-events.js"></script>
+    <script>window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }</script>
+    
     <style>
         * {
             margin: 0;
@@ -17,7 +26,6 @@
             font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", system-ui, sans-serif;
             line-height: 1.6;
             color: #1d1d1f;
-            background: #f5f5f7;
         }
 
         .container {
@@ -26,17 +34,7 @@
             padding: 40px 20px;
         }
 
-        .back-link {
-            display: inline-block;
-            color: #007aff;
-            text-decoration: none;
-            margin-bottom: 20px;
-            font-size: 17px;
-        }
-
-        .back-link:hover {
-            text-decoration: underline;
-        }
+        /* Removed unused legacy styles from pre-header/footer refactor */
 
         header {
             text-align: center;
@@ -109,21 +107,6 @@
             margin-bottom: 8px;
         }
 
-        footer {
-            text-align: center;
-            padding: 40px 0;
-            color: #86868b;
-            font-size: 14px;
-        }
-
-        footer a {
-            color: #007aff;
-            text-decoration: none;
-        }
-
-        footer a:hover {
-            text-decoration: underline;
-        }
 
         @media (max-width: 768px) {
             .container {
@@ -145,9 +128,24 @@
     </style>
 </head>
 <body>
+    
+    <!-- Header -->
+    <header class="bg-white border-b border-gray-200">
+        <div class="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
+            <a href="/" class="flex items-center space-x-2">
+                <div class="w-8 h-8 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
+                    <span class="text-white font-bold text-sm">TB</span>
+                </div>
+                <span class="font-bold text-xl text-gray-900">TouchBarFix</span>
+            </a>
+            <nav class="flex space-x-6">
+                <a href="/" class="text-gray-600 hover:text-gray-900 transition-colors">Home</a>
+                <a href="/support.html" class="text-gray-600 hover:text-gray-900 transition-colors">Support</a>
+            </nav>
+        </div>
+    </header>
+
     <div class="container">
-        <a href="/" class="back-link">← Back to TouchBarFix</a>
-        
         <header>
             <h1>Privacy Policy</h1>
             <p class="subtitle">How we protect your privacy</p>
@@ -225,7 +223,7 @@
             <h2>Contact Information</h2>
             <p>If you have questions about this privacy policy:</p>
             <ul>
-                <li>Visit our <a href="support.html">support page</a></li>
+                <li>Visit our <a href="/support.html">support page</a></li>
                 <li>Email: info@produktentdecker.com</li>
             </ul>
 
@@ -233,10 +231,23 @@
         </div>
     </div>
 
-    <!-- Footer Component -->
-    <div id="touchbarfix-footer"></div>
-
-    <!-- Footer Component Script -->
-    <script src="/components/footer.js"></script>
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-4xl mx-auto text-center px-4">
+            <h3 class="text-2xl font-bold mb-4">TouchBarFix</h3>
+            <p class="text-gray-400 mb-6">Simple automation for Touch Bar software restarts</p>
+            
+            <div class="flex justify-center space-x-6 mb-6">
+                <a href="/support.html" class="text-gray-400 hover:text-white transition-colors">Support</a>
+                <a href="/terms.html" class="text-gray-400 hover:text-white transition-colors">Terms</a>
+                <a href="/privacy.html" class="text-gray-400 hover:text-white transition-colors">Privacy</a>
+                <a href="/imprint.html" class="text-gray-400 hover:text-white transition-colors">Imprint</a>
+            </div>
+            
+            <p class="text-gray-500 text-sm">
+                © 2025 TouchBarFix • Created by Dr. Florian Steiner, AI Product Manager • Co-created with Claude Code
+            </p>
+        </div>
+    </footer>
 </body>
 </html>
