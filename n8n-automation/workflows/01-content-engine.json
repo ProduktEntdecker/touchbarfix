@@ -1,0 +1,156 @@
+{
+  "name": "TouchBarFix Content Engine",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 24,
+              "triggerAtHour": 9
+            }
+          ]
+        }
+      },
+      "id": "trigger",
+      "name": "Daily 9AM Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "url": "https://www.reddit.com/r/MacBookPro/hot.json",
+        "options": {
+          "headers": {
+            "User-Agent": "TouchBarFix Content Bot 1.0"
+          }
+        }
+      },
+      "id": "reddit-trends",
+      "name": "Fetch Reddit Trends",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "resource": "text",
+        "operation": "complete",
+        "modelId": "gpt-4",
+        "messages": {
+          "values": [
+            {
+              "role": "system",
+              "content": "You are a content creator for TouchBarFix, a Mac utility that fixes Touch Bar freezing. Create helpful, non-promotional content."
+            },
+            {
+              "role": "user", 
+              "content": "Based on these trending topics: {{$json.data.children[0].data.title}}, create a Reddit post about Touch Bar issues.\n\nFormat:\nTitle: [Catchy, problem-focused title]\nBody: [2-3 paragraphs, helpful tone, subtle product mention only if natural]\n\nTarget subreddit: r/MacBookPro\nTone: Helpful community member, not salesperson"
+            }
+          ]
+        }
+      },
+      "id": "generate-content",
+      "name": "Generate Content",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "position": [650, 300]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "sheetId": "YOUR_SHEET_ID",
+        "range": "ContentDatabase!A:E",
+        "options": {
+          "valueInputOption": "USER_ENTERED"
+        },
+        "dataMode": "autoMapInputData"
+      },
+      "id": "store-content",
+      "name": "Store in Google Sheets",
+      "type": "n8n-nodes-base.googleSheets",
+      "position": [850, 300]
+    },
+    {
+      "parameters": {
+        "functionCode": "// Content quality scoring\nconst content = $input.item.json.content;\nconst title = $input.item.json.title;\n\n// Check for quality indicators\nconst hasPersonalStory = content.includes('I') || content.includes('my');\nconst hasSolution = content.includes('fix') || content.includes('solution');\nconst notTooPromotional = (content.match(/TouchBarFix/g) || []).length <= 1;\n\nconst qualityScore = \n  (hasPersonalStory ? 30 : 0) +\n  (hasSolution ? 40 : 0) +\n  (notTooPromotional ? 30 : 0);\n\nreturn {\n  ...item.json,\n  qualityScore,\n  approved: qualityScore >= 70,\n  timestamp: new Date().toISOString(),\n  platform: 'reddit',\n  subreddit: 'r/MacBookPro',\n  status: 'pending'\n};"
+      },
+      "id": "score-content",
+      "name": "Score Content Quality",
+      "type": "n8n-nodes-base.function",
+      "position": [1050, 300]
+    },
+    {
+      "parameters": {
+        "path": "content-ready",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "trigger-distribution",
+      "name": "Trigger Distribution",
+      "type": "n8n-nodes-base.webhook",
+      "position": [1250, 300]
+    }
+  ],
+  "connections": {
+    "trigger": {
+      "main": [
+        [
+          {
+            "node": "reddit-trends",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "reddit-trends": {
+      "main": [
+        [
+          {
+            "node": "generate-content",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "generate-content": {
+      "main": [
+        [
+          {
+            "node": "store-content",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "store-content": {
+      "main": [
+        [
+          {
+            "node": "score-content",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "score-content": {
+      "main": [
+        [
+          {
+            "node": "trigger-distribution",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionTimeout": 300,
+    "saveExecutionProgress": true,
+    "saveDataSuccessExecution": "all"
+  }
+}
