@@ -65,7 +65,7 @@ cover_image: https://touchbarfix.com/images/[cover-image].png
 
 [Article Content]
 
-{% github ProduktEntdecker/touchbarfix %}
+[ProduktEntdecker/touchbarfix on GitHub](https://github.com/ProduktEntdecker/touchbarfix)
 
 ---
 
