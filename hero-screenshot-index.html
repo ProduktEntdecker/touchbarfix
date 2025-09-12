@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TouchBarFix - Fix Your Frozen Touch Bar in One Click | €2.99</title>
+    <link rel="canonical" href="https://touchbarfix.com/">
+    <meta name="robots" content="noindex,follow">
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="TouchBarFix instantly restarts your frozen MacBook Pro Touch Bar. No Terminal needed. 30-day money-back guarantee. €2.99 one-time purchase.">
+    <meta name="keywords" content="Touch Bar fix, MacBook Pro Touch Bar not working, reset Touch Bar, Touch Bar Sonoma fix, TouchBarServer, MacBook Pro repair">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="TouchBarFix - Fix Your Frozen Touch Bar in One Click">
+    <meta property="og:description" content="Instantly fix your MacBook Pro Touch Bar when it freezes. No Terminal commands needed. €2.99 one-time purchase.">
+    <meta property="og:image" content="https://touchbarfix.com/app-screenshot-done.png">
+    <meta property="og:url" content="https://touchbarfix.com">
+    <meta property="og:type" content="website">
+    
+    <!-- Schema.org for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "TouchBarFix",
+      "description": "One-click solution to fix MacBook Pro Touch Bar issues. No Terminal commands required.",
+      "operatingSystem": "macOS",
+      "applicationCategory": "UtilitiesApplication",
+      "offers": {
+        "@type": "Offer",
+        "price": "2.99",
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock",
+        "url": "https://touchbarfix.com"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Dr. Florian Steiner",
+        "jobTitle": "AI Product Manager"
+      }
+    }
+    </script>
+    
+    <!-- Plausible Analytics -->
+    <script defer data-domain="touchbarfix.com" src="https://plausible.io/js/script.file-downloads.outbound-links.tagged-events.js"></script>
+    <script>window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }</script>
+    
+    <link rel="stylesheet" href="dist/tailwind.css">
+
+    <!-- Favicons -->
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <meta name="theme-color" content="#007AFF">
+    
+    <style>
+        /* Brand colors */
+        .touchbar-blue { color: #007AFF; }
+        .bg-touchbar-blue { background-color: #007AFF; }
+        .success-green { color: #10B981; }
+        .alert-red { color: #EF4444; }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, #F9FAFB 0%, #E5E7EB 100%);
+        }
+        
+        .primary-cta {
+            background: linear-gradient(135deg, #EF4444 0%, #DC2626 100%);
+            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
+        }
+        
+        /* App screenshot styling */
+        .app-screenshot {
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease;
+        }
+        
+        .app-screenshot:hover {
+            transform: scale(1.02);
+        }
+        
+        /* Value prop list styling */
+        .value-list li {
+            position: relative;
+            padding-left: 32px;
+        }
+        
+        .value-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #10B981;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        
+        /* Screenshot toggle animation */
+        .screenshot-toggle {
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        
+        .screenshot-hidden {
+            opacity: 0;
+            transform: scale(0.95);
+            display: none;
+        }
+        
+        .screenshot-visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+    </style>
+</head>
+
+<body class="bg-white text-gray-900 font-sans">
+
+    <!-- Trust Bar -->
+    <div class="bg-blue-50 border-b border-blue-200 py-2">
+        <div class="max-w-7xl mx-auto px-4 flex items-center justify-center gap-4 md:gap-6 text-sm">
+            <span class="flex items-center gap-1">
+                ✅ <strong>30-Day Guarantee</strong>
+            </span>
+            <span class="hidden md:flex items-center gap-1">
+                🔒 <strong>No Admin Password</strong>
+            </span>
+            <span class="hidden lg:flex items-center gap-1">
+                🛡️ <strong>Apple Notarized</strong>
+            </span>
+        </div>
+    </div>
+
+    <!-- Hero Section with Screenshot -->
+    <section class="hero-gradient min-h-screen flex items-center py-20 px-4">
+        <div class="max-w-7xl mx-auto w-full">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                
+                <!-- Left: App Screenshots -->
+                <div class="relative">
+                    <div class="relative mx-auto max-w-md lg:max-w-none">
+                        <!-- Start Screen -->
+                        <img id="screenshot-start" 
+                             src="app-screenshot-start.png" 
+                             alt="TouchBarFix app interface showing Fix Touch Bar button"
+                             class="app-screenshot screenshot-visible w-full">
+                        
+                        <!-- Done Screen (initially hidden) -->
+                        <img id="screenshot-done" 
+                             src="app-screenshot-done.png" 
+                             alt="TouchBarFix success screen showing Touch Bar fixed"
+                             class="app-screenshot screenshot-hidden w-full absolute top-0 left-0">
+                        
+                        <!-- Toggle buttons -->
+                        <div class="flex gap-2 justify-center mt-4">
+                            <button onclick="showScreenshot('start')" 
+                                    id="btn-start"
+                                    class="px-4 py-2 rounded-lg bg-white text-gray-700 font-medium shadow-sm hover:shadow-md transition-all">
+                                Before Fix
+                            </button>
+                            <button onclick="showScreenshot('done')" 
+                                    id="btn-done"
+                                    class="px-4 py-2 rounded-lg bg-white text-gray-700 font-medium shadow-sm hover:shadow-md transition-all">
+                                After Fix ✓
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right: Value Proposition -->
+                <div class="text-center lg:text-left">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+                        Fix Your Frozen<br>
+                        <span class="touchbar-blue">Touch Bar Instantly</span>
+                    </h1>
+                    
+                    <p class="text-xl text-gray-600 mb-8">
+                        When your MacBook Pro Touch Bar stops responding, 
+                        TouchBarFix brings it back to life with one click.
+                    </p>
+                    
+                    <!-- Key Benefits -->
+                    <ul class="value-list space-y-3 mb-8 text-lg">
+                        <li><strong>15-second fix</strong> vs 5-day Apple repair</li>
+                        <li><strong>€2.99</strong> vs €700 hardware replacement</li>
+                        <li><strong>One click</strong> vs Terminal commands</li>
+                        <li><strong>No admin password</strong> required</li>
+                    </ul>
+                    
+                    <!-- CTA -->
+                    <div class="flex flex-col sm:flex-row gap-4 items-center lg:items-start">
+                        <a href="https://produktentdecker.gumroad.com/l/touchbarfix?utm_source=website&utm_medium=cta&utm_campaign=hero" 
+                           onclick="plausible('Gumroad CTA Click', {props: {placement: 'hero'}})"
+                           target="_blank" rel="noopener noreferrer"
+                           class="primary-cta text-white px-8 py-4 rounded-lg text-lg font-semibold inline-block transition-all hover:transform hover:scale-105">
+                            Get TouchBarFix - €2.99
+                        </a>
+                        
+                        <div class="text-center lg:text-left">
+                            <p class="font-semibold success-green">✓ 30-Day Money-Back</p>
+                            <p class="text-sm text-gray-600">One-time purchase</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Trust indicators -->
+                    <div class="mt-8 pt-8 border-t border-gray-200">
+                        <div class="flex flex-wrap gap-6 justify-center lg:justify-start text-sm text-gray-600">
+                            <a href="https://github.com/ProduktEntdecker/touchbarfix" 
+                               target="_blank" 
+                               rel="noopener"
+                               class="flex items-center gap-2 hover:text-gray-900">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                                </svg>
+                                <span id="github-stars">Open Source</span>
+                            </a>
+                            
+                            <span class="flex items-center gap-2">
+                                🛡️ Apple Notarized
+                            </span>
+                            
+                            <span class="flex items-center gap-2">
+                                📧 Support included
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="py-20 bg-white">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-12">How It Works</h2>
+            
+            <div class="grid md:grid-cols-3 gap-8 text-center">
+                <div>
+                    <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl">1</span>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Touch Bar Freezes</h3>
+                    <p class="text-gray-600">Your Touch Bar becomes unresponsive or shows wrong controls</p>
+                </div>
+                
+                <div>
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl">2</span>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Click Fix Button</h3>
+                    <p class="text-gray-600">Open TouchBarFix and click the "Fix Touch Bar" button</p>
+                </div>
+                
+                <div>
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl">3</span>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Touch Bar Works</h3>
+                    <p class="text-gray-600">Your Touch Bar restarts and becomes responsive again</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Transparency Section -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-4xl mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center text-gray-900 mb-12">
+                Complete Transparency
+            </h2>
+            
+            <div class="bg-white rounded-lg p-8 shadow-sm">
+                <h3 class="text-2xl font-semibold mb-4">What TouchBarFix Actually Does:</h3>
+                <div class="bg-gray-900 text-green-400 p-4 rounded font-mono text-sm mb-4">
+                    pkill -x TouchBarServer
+                </div>
+                <p class="text-gray-700 mb-4">
+                    This Terminal command restarts the Touch Bar software. You can type it yourself for free.
+                </p>
+                <p class="text-gray-700">
+                    <strong>Why pay €2.99?</strong> For the convenience of not opening Terminal, 
+                    remembering the command, or dealing with typos. One click, problem solved.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Developer Section -->
+    <section class="py-20 bg-white">
+        <div class="max-w-4xl mx-auto px-4">
+            <div class="bg-gray-50 p-8 rounded-lg">
+                <h2 class="text-3xl font-bold mb-6 text-center">Made by a MacBook Pro User</h2>
+                <div class="max-w-2xl mx-auto text-center">
+                    <h3 class="text-2xl font-semibold mb-2">Dr. Florian Steiner</h3>
+                    <p class="text-gray-600 mb-4">AI Product Manager & Independent Developer</p>
+                    <p class="text-gray-700 mb-6">
+                        "My Touch Bar kept freezing daily. I got tired of typing Terminal commands, 
+                        so I built this simple app. It saves me time every week."
+                    </p>
+                    <div class="flex gap-4 justify-center">
+                        <a href="https://linkedin.com/in/floriansteiner" target="_blank" rel="noopener" 
+                           class="touchbar-blue hover:underline">LinkedIn →</a>
+                        <a href="https://github.com/ProduktEntdecker/touchbarfix" target="_blank" rel="noopener" 
+                           class="touchbar-blue hover:underline">GitHub →</a>
+                        <a href="mailto:info@produktentdecker.com" 
+                           class="touchbar-blue hover:underline">Contact →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-4xl mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center text-gray-900 mb-12">
+                Questions & Answers
+            </h2>
+            
+            <div class="space-y-6">
+                <details class="bg-white p-6 rounded-lg">
+                    <summary class="font-bold cursor-pointer">What if it doesn't fix my Touch Bar?</summary>
+                    <p class="mt-3 text-gray-700">
+                        30-day money-back guarantee. If TouchBarFix doesn't solve your software-related Touch Bar freeze, 
+                        email us for a full refund. Note: Hardware issues require Apple repair.
+                    </p>
+                </details>
+                
+                <details class="bg-white p-6 rounded-lg">
+                    <summary class="font-bold cursor-pointer">Is it safe to use?</summary>
+                    <p class="mt-3 text-gray-700">
+                        Yes. TouchBarFix is notarized by Apple, doesn't require admin privileges, 
+                        and only restarts Touch Bar processes. The source code is on GitHub for review.
+                    </p>
+                </details>
+                
+                <details class="bg-white p-6 rounded-lg">
+                    <summary class="font-bold cursor-pointer">Why not use Terminal for free?</summary>
+                    <p class="mt-3 text-gray-700">
+                        You absolutely can! The command is: <code class="bg-gray-100 px-2 py-1 rounded">pkill -x TouchBarServer</code>. 
+                        TouchBarFix just makes it more convenient with one-click access without Terminal.
+                    </p>
+                </details>
+                
+                <details class="bg-white p-6 rounded-lg">
+                    <summary class="font-bold cursor-pointer">Which MacBooks are supported?</summary>
+                    <p class="mt-3 text-gray-700">
+                        All MacBook Pro models with Touch Bar (2016-2021) running macOS Big Sur (11.0) or later. 
+                        Works natively on both Intel and Apple Silicon.
+                    </p>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section id="purchase" class="py-20 bg-gray-900 text-white">
+        <div class="max-w-4xl mx-auto text-center px-4">
+            <h2 class="text-4xl font-bold mb-6">
+                Stop Fighting with Your Touch Bar
+            </h2>
+            <p class="text-xl mb-8 opacity-90">
+                Get back to work in seconds, not days.
+            </p>
+            
+            <a href="https://produktentdecker.gumroad.com/l/touchbarfix?utm_source=website&utm_medium=cta&utm_campaign=final" 
+               onclick="plausible('Gumroad CTA Click', {props: {placement: 'final_cta'}})"
+               target="_blank" rel="noopener noreferrer"
+               class="primary-cta text-white px-12 py-4 rounded-lg text-xl font-semibold inline-block transition-all hover:transform hover:scale-105 mb-6">
+                Get TouchBarFix - €2.99
+            </a>
+            
+            <p class="text-sm opacity-75">
+                30-day money-back guarantee • One-time purchase
+            </p>
+            
+            <p class="text-xs opacity-50 mt-4">
+                Or use Terminal: <code class="bg-gray-800 px-2 py-1 rounded">pkill -x TouchBarServer</code>
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12 border-t border-gray-800">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="font-bold mb-4">TouchBarFix</h3>
+                    <p class="text-gray-400 text-sm">Simple Touch Bar fix</p>
+                </div>
+                <div>
+                    <h3 class="font-bold mb-4">Support</h3>
+                    <ul class="space-y-2">
+                        <li><a href="/support.html" class="text-gray-400 hover:text-white transition-colors">Help</a></li>
+                        <li><a href="mailto:info@produktentdecker.com" class="text-gray-400 hover:text-white transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-bold mb-4">Legal</h3>
+                    <ul class="space-y-2">
+                        <li><a href="/terms.html" class="text-gray-400 hover:text-white transition-colors">Terms</a></li>
+                        <li><a href="/privacy.html" class="text-gray-400 hover:text-white transition-colors">Privacy</a></li>
+                        <li><a href="/imprint.html" class="text-gray-400 hover:text-white transition-colors">Imprint</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-bold mb-4">Connect</h3>
+                    <ul class="space-y-2">
+                        <li><a href="https://github.com/ProduktEntdecker/touchbarfix" target="_blank" rel="noopener" 
+                               class="text-gray-400 hover:text-white transition-colors">GitHub</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 text-center">
+                <p class="text-gray-500 text-sm">
+                    © 2025 TouchBarFix by Dr. Florian Steiner
+                </p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Screenshot toggle functionality
+        function showScreenshot(type) {
+            const startImg = document.getElementById('screenshot-start');
+            const doneImg = document.getElementById('screenshot-done');
+            const startBtn = document.getElementById('btn-start');
+            const doneBtn = document.getElementById('btn-done');
+            
+            if (type === 'start') {
+                startImg.classList.remove('screenshot-hidden');
+                startImg.classList.add('screenshot-visible');
+                startImg.style.display = 'block';
+                doneImg.classList.remove('screenshot-visible');
+                doneImg.classList.add('screenshot-hidden');
+                setTimeout(() => doneImg.style.display = 'none', 500);
+                
+                startBtn.classList.add('bg-blue-100', 'border-blue-500');
+                doneBtn.classList.remove('bg-green-100', 'border-green-500');
+            } else {
+                doneImg.classList.remove('screenshot-hidden');
+                doneImg.classList.add('screenshot-visible');
+                doneImg.style.display = 'block';
+                startImg.classList.remove('screenshot-visible');
+                startImg.classList.add('screenshot-hidden');
+                setTimeout(() => startImg.style.display = 'none', 500);
+                
+                doneBtn.classList.add('bg-green-100', 'border-green-500');
+                startBtn.classList.remove('bg-blue-100', 'border-blue-500');
+            }
+        }
+        
+        // Fetch real GitHub stars
+        fetch('https://api.github.com/repos/ProduktEntdecker/touchbarfix')
+            .then(r => r.json())
+            .then(data => {
+                const el = document.getElementById('github-stars');
+                if (el && Number.isFinite(data.stargazers_count)) {
+                    el.textContent = `⭐ ${data.stargazers_count} stars`;
+                }
+            })
+            .catch(() => {
+                // Keep default text
+            });
+    </script>
+</body>
+</html>
