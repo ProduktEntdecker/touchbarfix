@@ -135,12 +135,24 @@
             
             <!-- CTA with honest messaging -->
             <div class="flex flex-col gap-4 justify-center items-center">
-                <a href="https://produktentdecker.gumroad.com/l/touchbarfix?utm_source=website&utm_medium=cta&utm_campaign=homepage_hero" 
-                   onclick="plausible('Gumroad CTA Click', {props: {placement: 'hero'}})"
-                   target="_blank" rel="noopener noreferrer"
-                   class="primary-cta text-white px-12 py-4 rounded-lg text-xl font-semibold inline-block cursor-pointer transition-all hover:transform hover:scale-105">
-                    Get TouchBarFix - €2.99
-                </a>
+                <div class="flex items-center gap-4">
+                    <a href="https://produktentdecker.gumroad.com/l/touchbarfix?utm_source=website&utm_medium=cta&utm_campaign=homepage_hero"
+                       onclick="plausible('Gumroad CTA Click', {props: {placement: 'hero'}})"
+                       target="_blank" rel="noopener noreferrer"
+                       class="primary-cta text-white px-12 py-4 rounded-lg text-xl font-semibold inline-block cursor-pointer transition-all hover:transform hover:scale-105">
+                        Get TouchBarFix - €2.99
+                    </a>
+                    <a href="https://github.com/ProduktEntdecker/touchbarfix"
+                       target="_blank" rel="noopener noreferrer"
+                       onclick="plausible('GitHub Icon Click', {props: {placement: 'hero'}})"
+                       aria-label="View source code on GitHub (opens in new tab)"
+                       class="bg-gray-800 text-white p-4 rounded-lg transition-all hover:bg-gray-700 hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-900"
+                       title="View source code on GitHub">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                    </a>
+                </div>
                 <div class="text-sm text-gray-600 mt-2 text-center">
                     <p class="mb-2 font-semibold success-green">✓ 30-Day Money-Back Guarantee</p>
                     <p class="text-xs">One-time purchase • Works with macOS Big Sur through Sonoma</p>
@@ -158,52 +170,6 @@
                     </svg>
                     <span id="github-stars">View on GitHub</span>
                 </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- What It Actually Does -->
-    <section class="py-20 bg-white">
-        <div class="max-w-4xl mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center text-gray-900 mb-12">
-                Complete Transparency
-            </h2>
-            
-            <div class="bg-gray-50 rounded-lg p-8 mb-8">
-                <h3 class="text-2xl font-semibold mb-4">What TouchBarFix Actually Does:</h3>
-                <div class="bg-gray-900 text-green-400 p-4 rounded font-mono text-sm mb-4">
-                    pkill -x TouchBarServer
-                </div>
-                <p class="text-gray-700 mb-4">
-                    That's it. This command restarts the Touch Bar software. You can type this yourself in Terminal, 
-                    and it will have the exact same effect.
-                </p>
-                <p class="text-gray-700">
-                    <strong>Why pay €2.99?</strong> For convenience. No need to remember the command, open Terminal, 
-                    or worry about typos. Just click once and your Touch Bar is fixed.
-                </p>
-            </div>
-            
-            <div class="grid md:grid-cols-2 gap-6">
-                <div class="bg-white p-6 rounded-lg border border-gray-200">
-                    <h3 class="text-xl font-semibold mb-3">Free Option (Terminal)</h3>
-                    <ul class="space-y-2 text-gray-600">
-                        <li>✓ Completely free</li>
-                        <li>✗ Need to remember command</li>
-                        <li>✗ Must open Terminal each time</li>
-                        <li>✗ Risk of typos</li>
-                    </ul>
-                </div>
-                
-                <div class="bg-white p-6 rounded-lg border border-blue-200">
-                    <h3 class="text-xl font-semibold mb-3 touchbar-blue">TouchBarFix (€2.99)</h3>
-                    <ul class="space-y-2 text-gray-600">
-                        <li>✓ One-click solution</li>
-                        <li>✓ Quick app launcher</li>
-                        <li>✓ No Terminal needed</li>
-                        <li>✓ Always available</li>
-                    </ul>
-                </div>
             </div>
         </div>
     </section>
@@ -344,12 +310,24 @@
                 One-time purchase. 30-day guarantee. No subscriptions.
             </p>
             
-            <a href="https://produktentdecker.gumroad.com/l/touchbarfix?utm_source=website&utm_medium=cta&utm_campaign=homepage_final" 
-               onclick="plausible('Gumroad CTA Click', {props: {placement: 'final_cta'}})"
-               target="_blank" rel="noopener noreferrer"
-               class="primary-cta text-white px-12 py-4 rounded-lg text-xl font-semibold inline-block transition-all hover:transform hover:scale-105 mb-4">
-                Get TouchBarFix - €2.99
-            </a>
+            <div class="flex items-center gap-4 justify-center mb-4">
+                <a href="https://produktentdecker.gumroad.com/l/touchbarfix?utm_source=website&utm_medium=cta&utm_campaign=homepage_final"
+                   onclick="plausible('Gumroad CTA Click', {props: {placement: 'final_cta'}})"
+                   target="_blank" rel="noopener noreferrer"
+                   class="primary-cta text-white px-12 py-4 rounded-lg text-xl font-semibold inline-block transition-all hover:transform hover:scale-105">
+                    Get TouchBarFix - €2.99
+                </a>
+                <a href="https://github.com/ProduktEntdecker/touchbarfix"
+                   target="_blank" rel="noopener noreferrer"
+                   onclick="plausible('GitHub Icon Click', {props: {placement: 'final_cta'}})"
+                   aria-label="View source code on GitHub (opens in new tab)"
+                   class="bg-gray-800 text-white p-4 rounded-lg transition-all hover:bg-gray-700 hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                   title="View source code on GitHub">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                </a>
+            </div>
             
             <p class="text-sm opacity-75">
                 Or use Terminal for free: <code class="bg-gray-800 px-2 py-1 rounded">pkill -x TouchBarServer</code>
