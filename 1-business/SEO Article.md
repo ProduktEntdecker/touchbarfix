@@ -1,1 +1,0 @@
-https://apple.stackexchange.com/questions/470569/how-to-fix-regular-blackout-of-touch-bar
