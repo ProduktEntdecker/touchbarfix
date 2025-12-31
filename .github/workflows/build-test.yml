@@ -6,29 +6,112 @@ on:
   pull_request:
     branches: [ main ]
 
+env:
+  COVERAGE_THRESHOLD: 75
+
 jobs:
   build:
     runs-on: macos-14
-    
+
     steps:
     - uses: actions/checkout@v4
-    
+
     - name: Verify Swift Installation
       run: |
         swift --version
         xcodebuild -version
-    
+
     - name: Build TouchBarFix
       run: |
         cd App
         swift build -c release
-    
-    - name: Run Tests
+
+    - name: Run Tests with Coverage
       run: |
         cd App
         echo "Running tests in CI environment (no Touch Bar hardware)"
-        swift test
-    
+        swift test --enable-code-coverage
+
+    - name: Generate Coverage Report
+      id: coverage
+      run: |
+        cd App
+
+        # Find the coverage profdata file
+        PROFDATA_PATH=$(find .build -name "*.profdata" -type f 2>/dev/null | head -1)
+        if [ -z "$PROFDATA_PATH" ]; then
+          echo "Error: No profdata file found"
+          exit 1
+        fi
+        echo "Found profdata: $PROFDATA_PATH"
+
+        # Find the test binary
+        TEST_BINARY=$(find .build -name "TouchBarFixPackageTests.xctest" -type d 2>/dev/null | head -1)
+        if [ -z "$TEST_BINARY" ]; then
+          # Fallback: look for any test binary
+          TEST_BINARY=$(find .build -name "*.xctest" -type d 2>/dev/null | head -1)
+        fi
+
+        if [ -z "$TEST_BINARY" ]; then
+          echo "Error: No test binary found"
+          exit 1
+        fi
+
+        # Get the executable inside the xctest bundle
+        EXECUTABLE="$TEST_BINARY/Contents/MacOS/$(basename "${TEST_BINARY%.xctest}")"
+        if [ ! -f "$EXECUTABLE" ]; then
+          # Try alternative path for Swift package tests
+          EXECUTABLE=$(find .build -type f -perm +111 -name "*PackageTests" 2>/dev/null | head -1)
+        fi
+
+        echo "Using executable: $EXECUTABLE"
+
+        # Generate coverage report
+        xcrun llvm-cov report "$EXECUTABLE" \
+          -instr-profile="$PROFDATA_PATH" \
+          -ignore-filename-regex=".build|Tests" \
+          > coverage_report.txt 2>&1 || true
+
+        echo "=== Coverage Report ==="
+        cat coverage_report.txt
+
+        # Extract overall coverage percentage
+        # Parse the TOTAL line which contains the overall coverage
+        COVERAGE=$(grep -E "^TOTAL" coverage_report.txt | awk '{print $NF}' | sed 's/%//' || echo "0")
+
+        if [ -z "$COVERAGE" ] || [ "$COVERAGE" = "0" ]; then
+          # Alternative: try to get coverage from the summary
+          COVERAGE=$(tail -1 coverage_report.txt | grep -oE "[0-9]+\.[0-9]+" | head -1 || echo "0")
+        fi
+
+        echo "coverage=$COVERAGE" >> $GITHUB_OUTPUT
+        echo "Extracted coverage: $COVERAGE%"
+
+    - name: Check Coverage Threshold
+      run: |
+        COVERAGE="${{ steps.coverage.outputs.coverage }}"
+        THRESHOLD="${{ env.COVERAGE_THRESHOLD }}"
+
+        echo "Current coverage: ${COVERAGE}%"
+        echo "Required threshold: ${THRESHOLD}%"
+
+        if [ -z "$COVERAGE" ] || [ "$COVERAGE" = "0" ]; then
+          echo "Warning: Could not determine coverage percentage"
+          echo "This may happen if there are no testable source files"
+          exit 0
+        fi
+
+        # Compare using bc for floating point
+        RESULT=$(echo "$COVERAGE >= $THRESHOLD" | bc -l)
+
+        if [ "$RESULT" -eq 1 ]; then
+          echo "Coverage check passed: ${COVERAGE}% >= ${THRESHOLD}%"
+        else
+          echo "Coverage check FAILED: ${COVERAGE}% < ${THRESHOLD}%"
+          echo "Please add more tests to increase code coverage"
+          exit 1
+        fi
+
     - name: Verify Build Output
       run: |
         cd App
@@ -40,7 +123,7 @@ jobs:
           echo "TouchBarFix binary not found"
           ls -la .build/ || echo "Build directory not found"
         fi
-    
+
     - name: Upload Build Artifacts
       uses: actions/upload-artifact@v4
       if: success()
@@ -49,3 +132,10 @@ jobs:
         path: |
           App/.build/release/TouchBarFix
           App/.build/release/*.dSYM
+
+    - name: Upload Coverage Report
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: Coverage-Report-${{ github.sha }}
+        path: App/coverage_report.txt
