@@ -61,7 +61,7 @@ struct ShareSuccessView: View {
                         icon: "text.bubble.fill",
                         color: .blue,
                         action: {
-                            let modelSeries = getModelSeries(modelIdentifier)
+                            let modelSeries = MacBookModel.series(from: modelIdentifier)
                             sharingManager.shareToTwitter(fixCount: fixCount, modelSeries: modelSeries)
                             onDismiss()
                         }
@@ -145,15 +145,6 @@ struct ShareSuccessView: View {
         )
     }
     
-    private func getModelSeries(_ modelIdentifier: String) -> String {
-        if modelIdentifier.contains("MacBookPro13") { return "MacBook Pro 13\" (2016)" }
-        if modelIdentifier.contains("MacBookPro14") { return "MacBook Pro (2017)" }
-        if modelIdentifier.contains("MacBookPro15") { return "MacBook Pro (2018-19)" }
-        if modelIdentifier.contains("MacBookPro16") { return "MacBook Pro (2019-20)" }
-        if modelIdentifier.contains("MacBookPro17") { return "MacBook Pro M1" }
-        if modelIdentifier.contains("MacBookPro18") { return "MacBook Pro M1 Pro/Max" }
-        return "MacBook Pro"
-    }
 }
 
 // Reusable share button component
