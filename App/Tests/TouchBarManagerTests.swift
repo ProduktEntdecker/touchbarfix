@@ -56,11 +56,15 @@ final class TouchBarManagerTests: XCTestCase {
     }
     
     func testErrorEnumDescription() {
+        // Test all error cases including new ones
         let errors: [TouchBarError] = [
             .noTouchBar,
             .processNotFound,
             .killFailed("TestProcess"),
             .serviceRestartFailed,
+            .securityViolation("Test violation"),
+            .adminRequired(["TouchBarServer"]),
+            .userCancelled,
             .unknown("Test error")
         ]
         
@@ -68,6 +72,63 @@ final class TouchBarManagerTests: XCTestCase {
             XCTAssertNotNil(error.errorDescription, "Error \(error) should have a description")
             XCTAssertFalse(error.errorDescription!.isEmpty, "Error description should not be empty")
         }
+    }
+    
+    func testProcessRestartStatusEquatable() {
+        // Test that ProcessRestartStatus conforms to Equatable
+        XCTAssertEqual(ProcessRestartStatus.success, ProcessRestartStatus.success)
+        XCTAssertEqual(ProcessRestartStatus.notRunning, ProcessRestartStatus.notRunning)
+        XCTAssertEqual(ProcessRestartStatus.permissionDenied, ProcessRestartStatus.permissionDenied)
+        XCTAssertEqual(ProcessRestartStatus.failed("test"), ProcessRestartStatus.failed("test"))
+        
+        // Test inequality
+        XCTAssertNotEqual(ProcessRestartStatus.success, ProcessRestartStatus.notRunning)
+        XCTAssertNotEqual(ProcessRestartStatus.failed("a"), ProcessRestartStatus.failed("b"))
+    }
+    
+    func testProcessRestartResult() {
+        // Test creating a ProcessRestartResult
+        let result = ProcessRestartResult(
+            processName: "TestProcess",
+            status: .success,
+            previousPID: 1234,
+            newPID: 5678
+        )
+        
+        XCTAssertEqual(result.processName, "TestProcess")
+        XCTAssertEqual(result.status, .success)
+        XCTAssertEqual(result.previousPID, 1234)
+        XCTAssertEqual(result.newPID, 5678)
+    }
+    
+    func testTouchBarRestartResult() {
+        // Create mixed results
+        let results = [
+            ProcessRestartResult(processName: "Process1", status: .success, previousPID: 100, newPID: 200),
+            ProcessRestartResult(processName: "Process2", status: .notRunning, previousPID: nil, newPID: nil),
+            ProcessRestartResult(processName: "Process3", status: .permissionDenied, previousPID: 300, newPID: nil),
+            ProcessRestartResult(processName: "Process4", status: .failed("error"), previousPID: 400, newPID: nil)
+        ]
+        
+        let touchBarResult = TouchBarRestartResult(
+            results: results,
+            overallSuccess: false,
+            needsAdmin: true
+        )
+        
+        // Test computed properties
+        XCTAssertEqual(touchBarResult.processesNeedingAdmin.count, 1)
+        XCTAssertTrue(touchBarResult.processesNeedingAdmin.contains("Process3"))
+        
+        XCTAssertEqual(touchBarResult.successfulProcesses.count, 2)
+        XCTAssertTrue(touchBarResult.successfulProcesses.contains("Process1"))
+        XCTAssertTrue(touchBarResult.successfulProcesses.contains("Process2"))
+        
+        XCTAssertEqual(touchBarResult.failedProcesses.count, 1)
+        XCTAssertTrue(touchBarResult.failedProcesses.contains("Process4"))
+        
+        XCTAssertFalse(touchBarResult.overallSuccess)
+        XCTAssertTrue(touchBarResult.needsAdmin)
     }
     
     func testRestartTouchBarWithoutTouchBar() async {
@@ -91,6 +152,22 @@ final class TouchBarManagerTests: XCTestCase {
             }
         }
     }
+    
+    func testRestartTouchBarReturnsResult() async {
+        // Test that restartTouchBar returns the correct type
+        let result = await touchBarManager.restartTouchBar()
+        
+        switch result {
+        case .success(let touchBarResult):
+            // Verify the result has the expected properties
+            XCTAssertNotNil(touchBarResult.results)
+            // The result could be success or needs admin depending on the environment
+            print("Restart result: overallSuccess=\(touchBarResult.overallSuccess), needsAdmin=\(touchBarResult.needsAdmin)")
+        case .failure(let error):
+            // On machines without Touch Bar, this is expected
+            print("Expected failure on non-Touch Bar machine: \(error)")
+        }
+    }
 }
 
 // Mock TouchBarManager for testing
@@ -110,7 +187,7 @@ class MockTouchBarManager: TouchBarManager {
     func detectTouchBar() {
         // Detection to use only mock values
         hasTouchBar = mockHasTouchBar
-        print("🔍 Mock Touch Bar Detection: \(mockHasTouchBar)")
+        print("Mock Touch Bar Detection: \(mockHasTouchBar)")
     }
 }
 
