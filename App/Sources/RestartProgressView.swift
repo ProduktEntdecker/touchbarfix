@@ -171,7 +171,7 @@ struct ProcessStatusRow: View {
                 startPulseAnimation()
             }
         }
-        .onChange(of: process.status) { _, newStatus in
+        .onChange(of: process.status) { newStatus in
             if case .inProgress = newStatus {
                 startPulseAnimation()
             } else {
@@ -292,7 +292,7 @@ struct RestartProgressView: View {
         .background(Color(NSColor.windowBackgroundColor))
         .cornerRadius(16)
         .shadow(color: .black.opacity(0.15), radius: 10, x: 0, y: 4)
-        .onChange(of: progress.overallState) { _, newState in
+        .onChange(of: progress.overallState) { newState in
             handleStateChange(newState)
         }
     }
