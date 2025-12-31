@@ -216,7 +216,7 @@ class TouchBarManager: ObservableObject {
     /// - Returns: The PID if the process is running, nil otherwise
     private func getProcessPID(_ processName: String) -> Int? {
         let task = Process()
-        task.executableURL = URL(fileWithPath: "/usr/bin/pgrep")
+        task.executableURL = URL(fileURLWithPath: "/usr/bin/pgrep")
         task.arguments = ["-x", processName]
 
         let pipe = Pipe()
@@ -425,7 +425,7 @@ class TouchBarManager: ObservableObject {
         """
 
         let task = Process()
-        task.executableURL = URL(fileWithPath: "/usr/bin/osascript")
+        task.executableURL = URL(fileURLWithPath: "/usr/bin/osascript")
         task.arguments = ["-e", script]
 
         let errorPipe = Pipe()
@@ -522,7 +522,7 @@ class TouchBarManager: ObservableObject {
         print("   Attempting to kill process: \(processName) (PID: \(previousPID.map { String($0) } ?? "not running"))")
 
         let task = Process()
-        task.executableURL = URL(fileWithPath: "/usr/bin/pkill")
+        task.executableURL = URL(fileURLWithPath: "/usr/bin/pkill")
         task.arguments = ["-9", processName]  // Use -9 for SIGKILL
 
         let errorPipe = Pipe()
@@ -600,7 +600,7 @@ class TouchBarManager: ObservableObject {
 
         for domain in preferenceDomains {
             let task = Process()
-            task.executableURL = URL(fileWithPath: "/usr/bin/defaults")
+            task.executableURL = URL(fileURLWithPath: "/usr/bin/defaults")
             task.arguments = ["delete", domain]
 
             do {
@@ -616,7 +616,7 @@ class TouchBarManager: ObservableObject {
 
         // Also restart the Dock to refresh Touch Bar state
         let dockTask = Process()
-        dockTask.executableURL = URL(fileWithPath: "/usr/bin/killall")
+        dockTask.executableURL = URL(fileURLWithPath: "/usr/bin/killall")
         dockTask.arguments = ["Dock"]
 
         do {
@@ -652,7 +652,7 @@ class TouchBarManager: ObservableObject {
         }
 
         let task = Process()
-        task.executableURL = URL(fileWithPath: "/usr/bin/pgrep")
+        task.executableURL = URL(fileURLWithPath: "/usr/bin/pgrep")
         task.arguments = ["-x", "TouchBarServer"]
 
         do {
@@ -672,7 +672,7 @@ class TouchBarManager: ObservableObject {
         }
 
         let task = Process()
-        task.executableURL = URL(fileWithPath: "/usr/bin/pgrep")
+        task.executableURL = URL(fileURLWithPath: "/usr/bin/pgrep")
         task.arguments = ["-x", processName]
 
         do {
