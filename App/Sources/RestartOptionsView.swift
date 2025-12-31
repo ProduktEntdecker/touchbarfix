@@ -10,7 +10,7 @@ struct RestartOptionsView: View {
     /// Called when user cancels the dialog
     let onCancel: () -> Void
 
-    @State private var hoveredButton: ButtonType? = nil
+    @State private var hoveredButton: ButtonType?
 
     private enum ButtonType {
         case grantAdmin
