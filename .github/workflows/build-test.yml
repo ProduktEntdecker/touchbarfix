@@ -78,13 +78,14 @@ jobs:
         echo "=== Coverage Report ==="
         cat coverage_report.txt
 
-        # Extract overall coverage percentage
-        # Parse the TOTAL line which contains the overall coverage
-        COVERAGE=$(grep -E "^TOTAL" coverage_report.txt | awk '{print $NF}' | sed 's/%//' || echo "0")
+        # Extract overall coverage percentage (Region coverage from column 4)
+        # TOTAL line format: TOTAL  Regions MissedRegions Cover%  Functions ...
+        COVERAGE=$(grep -E "^TOTAL" coverage_report.txt | awk '{print $4}' | sed 's/%//' || echo "0")
 
-        if [ -z "$COVERAGE" ] || [ "$COVERAGE" = "0" ]; then
-          # Alternative: try to get coverage from the summary
-          COVERAGE=$(tail -1 coverage_report.txt | grep -oE "[0-9]+\.[0-9]+" | head -1 || echo "0")
+        # Validate the extracted value is a number
+        if ! echo "$COVERAGE" | grep -qE '^[0-9]+\.?[0-9]*$'; then
+          echo "Warning: Invalid coverage value extracted: $COVERAGE"
+          COVERAGE="0"
         fi
 
         echo "coverage=$COVERAGE" >> $GITHUB_OUTPUT
