@@ -10,7 +10,7 @@ echo "🔨 Building TouchBarFix App Bundle..."
 # Configuration
 APP_NAME="TouchBarFix"
 BUNDLE_ID="com.produktentdecker.touchbarfix"
-VERSION="1.3.0"
+VERSION="1.4.0"
 BUILD_DIR=".build"
 RELEASE_DIR="Release"
 
