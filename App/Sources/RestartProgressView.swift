@@ -3,8 +3,9 @@ import Combine
 
 // MARK: - Data Models
 
-/// Represents the restart status of an individual process
-enum ProcessRestartStatus: Equatable {
+/// Represents the UI display status of an individual process during restart
+/// Note: This is different from TouchBarManager.ProcessRestartStatus which tracks actual process results
+enum UIProcessStatus: Equatable {
     case pending
     case inProgress
     case success
@@ -40,13 +41,13 @@ enum OverallRestartState: Equatable {
 
 // MARK: - Process Info
 
-/// Information about a Touch Bar process being restarted
-struct ProcessInfo: Identifiable, Equatable {
+/// Information about a Touch Bar process being restarted (for UI display)
+struct UIProcessInfo: Identifiable, Equatable {
     let id: String
     let displayName: String
-    var status: ProcessRestartStatus
+    var status: UIProcessStatus
 
-    init(id: String, displayName: String, status: ProcessRestartStatus = .pending) {
+    init(id: String, displayName: String, status: UIProcessStatus = .pending) {
         self.id = id
         self.displayName = displayName
         self.status = status
@@ -58,17 +59,17 @@ struct ProcessInfo: Identifiable, Equatable {
 /// Tracks the progress of Touch Bar restart operations
 @MainActor
 class RestartProgress: ObservableObject {
-    @Published var controlStrip: ProcessRestartStatus = .pending
-    @Published var touchBarServer: ProcessRestartStatus = .pending
-    @Published var displayRefresh: ProcessRestartStatus = .pending
+    @Published var controlStrip: UIProcessStatus = .pending
+    @Published var touchBarServer: UIProcessStatus = .pending
+    @Published var displayRefresh: UIProcessStatus = .pending
     @Published var overallState: OverallRestartState = .idle
 
     /// All processes with their current status
-    var processes: [ProcessInfo] {
+    var processes: [UIProcessInfo] {
         [
-            ProcessInfo(id: "controlStrip", displayName: "Control Strip", status: controlStrip),
-            ProcessInfo(id: "touchBarServer", displayName: "Touch Bar Server", status: touchBarServer),
-            ProcessInfo(id: "displayRefresh", displayName: "Display Refresh", status: displayRefresh)
+            UIProcessInfo(id: "controlStrip", displayName: "Control Strip", status: controlStrip),
+            UIProcessInfo(id: "touchBarServer", displayName: "Touch Bar Server", status: touchBarServer),
+            UIProcessInfo(id: "displayRefresh", displayName: "Display Refresh", status: displayRefresh)
         ]
     }
 
@@ -81,7 +82,7 @@ class RestartProgress: ObservableObject {
     }
 
     /// Update the status of a specific process
-    func updateStatus(for processId: String, status: ProcessRestartStatus) {
+    func updateStatus(for processId: String, status: UIProcessStatus) {
         switch processId {
         case "controlStrip":
             controlStrip = status
@@ -134,7 +135,11 @@ class RestartProgress: ObservableObject {
         // All succeeded
         if statuses.allSatisfy({ $0 == .success }) {
             overallState = .success
+            return
         }
+
+        // Mixed state (some pending, some success) - treat as in-progress
+        overallState = .restarting
     }
 }
 
@@ -142,7 +147,7 @@ class RestartProgress: ObservableObject {
 
 /// A reusable row displaying the status of a single process
 struct ProcessStatusRow: View {
-    let process: ProcessInfo
+    let process: UIProcessInfo
 
     /// Animate pulse effect for in-progress status
     @State private var isPulsing = false
