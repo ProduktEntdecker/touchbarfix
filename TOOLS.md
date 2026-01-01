@@ -1,1 +1,0 @@
-/Users/floriansteiner/.claude/TOOLS.md
