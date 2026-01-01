@@ -11,12 +11,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         NSApp.setActivationPolicy(.regular)
         
         // Create and configure window
+        // Start at idle size, will resize for dashboard when needed
         window = NSWindow(
             contentRect: NSRect(x: 0, y: 0, width: 420, height: 360),
-            styleMask: [.titled, .closable, .miniaturizable],
+            styleMask: [.titled, .closable, .miniaturizable, .resizable],
             backing: .buffered,
             defer: false
         )
+
+        // Allow window to resize based on content
+        window.contentMinSize = NSSize(width: 420, height: 360)
+        window.contentMaxSize = NSSize(width: 800, height: 600)
         
         window.center()
         window.title = "TouchBarFix"
