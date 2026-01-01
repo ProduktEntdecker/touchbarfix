@@ -170,6 +170,11 @@ struct ContentView: View {
             .padding(.horizontal, 60)
 
             Spacer()
+
+            // Version footer
+            Text("v\(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0") • Jan 2026")
+                .font(.system(size: 8))
+                .foregroundColor(.secondary)
         }
         .padding(32)
         .frame(width: 420, height: 360)
