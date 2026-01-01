@@ -15,20 +15,20 @@ final class RestartProgressViewTests: XCTestCase {
         try await super.tearDown()
     }
     
-    // MARK: - ProcessRestartStatus Tests
-    
-    func testProcessRestartStatusEquality() {
-        XCTAssertEqual(ProcessRestartStatus.pending, ProcessRestartStatus.pending)
-        XCTAssertEqual(ProcessRestartStatus.inProgress, ProcessRestartStatus.inProgress)
-        XCTAssertEqual(ProcessRestartStatus.success, ProcessRestartStatus.success)
+    // MARK: - UIProcessStatus Tests
+
+    func testUIProcessStatusEquality() {
+        XCTAssertEqual(UIProcessStatus.pending, UIProcessStatus.pending)
+        XCTAssertEqual(UIProcessStatus.inProgress, UIProcessStatus.inProgress)
+        XCTAssertEqual(UIProcessStatus.success, UIProcessStatus.success)
         XCTAssertEqual(
-            ProcessRestartStatus.failed(reason: .needsAdmin),
-            ProcessRestartStatus.failed(reason: .needsAdmin)
+            UIProcessStatus.failed(reason: .needsAdmin),
+            UIProcessStatus.failed(reason: .needsAdmin)
         )
-        XCTAssertNotEqual(ProcessRestartStatus.pending, ProcessRestartStatus.inProgress)
+        XCTAssertNotEqual(UIProcessStatus.pending, UIProcessStatus.inProgress)
         XCTAssertNotEqual(
-            ProcessRestartStatus.failed(reason: .needsAdmin),
-            ProcessRestartStatus.failed(reason: .notRunning)
+            UIProcessStatus.failed(reason: .needsAdmin),
+            UIProcessStatus.failed(reason: .notRunning)
         )
     }
     
@@ -69,17 +69,17 @@ final class RestartProgressViewTests: XCTestCase {
         )
     }
     
-    // MARK: - ProcessInfo Tests
-    
-    func testProcessInfoInitialization() {
-        let process = ProcessInfo(id: "test", displayName: "Test Process")
+    // MARK: - UIProcessInfo Tests
+
+    func testUIProcessInfoInitialization() {
+        let process = UIProcessInfo(id: "test", displayName: "Test Process")
         XCTAssertEqual(process.id, "test")
         XCTAssertEqual(process.displayName, "Test Process")
         XCTAssertEqual(process.status, .pending)
     }
-    
-    func testProcessInfoWithCustomStatus() {
-        let process = ProcessInfo(id: "test", displayName: "Test", status: .success)
+
+    func testUIProcessInfoWithCustomStatus() {
+        let process = UIProcessInfo(id: "test", displayName: "Test", status: .success)
         XCTAssertEqual(process.status, .success)
     }
     
