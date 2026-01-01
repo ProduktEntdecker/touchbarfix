@@ -4,7 +4,7 @@
 set -e
 
 APP_NAME="TouchBarFix"
-DMG_NAME="TouchBarFix-1.4.0"
+DMG_NAME="TouchBarFix-1.4.1"
 RELEASE_DIR="Release"
 APP_BUNDLE="$RELEASE_DIR/$APP_NAME.app"
 
@@ -35,7 +35,7 @@ ln -s /Applications "$DMG_DIR/Applications"
 
 # Create README file
 cat > "$DMG_DIR/README.txt" << EOF
-TouchBarFix v1.4.0
+TouchBarFix v1.4.1
 ==========================
 
 Installation:
