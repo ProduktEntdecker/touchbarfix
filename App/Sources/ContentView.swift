@@ -15,7 +15,6 @@ struct ContentView: View {
     @StateObject private var touchBarManager = TouchBarManager()
     @StateObject private var restartProgress = RestartProgress()
     @State private var flowState: ContentViewFlowState = .idle
-    @State private var showingRestartOptions = false
     @State private var showingAlert = false
     @State private var alertMessage = ""
     @State private var alertTitle = "Touch Bar Restart"
@@ -29,17 +28,21 @@ struct ContentView: View {
     }
 
     var body: some View {
-        ZStack {
-            mainContentView
-
-            // Overlay for progress view during restart
-            if case .restarting = flowState {
-                progressOverlay
-            }
-
-            // Overlay for restart options on partial failure
-            if showingRestartOptions {
-                optionsOverlay
+        Group {
+            if flowState == .idle {
+                mainContentView
+            } else {
+                // Dashboard view for all non-idle states
+                TouchBarDashboardView(
+                    progress: restartProgress,
+                    flowState: flowState,
+                    onGrantAdmin: handleGrantAdmin,
+                    onRestartComputer: handleRestartComputer,
+                    onCancel: { resetToIdle() },
+                    onDone: { quitApp() },
+                    onTryAgain: { restartTouchBar() },
+                    onShare: { shareSuccess() }
+                )
             }
         }
         .alert(alertTitle, isPresented: $showingAlert) {
@@ -173,49 +176,6 @@ struct ContentView: View {
         .background(Color.white)
     }
 
-    // MARK: - Overlay Views
-
-    private var progressOverlay: some View {
-        ZStack {
-            Color.black.opacity(0.4)
-                .ignoresSafeArea()
-
-            RestartProgressView(
-                progress: restartProgress,
-                onComplete: { state in
-                    handleProgressComplete(state)
-                },
-                onDismiss: {
-                    resetToIdle()
-                }
-            )
-        }
-        .transition(.opacity)
-    }
-
-    private var optionsOverlay: some View {
-        ZStack {
-            Color.black.opacity(0.4)
-                .ignoresSafeArea()
-
-            RestartOptionsView(
-                onGrantAdmin: {
-                    handleGrantAdmin()
-                },
-                onRestartComputer: {
-                    handleRestartComputer()
-                },
-                onCancel: {
-                    showingRestartOptions = false
-                    resetToIdle()
-                }
-            )
-            .cornerRadius(16)
-            .shadow(color: .black.opacity(0.2), radius: 20, x: 0, y: 10)
-        }
-        .transition(.opacity)
-    }
-
     // MARK: - Computed Properties for UI State
 
     private var subtitleText: String {
@@ -322,9 +282,8 @@ struct ContentView: View {
                 switch result {
                 case .success(let touchBarResult):
                     if touchBarResult.needsAdmin {
-                        // Partial failure - show options dialog
+                        // Partial failure - dashboard will show admin options
                         flowState = .partialFailure(needsAdmin: true)
-                        showingRestartOptions = true
                     } else if touchBarResult.overallSuccess {
                         // Full success
                         flowState = .success(usedAdmin: false)
@@ -385,9 +344,6 @@ struct ContentView: View {
             flowState = .success(usedAdmin: false)
         case .partialFailure(let needsAdmin):
             flowState = .partialFailure(needsAdmin: needsAdmin)
-            if needsAdmin {
-                showingRestartOptions = true
-            }
         case .failure(let message):
             flowState = .failure(message)
         default:
@@ -396,7 +352,6 @@ struct ContentView: View {
     }
 
     private func handleGrantAdmin() {
-        showingRestartOptions = false
         flowState = .restarting
 
         // Reset progress for admin restart
@@ -418,7 +373,6 @@ struct ContentView: View {
                     if case .userCancelled = error {
                         // User cancelled - go back to partial failure state
                         flowState = .partialFailure(needsAdmin: true)
-                        showingRestartOptions = true
                     } else {
                         flowState = .failure(error.localizedDescription)
                         restartProgress.overallState = .failure(error.localizedDescription)
@@ -429,8 +383,6 @@ struct ContentView: View {
     }
 
     private func handleRestartComputer() {
-        showingRestartOptions = false
-
         // Use AppleScript to trigger system restart
         let script = """
         tell application "System Events"
@@ -453,7 +405,6 @@ struct ContentView: View {
     private func resetToIdle() {
         flowState = .idle
         restartProgress.reset()
-        showingRestartOptions = false
     }
 
     private func showSuccessAlert(usedAdmin: Bool) {
