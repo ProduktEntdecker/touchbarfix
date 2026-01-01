@@ -135,7 +135,11 @@ class RestartProgress: ObservableObject {
         // All succeeded
         if statuses.allSatisfy({ $0 == .success }) {
             overallState = .success
+            return
         }
+
+        // Mixed state (some pending, some success) - treat as in-progress
+        overallState = .restarting
     }
 }
 

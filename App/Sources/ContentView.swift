@@ -458,8 +458,8 @@ struct ContentView: View {
         
         // Fallback to picker
         let activityVC = NSSharingServicePicker(items: items)
-        if let window = NSApp.windows.first {
-            activityVC.show(relativeTo: .zero, of: window.contentView!, preferredEdge: .minY)
+        if let window = NSApp.windows.first, let contentView = window.contentView {
+            activityVC.show(relativeTo: .zero, of: contentView, preferredEdge: .minY)
         }
     }
     
