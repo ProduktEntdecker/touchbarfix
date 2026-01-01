@@ -291,10 +291,32 @@ struct ContentView: View {
         flowState = .restarting
 
         Task {
-            // Simulate progress updates for each process
-            await simulateProgressUpdates()
+            // Show "in progress" for all processes while restart runs
+            await MainActor.run {
+                restartProgress.updateStatus(for: "controlStrip", status: .inProgress)
+                restartProgress.updateStatus(for: "touchBarServer", status: .inProgress)
+                restartProgress.updateStatus(for: "displayRefresh", status: .inProgress)
+            }
 
+            // Perform actual restart
             let result = await touchBarManager.restartTouchBar()
+
+            await MainActor.run {
+                switch result {
+                case .success(let touchBarResult):
+                    // Update progress with REAL results from each process
+                    updateProgressFromResults(touchBarResult)
+
+                case .failure(let error):
+                    restartProgress.controlStrip = .failed(reason: .unknown(error.localizedDescription))
+                    restartProgress.touchBarServer = .failed(reason: .unknown(error.localizedDescription))
+                    restartProgress.displayRefresh = .failed(reason: .unknown(error.localizedDescription))
+                    restartProgress.overallState = .failure(error.localizedDescription)
+                }
+            }
+
+            // Wait so user can see the actual status before transitioning
+            try? await Task.sleep(nanoseconds: 1_500_000_000) // 1.5s
 
             await MainActor.run {
                 switch result {
@@ -302,52 +324,58 @@ struct ContentView: View {
                     if touchBarResult.needsAdmin {
                         // Partial failure - show options dialog
                         flowState = .partialFailure(needsAdmin: true)
-                        restartProgress.overallState = .partialFailure(needsAdmin: true)
                         showingRestartOptions = true
                     } else if touchBarResult.overallSuccess {
                         // Full success
                         flowState = .success(usedAdmin: false)
-                        restartProgress.controlStrip = .success
-                        restartProgress.touchBarServer = .success
-                        restartProgress.displayRefresh = .success
-                        restartProgress.overallState = .success
                         showSuccessAlert(usedAdmin: false)
                     } else {
                         // Failure
                         let failedProcesses = touchBarResult.failedProcesses.joined(separator: ", ")
                         flowState = .failure("Failed to restart: \(failedProcesses)")
-                        restartProgress.overallState = .failure("Process restart failed")
                     }
                 case .failure(let error):
                     flowState = .failure(error.localizedDescription)
-                    restartProgress.overallState = .failure(error.localizedDescription)
                 }
             }
         }
     }
 
-    /// Simulate progress updates to provide visual feedback during restart
-    private func simulateProgressUpdates() async {
-        // Control Strip
-        await MainActor.run {
-            restartProgress.updateStatus(for: "controlStrip", status: .inProgress)
-        }
-        try? await Task.sleep(nanoseconds: 300_000_000) // 0.3s
+    /// Update progress view with real results from TouchBarManager
+    private func updateProgressFromResults(_ result: TouchBarRestartResult) {
+        for processResult in result.results {
+            let status: UIProcessStatus
+            switch processResult.status {
+            case .success:
+                status = .success
+            case .notRunning:
+                status = .success // Not running is OK - process wasn't needed
+            case .permissionDenied:
+                status = .failed(reason: .needsAdmin)
+            case .failed(let message):
+                status = .failed(reason: .unknown(message))
+                print("Process \(processResult.processName) failed: \(message)")
+            }
 
-        await MainActor.run {
-            restartProgress.updateStatus(for: "controlStrip", status: .success)
-            restartProgress.updateStatus(for: "touchBarServer", status: .inProgress)
+            // Map process names to our UI identifiers
+            switch processResult.processName {
+            case "ControlStrip":
+                restartProgress.controlStrip = status
+            case "TouchBarServer":
+                restartProgress.touchBarServer = status
+            default:
+                // Other processes go to displayRefresh
+                restartProgress.displayRefresh = status
+            }
         }
-        try? await Task.sleep(nanoseconds: 500_000_000) // 0.5s
 
-        await MainActor.run {
-            restartProgress.updateStatus(for: "touchBarServer", status: .success)
-            restartProgress.updateStatus(for: "displayRefresh", status: .inProgress)
-        }
-        try? await Task.sleep(nanoseconds: 200_000_000) // 0.2s
-
-        await MainActor.run {
-            restartProgress.updateStatus(for: "displayRefresh", status: .success)
+        // Update overall state
+        if result.needsAdmin {
+            restartProgress.overallState = .partialFailure(needsAdmin: true)
+        } else if result.overallSuccess {
+            restartProgress.overallState = .success
+        } else {
+            restartProgress.overallState = .failure("Some processes failed to restart")
         }
     }
 
