@@ -13,6 +13,39 @@ reviews:
     - path: "App/Tests/**/*.swift"
       instructions: "Ensure tests are isolated, use proper mocking, and cover edge cases"
 
+# Issue Enrichment
+issue_enrichment:
+  planning:
+    enabled: true
+  auto_enrich:
+    enabled: true
+  labeling:
+    auto_apply_labels: true
+    labeling_instructions:
+      - label: bug
+        instructions: "Bugs, crashes, Touch Bar issues"
+      - label: enhancement
+        instructions: "Feature requests, improvements"
+      - label: macos-compatibility
+        instructions: "macOS version specific issues"
+
+# Unit Test Generation (Swift/XCTest)
+code_generation:
+  unit_tests:
+    path_instructions:
+      - path: "**/Sources/**/*.swift"
+        instructions: |
+          Use XCTest framework.
+          Test MacBook model detection logic.
+          Mock system APIs where needed.
+          Verify Touch Bar restart functionality.
+          Test privacy compliance (no analytics without consent).
+      - path: "**/Views/**/*.swift"
+        instructions: |
+          Use XCTest with ViewInspector if available.
+          Test view state changes and user interactions.
+          Verify accessibility labels.
+
 knowledge_base:
   linear:
     team_keys:
