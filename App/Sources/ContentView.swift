@@ -172,7 +172,7 @@ struct ContentView: View {
             Spacer()
 
             // Version footer
-            Text("v\(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0") • Jan 2026")
+            Text("v\(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0")")
                 .font(.system(size: 8))
                 .foregroundColor(.secondary)
         }

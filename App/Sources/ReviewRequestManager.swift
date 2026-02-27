@@ -59,18 +59,13 @@ class ReviewRequestManager: ObservableObject {
         recordReviewRequest()
     }
 
-    /// Fallback: Direct App Store review page
+    /// Fallback: Direct to Gumroad product page for reviews
     private func requestReviewFallback() {
-        // This will need to be updated with actual App Store ID when published
-        let appStoreReviewURL = "https://apps.apple.com/app/id[TOUCHBARFIX_APP_ID]?action=write-review"
+        // TouchBarFix is sold via Gumroad, not the App Store
+        let reviewURL = "https://produktentdecker.gumroad.com/l/touchbarfix"
 
-        if let url = URL(string: appStoreReviewURL) {
+        if let url = URL(string: reviewURL) {
             NSWorkspace.shared.open(url)
-        } else {
-            // Ultimate fallback: open TouchBarFix website
-            if let fallbackURL = URL(string: "https://touchbarfix.com/review") {
-                NSWorkspace.shared.open(fallbackURL)
-            }
         }
     }
 

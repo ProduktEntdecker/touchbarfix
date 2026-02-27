@@ -9,7 +9,7 @@ struct OnboardingView: View {
     
     private let pages = [
         OnboardingPage(
-            title: "Welcome to TouchBarFix 1.3!",
+            title: "Welcome to TouchBarFix!",
             subtitle: "New features to help you and other MacBook users",
             icon: "sparkles",
             color: .blue,

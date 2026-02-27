@@ -70,7 +70,7 @@ class AnalyticsService: ObservableObject {
             "success": success,
             "model_series": anonymizedModel,
             "timestamp": ISO8601DateFormatter().string(from: Date()),
-            "app_version": "1.3.0",
+            "app_version": Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.5.0",
             // NO personal identifiers, IP is not stored server-side
         ]
 
@@ -94,7 +94,7 @@ class AnalyticsService: ObservableObject {
             var request = URLRequest(url: url)
             request.httpMethod = "POST"
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-            request.setValue("TouchBarFix/1.3.0", forHTTPHeaderField: "User-Agent")
+            request.setValue("TouchBarFix/\(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.5.0")", forHTTPHeaderField: "User-Agent")
 
             request.httpBody = try JSONSerialization.data(withJSONObject: data)
 
@@ -132,7 +132,7 @@ class AnalyticsService: ObservableObject {
 
         do {
             var request = URLRequest(url: url)
-            request.setValue("TouchBarFix/1.3.0", forHTTPHeaderField: "User-Agent")
+            request.setValue("TouchBarFix/\(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.5.0")", forHTTPHeaderField: "User-Agent")
             request.timeoutInterval = 15
 
             let (data, response) = try await session.data(for: request)
