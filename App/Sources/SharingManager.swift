@@ -138,7 +138,7 @@ class SharingManager: ObservableObject {
             "event": "user_share",
             "platform": platform.rawValue,
             "timestamp": ISO8601DateFormatter().string(from: Date()),
-            "app_version": "1.3.0"
+            "app_version": Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.5.0"
         ]
         
         // Submit to analytics (non-blocking)
@@ -155,7 +155,7 @@ class SharingManager: ObservableObject {
             var request = URLRequest(url: url)
             request.httpMethod = "POST"
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-            request.setValue("TouchBarFix/1.3.0", forHTTPHeaderField: "User-Agent")
+            request.setValue("TouchBarFix/\(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.5.0")", forHTTPHeaderField: "User-Agent")
             request.timeoutInterval = 10
             
             request.httpBody = try JSONSerialization.data(withJSONObject: data)
