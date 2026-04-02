@@ -1,52 +1,60 @@
-# CodeRabbit Configuration
-# https://docs.coderabbit.ai/getting-started/configure-coderabbit
+# CodeRabbit Configuration — ProduktEntdecker Org Standard
+# Docs: https://docs.coderabbit.ai/reference/configuration
 
-language: en
+language: "de"
+tone_instructions: "Sei direkt und pragmatisch. Fokus auf Bugs und Sicherheit, nicht auf Style-Nitpicks."
+early_access: true
 
 reviews:
+  profile: "assertive"
+  request_changes_workflow: true
+  high_level_summary: true
+  collapse_walkthrough: true
+  poem: false
+  in_progress_fortune: false
+  sequence_diagrams: false
+  changed_files_summary: true
+  assess_linked_issues: true
+  related_issues: true
+  related_prs: false
+
   auto_review:
     enabled: true
     drafts: false
-  path_instructions:
-    - path: "App/Sources/**/*.swift"
-      instructions: "Review for Swift best practices, memory management, and macOS API usage"
-    - path: "App/Tests/**/*.swift"
-      instructions: "Ensure tests are isolated, use proper mocking, and cover edge cases"
+    auto_incremental_review: true
 
-# Issue Enrichment
-issue_enrichment:
-  planning:
-    enabled: true
-  auto_enrich:
-    enabled: true
-  labeling:
-    auto_apply_labels: true
-    labeling_instructions:
-      - label: bug
-        instructions: "Bugs, crashes, Touch Bar issues"
-      - label: enhancement
-        instructions: "Feature requests, improvements"
-      - label: macos-compatibility
-        instructions: "macOS version specific issues"
+  path_filters:
+    - "!**/node_modules/**"
+    - "!**/package-lock.json"
+    - "!**/dist/**"
+    - "!**/coverage/**"
+    - "!**/__snapshots__/**"
+    - "!**/*.min.js"
+    - "!**/.worktrees/**"
 
-# Unit Test Generation (Swift/XCTest)
-code_generation:
-  unit_tests:
-    path_instructions:
-      - path: "**/Sources/**/*.swift"
-        instructions: |
-          Use XCTest framework.
-          Test MacBook model detection logic.
-          Mock system APIs where needed.
-          Verify Touch Bar restart functionality.
-          Test privacy compliance (no analytics without consent).
-      - path: "**/Views/**/*.swift"
-        instructions: |
-          Use XCTest with ViewInspector if available.
-          Test view state changes and user interactions.
-          Verify accessibility labels.
+  tools:
+    eslint:
+      enabled: true
+    semgrep:
+      enabled: true
+    gitleaks:
+      enabled: true
+    shellcheck:
+      enabled: true
+
+  finishing_touches:
+    docstrings:
+      enabled: false
+    unit_tests:
+      enabled: true
+
+chat:
+  auto_reply: true
 
 knowledge_base:
-  linear:
-    team_keys:
-      - TOU
+  learnings:
+    scope: "auto"
+  issues:
+    scope: "auto"
+  pull_requests:
+    scope: "auto"
