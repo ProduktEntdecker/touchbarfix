@@ -65,6 +65,7 @@ final class TouchBarManagerTests: XCTestCase {
             .securityViolation("Test violation"),
             .adminRequired(["TouchBarServer"]),
             .userCancelled,
+            .touchBarDisabledByOS,
             .unknown("Test error")
         ]
         

@@ -32,7 +32,9 @@ struct MacBookModel {
         if identifier.contains("MacBookPro16") { return "MacBook Pro (2019-20)" }
         if identifier.contains("MacBookPro17") { return "MacBook Pro M1" }
         if identifier.contains("MacBookPro18") { return "MacBook Pro M1 Pro/Max" }
-        if identifier.contains("Mac14,7") { return "MacBook Pro 13\" M2" }
+        // Strict match: "Mac14,7" is the 13" M2; other Mac14,x models have no Touch Bar
+        let trimmed = identifier.trimmingCharacters(in: .whitespacesAndNewlines)
+        if trimmed == "Mac14,7" || trimmed.hasPrefix("Mac14,7-") { return "MacBook Pro 13\" M2" }
 
         // MacBook Air models (some have virtual Touch Bar support)
         if identifier.contains("MacBookAir") { return "MacBook Air" }
