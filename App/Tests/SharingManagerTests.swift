@@ -56,15 +56,17 @@ final class SharingManagerTests: XCTestCase {
     // MARK: - MacBookModel.hasTouchBar Tests
 
     func test_macBookModel_hasTouchBar_withTouchBarModels_returnsTrue() {
-        XCTAssertTrue(MacBookModel.hasTouchBar(identifier: "MacBookPro13,1"))
+        XCTAssertTrue(MacBookModel.hasTouchBar(identifier: "MacBookPro13,2"))
         XCTAssertTrue(MacBookModel.hasTouchBar(identifier: "MacBookPro14,2"))
         XCTAssertTrue(MacBookModel.hasTouchBar(identifier: "MacBookPro15,1"))
         XCTAssertTrue(MacBookModel.hasTouchBar(identifier: "MacBookPro16,1"))
         XCTAssertTrue(MacBookModel.hasTouchBar(identifier: "MacBookPro17,1"))
-        XCTAssertTrue(MacBookModel.hasTouchBar(identifier: "MacBookPro18,3"))
+        XCTAssertTrue(MacBookModel.hasTouchBar(identifier: "Mac14,7")) // 13" M2 2022
     }
 
     func test_macBookModel_hasTouchBar_withNonTouchBarModels_returnsFalse() {
+        XCTAssertFalse(MacBookModel.hasTouchBar(identifier: "MacBookPro13,1")) // base 13" 2016, function keys
+        XCTAssertFalse(MacBookModel.hasTouchBar(identifier: "MacBookPro18,3")) // 2021 redesign, no Touch Bar
         XCTAssertFalse(MacBookModel.hasTouchBar(identifier: "MacBookPro19,1")) // M2 Pro
         XCTAssertFalse(MacBookModel.hasTouchBar(identifier: "MacBookAir10,1"))
         XCTAssertFalse(MacBookModel.hasTouchBar(identifier: "UnknownModel"))

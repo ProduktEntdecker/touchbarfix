@@ -80,9 +80,23 @@ final class MacBookModelTests: XCTestCase {
         XCTAssertTrue(MacBookModel.hasTouchBar(identifier: "MacBookPro17,1"))
     }
 
-    func testHasTouchBarM1ProMaxModels() {
-        XCTAssertTrue(MacBookModel.hasTouchBar(identifier: "MacBookPro18,3"))
-        XCTAssertTrue(MacBookModel.hasTouchBar(identifier: "MacBookPro18,4"))
+    func testHasTouchBarM2Model() {
+        // 13" M2 MacBook Pro (2022) - the last Mac with a Touch Bar
+        XCTAssertTrue(MacBookModel.hasTouchBar(identifier: "Mac14,7"))
+    }
+
+    func testNoTouchBar2021Redesign() {
+        // The October 2021 14"/16" redesign (M1 Pro/Max) removed the Touch Bar
+        XCTAssertFalse(MacBookModel.hasTouchBar(identifier: "MacBookPro18,1"))
+        XCTAssertFalse(MacBookModel.hasTouchBar(identifier: "MacBookPro18,2"))
+        XCTAssertFalse(MacBookModel.hasTouchBar(identifier: "MacBookPro18,3"))
+        XCTAssertFalse(MacBookModel.hasTouchBar(identifier: "MacBookPro18,4"))
+    }
+
+    func testNoTouchBarBase13InchModels() {
+        // Base 13" 2016/2017 models have physical function keys, no Touch Bar
+        XCTAssertFalse(MacBookModel.hasTouchBar(identifier: "MacBookPro13,1"))
+        XCTAssertFalse(MacBookModel.hasTouchBar(identifier: "MacBookPro14,1"))
     }
 
     func testNoTouchBarMacBookAir() {
@@ -91,10 +105,12 @@ final class MacBookModelTests: XCTestCase {
         XCTAssertFalse(MacBookModel.hasTouchBar(identifier: "MacBookAir10,1"))
     }
 
-    func testNoTouchBarM2Models() {
-        // M2 and later removed Touch Bar
+    func testNoTouchBarOtherAppleSiliconModels() {
+        // Other M2-generation and later models have no Touch Bar
         XCTAssertFalse(MacBookModel.hasTouchBar(identifier: "MacBookPro19,1"))
         XCTAssertFalse(MacBookModel.hasTouchBar(identifier: "MacBookPro20,1"))
+        XCTAssertFalse(MacBookModel.hasTouchBar(identifier: "Mac14,5")) // 14" M2 Max
+        XCTAssertFalse(MacBookModel.hasTouchBar(identifier: "Mac14,9")) // 14" M2 Pro
     }
 
     func testNoTouchBarOtherMacs() {
@@ -111,15 +127,19 @@ final class MacBookModelTests: XCTestCase {
 
     // MARK: - Edge Cases
 
+    func testModelIdentifierWithSuffix() {
+        // Suffixed variants of Touch Bar models are still matched
+        XCTAssertTrue(MacBookModel.hasTouchBar(identifier: "MacBookPro17,1-custom"))
+        XCTAssertEqual(MacBookModel.series(from: "MacBookPro17,1-custom"), "MacBook Pro M1")
+    }
+
     func testModelIdentifierWithWhitespace() {
-        // Test that identifiers with extra characters are still matched
-        XCTAssertTrue(MacBookModel.hasTouchBar(identifier: "MacBookPro18,3-custom"))
-        XCTAssertEqual(MacBookModel.series(from: "MacBookPro18,3-custom"), "MacBook Pro M1 Pro/Max")
+        XCTAssertTrue(MacBookModel.hasTouchBar(identifier: " MacBookPro17,1 "))
     }
 
     func testCaseSensitivity() {
         // The current implementation is case-sensitive
-        XCTAssertFalse(MacBookModel.hasTouchBar(identifier: "macbookpro18,3"))
-        XCTAssertEqual(MacBookModel.series(from: "macbookpro18,3"), "MacBook Pro")
+        XCTAssertFalse(MacBookModel.hasTouchBar(identifier: "macbookpro17,1"))
+        XCTAssertEqual(MacBookModel.series(from: "macbookpro17,1"), "MacBook Pro")
     }
 }
