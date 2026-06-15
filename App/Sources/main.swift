@@ -75,6 +75,50 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
 
+    /// Opens a pre-filled email to support with diagnostics attached inline.
+    /// Privacy-by-design: nothing is collected or sent automatically — the user
+    /// reviews and sends the message themselves.
+    @objc func reportProblem(_ sender: Any?) {
+        let info = Bundle.main.infoDictionary
+        let version = info?["CFBundleShortVersionString"] as? String ?? "—"
+        let build = info?["CFBundleVersion"] as? String ?? "—"
+        let os = ProcessInfo.processInfo.operatingSystemVersionString
+        let model = Self.hardwareModelIdentifier()
+
+        let subject = "TouchBarFix problem report (v\(version))"
+        let body = """
+        Please describe what happened (which screen, which button):
+
+
+        ----------------------------------------
+        Diagnostics (please keep):
+        App version: \(version) (build \(build))
+        macOS: \(os)
+        Model: \(model)
+        """
+
+        let allowed = CharacterSet.urlQueryAllowed
+        let encodedSubject = subject.addingPercentEncoding(withAllowedCharacters: allowed) ?? ""
+        let encodedBody = body.addingPercentEncoding(withAllowedCharacters: allowed) ?? ""
+
+        if let url = URL(string: "mailto:info@produktentdecker.com?subject=\(encodedSubject)&body=\(encodedBody)") {
+            NSWorkspace.shared.open(url)
+        }
+    }
+
+    /// Reads the hardware model identifier (e.g. "Mac14,7") via sysctl.
+    private static func hardwareModelIdentifier() -> String {
+        var size = 0
+        guard sysctlbyname("hw.model", nil, &size, nil, 0) == 0, size > 0, size < 1024 else {
+            return "Unknown"
+        }
+        var model = [CChar](repeating: 0, count: size)
+        guard sysctlbyname("hw.model", &model, &size, nil, 0) == 0 else {
+            return "Unknown"
+        }
+        return String(cString: model)
+    }
+
     // MARK: - Main menu construction
 
     private func buildMainMenu() -> NSMenu {
@@ -142,6 +186,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         helpMenu.addItem(withTitle: "TouchBarFix Support",
                          action: #selector(openSupport(_:)),
                          keyEquivalent: "?").target = self
+        helpMenu.addItem(withTitle: "Report a Problem…",
+                         action: #selector(reportProblem(_:)),
+                         keyEquivalent: "").target = self
         NSApp.helpMenu = helpMenu
 
         return mainMenu
