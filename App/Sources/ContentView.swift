@@ -172,8 +172,8 @@ struct ContentView: View {
             Spacer()
 
             // Version footer
-            Text("v\(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0")")
-                .font(.system(size: 8))
+            Text(appVersionString)
+                .font(.system(size: 11))
                 .foregroundColor(.secondary)
         }
         .padding(32)
@@ -182,6 +182,13 @@ struct ContentView: View {
     }
 
     // MARK: - Computed Properties for UI State
+
+    private var appVersionString: String {
+        let info = Bundle.main.infoDictionary
+        let version = info?["CFBundleShortVersionString"] as? String ?? "1.0"
+        let build = info?["CFBundleVersion"] as? String ?? "—"
+        return "Version \(version) (\(build))"
+    }
 
     private var subtitleText: String {
         switch flowState {

@@ -55,12 +55,15 @@ enum TouchBarError: LocalizedError {
     case securityViolation(String)
     case adminRequired([String])  // List of processes that need admin
     case userCancelled           // User cancelled admin prompt
+    case touchBarDisabledByOS    // Model has a Touch Bar but no Touch Bar processes exist (macOS 26 Tahoe bug)
     case unknown(String)
 
     var errorDescription: String? {
         switch self {
         case .noTouchBar:
             return "This device doesn't have a Touch Bar"
+        case .touchBarDisabledByOS:
+            return "Your Mac has a Touch Bar, but macOS has not started any Touch Bar processes. This is a known macOS 26 (Tahoe) issue on M1/M2 MacBook Pros. Try the admin fix, then restart your Mac if the Touch Bar is still missing."
         case .processNotFound:
             return "Touch Bar process not found"
         case .killFailed(let process):
@@ -112,16 +115,8 @@ class TouchBarManager: ObservableObject {
     // Fast, non-blocking initial detection based on model only
     private func initialTouchBarDetection() {
         let modelIdentifier = getModelIdentifier().trimmingCharacters(in: .whitespacesAndNewlines)
-        let touchBarModels = [
-            "MacBookPro13,2", "MacBookPro13,3", // 2016
-            "MacBookPro14,2", "MacBookPro14,3", // 2017
-            "MacBookPro15,1", "MacBookPro15,2", "MacBookPro15,3", "MacBookPro15,4", // 2018-2019
-            "MacBookPro16,1", "MacBookPro16,2", "MacBookPro16,3", "MacBookPro16,4", // 2019-2020
-            "MacBookPro17,1", // 2020 M1 13"
-            "MacBookPro18,3", "MacBookPro18,4", // 2021 M1 Pro/Max
-        ]
 
-        hasTouchBar = touchBarModels.contains(modelIdentifier)
+        hasTouchBar = MacBookModel.hasTouchBar(identifier: modelIdentifier)
 
         print("Touch Bar Detection (Model Only):")
         print("   Model: \(modelIdentifier)")
@@ -164,17 +159,9 @@ class TouchBarManager: ObservableObject {
         // This is now called asynchronously after UI initialization
         // Check if this Mac model has a Touch Bar
         let modelIdentifier = getModelIdentifier().trimmingCharacters(in: .whitespacesAndNewlines)
-        let touchBarModels = [
-            "MacBookPro13,2", "MacBookPro13,3", // 2016
-            "MacBookPro14,2", "MacBookPro14,3", // 2017
-            "MacBookPro15,1", "MacBookPro15,2", "MacBookPro15,3", "MacBookPro15,4", // 2018-2019
-            "MacBookPro16,1", "MacBookPro16,2", "MacBookPro16,3", "MacBookPro16,4", // 2019-2020
-            "MacBookPro17,1", // 2020 M1 13"
-            "MacBookPro18,3", "MacBookPro18,4", // 2021 M1 Pro/Max
-        ]
 
         // More robust detection - also check if TouchBarServer process exists
-        let modelHasTouchBar = touchBarModels.contains(modelIdentifier)
+        let modelHasTouchBar = MacBookModel.hasTouchBar(identifier: modelIdentifier)
         let touchBarServerExists = checkIfProcessRunning("TouchBarServer") || checkIfProcessRunning("ControlStrip")
 
         hasTouchBar = modelHasTouchBar || touchBarServerExists
@@ -268,13 +255,29 @@ class TouchBarManager: ObservableObject {
 
         // Check initial state of Touch Bar processes
         print("\nPRE-RESTART PROCESS STATUS:")
+        var anyProcessRunning = false
         for process in allowedTouchBarProcesses {
             let pid = getProcessPID(process)
             if let pid = pid {
+                anyProcessRunning = true
                 print("   - \(process): Running (PID: \(pid))")
             } else {
                 print("   - \(process): Not Running")
             }
+        }
+
+        // macOS 26 (Tahoe) failure mode: the OS disables the Touch Bar entirely on
+        // M1/M2 models - the hardware is present but no Touch Bar processes exist.
+        // Killing nothing would falsely report success, so surface a dedicated error.
+        let modelIdentifier = getModelIdentifier().trimmingCharacters(in: .whitespacesAndNewlines)
+        if !anyProcessRunning && MacBookModel.hasTouchBar(identifier: modelIdentifier) {
+            print("Touch Bar hardware detected but NO Touch Bar processes are running")
+            print("   This matches the macOS 26 (Tahoe) Touch Bar bug on M1/M2 models")
+            await MainActor.run {
+                self.lastError = .touchBarDisabledByOS
+                self.isRestarting = false
+            }
+            return .failure(.touchBarDisabledByOS)
         }
 
         await MainActor.run {

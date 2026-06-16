@@ -1,6 +1,6 @@
 # TouchBarFix
 
-A simple macOS utility that fixes frozen Touch Bar issues on MacBook Pro (2016-2021).
+A simple macOS utility that fixes frozen Touch Bar issues on MacBook Pro (2016-2022).
 
 ## What it does
 
@@ -26,14 +26,14 @@ swift build -c release
 
 ## System Requirements
 
-- macOS 11.0 (Big Sur) or later
-- MacBook Pro with Touch Bar (2016-2021 models)
-- No administrator privileges required
+- macOS 13.0 (Ventura) or later
+- MacBook Pro with Touch Bar (2016-2022 models, including the 13" M1/M2)
+- No administrator privileges required on macOS 13-25; on macOS 26 (Tahoe) and later, restarting the Touch Bar may require a one-time admin authorization
 
 ## Security
 
 - **Notarized by Apple** - Every release is notarized for security
-- **No Admin Access** - Runs entirely in user space
+- **No Admin Access** - Runs entirely in user space on macOS 13-25 (macOS 26+ may require a one-time admin authorization to restart the Touch Bar)
 - **No Data Collection** - Works completely offline
 - **Open Source** - Review the code yourself
 
