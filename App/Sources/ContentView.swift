@@ -14,6 +14,7 @@ enum ContentViewFlowState: Equatable {
 struct ContentView: View {
     @StateObject private var touchBarManager = TouchBarManager()
     @StateObject private var restartProgress = RestartProgress()
+    @StateObject private var sharingManager = SharingManager()
     @State private var flowState: ContentViewFlowState = .idle
     @State private var showingAlert = false
     @State private var alertMessage = ""
@@ -439,19 +440,16 @@ struct ContentView: View {
             .composeMessage
         ]
         
-        // Try to find preferred service first
-        if let preferredService = preferredServices.compactMap({ NSSharingService(named: $0) }).first {
-            if preferredService.canPerform(withItems: items) {
-                preferredService.perform(withItems: items)
-                return
-            }
+        // Try the first preferred service that can actually handle the items
+        if let preferredService = preferredServices
+            .compactMap({ NSSharingService(named: $0) })
+            .first(where: { $0.canPerform(withItems: items) }) {
+            preferredService.perform(withItems: items)
+            return
         }
-        
-        // Fallback to picker
-        let activityVC = NSSharingServicePicker(items: items)
-        if let window = NSApp.windows.first, let contentView = window.contentView {
-            activityVC.show(relativeTo: .zero, of: contentView, preferredEdge: .minY)
-        }
+
+        // Fallback to picker (retained by SharingManager until dismissed)
+        sharingManager.presentSystemSharePicker(items: items)
     }
     
     private func checkForErrors() {
