@@ -201,8 +201,12 @@ class SharingManager: NSObject, ObservableObject {
 extension SharingManager: NSSharingServicePickerDelegate {
     func sharingServicePicker(_ sharingServicePicker: NSSharingServicePicker, didChoose service: NSSharingService?) {
         // Called when a service was chosen or the menu was dismissed —
-        // safe to release the picker now.
-        activePicker = nil
+        // safe to release the picker now. Only clear our reference if the
+        // callback belongs to the currently presented picker, so a stale
+        // callback cannot release a newer picker while its menu is open.
+        if activePicker === sharingServicePicker {
+            activePicker = nil
+        }
     }
 }
 
