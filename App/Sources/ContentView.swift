@@ -40,7 +40,7 @@ struct ContentView: View {
                     onGrantAdmin: handleGrantAdmin,
                     onRestartComputer: handleRestartComputer,
                     onCancel: { resetToIdle() },
-                    onDone: { quitApp() },
+                    onDone: { resetToIdle() },
                     onTryAgain: { restartTouchBar() },
                     onShare: { shareSuccess() }
                 )
@@ -49,7 +49,7 @@ struct ContentView: View {
         .alert(alertTitle, isPresented: $showingAlert) {
             if showingSuccess {
                 Button("Done") {
-                    quitApp()
+                    resetToIdle()
                 }
                 Button("Fix Again") {
                     showingSuccess = false
@@ -417,6 +417,7 @@ struct ContentView: View {
 
     private func resetToIdle() {
         flowState = .idle
+        showingSuccess = false
         restartProgress.reset()
     }
 
