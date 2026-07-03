@@ -1,9 +1,20 @@
 import Foundation
 import SwiftUI
+import AppKit
 
 // Manages viral sharing functionality for TouchBarFix
-class SharingManager: ObservableObject {
-    
+class SharingManager: NSObject, ObservableObject {
+
+    // Strong reference to the picker while its menu is on screen.
+    // NSSharingServicePicker does not retain itself during show(); if it is
+    // deallocated before the user picks a service, AppKit calls back into a
+    // dangling pointer and the app crashes (TOU-96).
+    private var activePicker: NSSharingServicePicker?
+
+    deinit {
+        activePicker?.delegate = nil
+    }
+
     // Generate platform-specific share content
     func generateShareContent(fixCount: Int, modelIdentifier: String) -> ShareContent {
         let modelSeries = getModelSeries(modelIdentifier)
@@ -21,19 +32,40 @@ class SharingManager: ObservableObject {
     
     // Share to macOS native sharing
     func shareToSystem(content: ShareContent, sourceView: NSView?) {
-        let items: [Any] = [content.message, content.url]
-        
-        let sharingServicePicker = NSSharingServicePicker(items: items)
-        
-        if let view = sourceView {
-            sharingServicePicker.show(relativeTo: .zero, of: view, preferredEdge: .minY)
-        } else {
-            // Fallback: show from app's main window
-            if let window = NSApplication.shared.mainWindow,
-               let contentView = window.contentView {
-                sharingServicePicker.show(relativeTo: .zero, of: contentView, preferredEdge: .minY)
-            }
+        presentSystemSharePicker(items: [content.message, content.url], sourceView: sourceView)
+    }
+
+    // Presents the system share picker anchored to a view that is actually
+    // on screen, keeping the picker alive until the user made a choice.
+    func presentSystemSharePicker(items: [Any], sourceView: NSView? = nil) {
+        guard Thread.isMainThread else {
+            DispatchQueue.main.async { self.presentSystemSharePicker(items: items, sourceView: sourceView) }
+            return
         }
+
+        // Only anchor to a view that is attached to a window; otherwise skip
+        // silently instead of crashing.
+        var anchorView = sourceView
+        if anchorView?.window == nil {
+            anchorView = Self.fallbackAnchorView()
+        }
+        guard let view = anchorView, view.window != nil else { return }
+
+        // Never replace a picker whose menu may still be on screen; the
+        // delegate callback clears the slot when the menu closes.
+        guard activePicker == nil else { return }
+
+        let picker = NSSharingServicePicker(items: items)
+        picker.delegate = self
+        activePicker = picker
+        picker.show(relativeTo: view.bounds, of: view, preferredEdge: .minY)
+    }
+
+    private static func fallbackAnchorView() -> NSView? {
+        let window = NSApp.keyWindow
+            ?? NSApp.mainWindow
+            ?? NSApp.windows.first(where: { $0.isVisible })
+        return window?.contentView
     }
     
     // Platform-specific sharing
@@ -168,6 +200,20 @@ class SharingManager: ObservableObject {
             }
         } catch {
             print("📤 Share tracking failed (non-blocking): \(error)")
+        }
+    }
+}
+
+// MARK: - NSSharingServicePickerDelegate
+
+extension SharingManager: NSSharingServicePickerDelegate {
+    func sharingServicePicker(_ sharingServicePicker: NSSharingServicePicker, didChoose service: NSSharingService?) {
+        // Called when a service was chosen or the menu was dismissed —
+        // safe to release the picker now. Only clear our reference if the
+        // callback belongs to the currently presented picker, so a stale
+        // callback cannot release a newer picker while its menu is open.
+        if activePicker === sharingServicePicker {
+            activePicker = nil
         }
     }
 }
