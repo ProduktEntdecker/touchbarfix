@@ -11,6 +11,10 @@ class SharingManager: NSObject, ObservableObject {
     // dangling pointer and the app crashes (TOU-96).
     private var activePicker: NSSharingServicePicker?
 
+    deinit {
+        activePicker?.delegate = nil
+    }
+
     // Generate platform-specific share content
     func generateShareContent(fixCount: Int, modelIdentifier: String) -> ShareContent {
         let modelSeries = getModelSeries(modelIdentifier)
@@ -46,6 +50,10 @@ class SharingManager: NSObject, ObservableObject {
             anchorView = Self.fallbackAnchorView()
         }
         guard let view = anchorView, view.window != nil else { return }
+
+        // Never replace a picker whose menu may still be on screen; the
+        // delegate callback clears the slot when the menu closes.
+        guard activePicker == nil else { return }
 
         let picker = NSSharingServicePicker(items: items)
         picker.delegate = self
