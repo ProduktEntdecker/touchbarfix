@@ -240,7 +240,7 @@ class TouchBarManager: ObservableObject {
         print("   Timestamp: \(Date())")
         print("   Device model: \(getModelIdentifier())")
         print("   Has Touch Bar: \(hasTouchBar)")
-        print("   App: TouchBarFix \(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.5.0")")
+        print("   App: TouchBarFix \(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.5.1")")
         print(String(repeating: "=", count: 60))
 
         // Check if device has Touch Bar
