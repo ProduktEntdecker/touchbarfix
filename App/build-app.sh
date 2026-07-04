@@ -10,6 +10,8 @@ echo "🔨 Building TouchBarFix App Bundle..."
 # Configuration
 APP_NAME="TouchBarFix"
 BUNDLE_ID="com.produktentdecker.touchbarfix"
+# Informational only — the actual bundle version comes from Resources/Info.plist,
+# which is copied verbatim below. Keep this in sync manually when bumping releases.
 VERSION="1.5.1"
 BUILD_DIR=".build"
 RELEASE_DIR="Release"
